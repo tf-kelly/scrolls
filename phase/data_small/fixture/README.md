@@ -1,6 +1,6 @@
 # Integration fixture (contract v1, §6)
 
-This fixture is a small, committed test case for every `<branch>-*` branch. It is **not an evaluation set.** The
+This fixture is a small, committed test case for every implementation of the contract. It is **not an evaluation set.** The
 risk model was trained on all of slab 2, these pairs included, so fixture flags are in-sample. Use it to check formats,
 conventions and reproduction, never to quote performance.
 
@@ -103,8 +103,8 @@ PA, PB and midpoints since v1.3, which may extend beyond the crop):
 the CT with the zarr 2 API. Rewriting the CT with it gives **identical decoded values** at both levels, but different
 compressed chunk bytes in 31 of 35 files: the committed `ct.zarr` was written under zarr 3.1.6. G1 checks decoded
 values, so it holds under either library. The committed files stay as they are.
-**VC3D:** `ct.zarr` carries a non-zero OME translation, so VC3D cannot use it as its base volume as committed (SessD's
-reading of `ZarrChunkFetcher.cpp:757`). SessD's in-app tests used a relocated view.
+**VC3D:** `ct.zarr` carries a non-zero OME translation, so VC3D cannot use it as its base volume as committed (the plugin's
+reading of `ZarrChunkFetcher.cpp:757`). The plugin's in-app tests used a relocated view.
 
 ## v1.2 (2026-09-27; contract Amendment 5 §A5.4–A5.5)
 - `golden/report.json` `counts.joins` is corrected from **376 to 318**. The example writer had added page joins and
@@ -113,28 +113,28 @@ reading of `ZarrChunkFetcher.cpp:757`). SessD's in-app tests used a relocated vi
 - Nothing else in the file changed (one-line diff).
 - `test_fixture.py --outputs` now requires a region-A run to reproduce the golden clusters and join count.
 
-## v1.3 (2026-09-27; contract Amendment 7 §A7.2): reconciled with SessA's CLI
+## v1.3 (2026-09-27; contract Amendment 7 §A7.2): reconciled with the checker CLI
 
-**The one cluster.** SessA's CLI (`<branch>` e95e946, `vc-sheet-check fixture`) finds 51 clusters on region A;
+**The one cluster.** The checker CLI (`vc-sheet-check fixture --out OUT`) finds 51 clusters on region A;
 v1.1/v1.2 had 52.
-- The difference is pair **(148436, 150217)**. The old golden kept it as a singleton suspect-join cluster; SessA merges
+- The difference is pair **(148436, 150217)**. The old golden kept it as a singleton suspect-join cluster; the checker merges
   it into the 32-pair cluster, making 33.
 - Its nearest PA/PB point is **6.97 voxels** from that cluster, over the 6.32-voxel (50 µm) threshold. Counting
   midpoints, the gap is **4.84 voxels**.
-- **SessA is right.** §4.2 defines a flagged pair's evaluated points as "PA, PB and their midpoint". integrator's example
+- **The checker is right.** §4.2 defines a flagged pair's evaluated points as "PA, PB and their midpoint". The fixture's example
   writer used that set for the overlay but only PA/PB for clustering. The same fix is applied to the expected
   X6 clusters: still 13 clusters over the same 30 joins, with centroids recomputed above.
-- Where §4.1 was silent, SessA's definitions are adopted (Amendment 7 §A7.2):
+- Where §4.1 was silent, the checker's definitions are adopted (Amendment 7 §A7.2):
   - suspect-join `area_cm2`;
   - `max_risk` = null for wrong-turn clusters;
   - `areas_cm2.flagged_suspect`, `wrong_turn` and `cleaned_kept`.
-- **Result:** `golden/report.json` equals SessA's CLI output on region A in counts, all five areas and all 51 clusters,
+- **Result:** `golden/report.json` equals the checker CLI's output on region A in counts, all five areas and all 51 clusters,
   field for field (θ to 0.01°). The validator now checks all of these.
 
 ## v1.4 (2026-09-27; contract Amendment 10 §A10.2): overlay region
-- **Problem (SessD-2 R7).** The overlay was written only inside the 384³ analysis crop. On v1.3, **26 of 51** cluster
+- **Problem (plugin review R7).** The overlay was written only inside the 384³ analysis crop. On v1.3, **26 of 51** cluster
   centres lie outside it, and **13** clusters have no overlay voxel anywhere in their bbox. Jumping to those showed no
-  flag. SessD counted 26 of 52 on v1.1; integrator reproduced 26 of 51 on v1.3.
+  flag. This was 26 of 52 on v1.1 and is 26 of 51 on v1.3.
 - **Change.** `golden/report.json` gains `overlay_region`: origin (3712, 2176, 384) and shape (1408, 896, 1152) zyx.
   That is the bbox of the 507 scored pairs' PA/PB/midpoints and of the wrong-turn-tested vertices, plus 380 µm,
   snapped to 128. `amendments` gains 10.
@@ -147,4 +147,4 @@ v1.1/v1.2 had 52.
 - **Cost:** the example writer now peaks at 4.5 GB RSS and takes 53 s wall. The overlay region is 1.45 G voxels,
   written sparsely (112 level-0 chunks stored).
 - **VC3D note (A10.1):** the committed `ct.zarr` has a non-zero translation. VC3D's local reader ignores it and would
-  draw it at voxel − origin; it is not rejected. SessD's tests open it through a relocated view.
+  draw it at voxel − origin; it is not rejected. The plugin's tests open it through a relocated view.

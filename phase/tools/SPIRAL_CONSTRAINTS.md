@@ -1,11 +1,11 @@
-# Spiral constraints: record schema (contract v1 §4.5, owned by SessE)
+# Spiral constraints: record schema (contract v1 §4.5)
 
-> **Superseded by contract Amendment 2** (`phase/tools/CONTRACT.md` on `integration`), which replaces §4.5's
+> **Superseded by contract Amendment 2** (`phase/tools/CONTRACT.md`), which replaces §4.5's
 > delegation and fixes the format in the contract itself: role files in `<out>/spiral/`, envelope
-> `format = "vc_pointcollections_json v1"`. SessE-3's `convert.write_points` implements Amendment 2. This file is kept
-> only as the record of the SessE-2 proposal.
+> `format = "vc_pointcollections_json v1"`. `phase/sc/convert.py` `write_points` implements Amendment 2. This file is
+> kept only as the record of the earlier proposal.
 
-Producer: `phase/sc/convert.py` (branch `<branch>`). This file defines the `constraints` records inside
+Producer: `phase/sc/convert.py`. This file defines the `constraints` records inside
 the frozen §4.5 envelope. It does not redefine §1–§3.
 
 ## Envelope values
@@ -29,7 +29,7 @@ by +1 (`t = k + θ/2π` continuous). `delta_winding` subtracts c, so it is seam-
 loss applies its own θ = 0 crossing correction along each collection's chain
 (`losses._pcl_chain_seam_adjustments`), so it needs exactly this seam-free number.
 
-**Omitted:** pairs touching a patch without a wrap index, or with SessE's abstention flag.
+**Omitted:** pairs touching a patch without a wrap index, or with the converter's abstention flag.
 
 ## villa-native file written next to the envelope
 
@@ -41,7 +41,7 @@ villa has no hard constraints and no per-constraint weight (see `phase/sc/CONTRA
 ## Weighting
 
 `uniform` is the default and the only mode to deploy until a risk beats chance at identifying *wrong
-constraints*. Two risks have been tried: SessE's per-patch LP-violation rate (AUC 0.48, SessE-1) and contract
-risk v1 (AUC 0.506 on the 453 wrong edges against matched correct ones, SessE-2 (a)). Contract risk v1 is
+constraints*. Two risks have been tried: a per-patch LP-violation rate (AUC 0.48) and contract
+risk v1 (AUC 0.506 on the 453 wrong edges against matched correct ones). Contract risk v1 is
 trained on labels from the same solve that produced the index, so it largely restates the index.
 `replicate` (round(4·w) copies) and `tiers` (service only) are retained for a future risk.

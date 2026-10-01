@@ -3,7 +3,12 @@
 This tree is a scripted extract of tool code from a private research repository (see SOURCE_COMMIT.txt and
 MANIFEST.txt). It contains code, the two trained switch models the tools default to, the small experiment tables
 the tests read, and the integration fixture's own files and golden outputs. It contains no scan data, no patches, no
-meshes, no figures and no whole-scroll results.
+meshes and no figures.
+
+It does contain whole-scroll results for Scroll 4: the winding index for W. Stevens' patches in `community/`. The
+Release `sept-submission` attaches the larger files: the index's point-collection constraints (point coordinates on
+Stevens' patch surfaces), the solve's input (his patch centroids and our measurements on each join), and `d1_boundaries.json`, which holds vertex coordinates on his
+published page surfaces. See `community/README.md`.
 
 ## Data the tools are written for (dataset sources)
 - CT volumes and segments: Vesuvius Challenge open data, served from `https://dl.ash2txt.org/` and

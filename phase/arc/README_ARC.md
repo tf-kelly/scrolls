@@ -1,17 +1,18 @@
-# SessB-3: whole-scroll villa Spiral fit on Oxford ARC (HTC)
+# Whole-scroll villa Spiral fit on Oxford ARC (HTC)
 
 **Aim.** Fit villa's Spiral model to the whole of PHerc1667 (all 56,968 patches) on one H100, in two arms, with the
-same configuration SessB used on the slab:
+same configuration as the slab-2 fit:
 - **(a)** our whole-scroll winding constraints;
 - **(b)** no winding constraints.
 
 Everything lives in `$DATA/vc_arc` (`<arc-project-dir>/<user>/vc_arc`). Checkpoints go to `$DATA` every
 2,000 steps. If a job hits the 12-hour limit, resubmit it and it continues.
 
-**Blocked until SessA-12 lands.** Arms (a) and (b) need SessA-12's whole-scroll files, listed as `PENDING` in
-`bundle/INPUTS.sha256`:
+**Whole-scroll inputs.** Arms (a) and (b) need three whole-scroll files; `make_manifest.sh` marks each one `PENDING`
+in `bundle/INPUTS.sha256` until it is present:
 - `umbilicus.json` (both arms);
-- `same_windings.json` and `relative_windings.json` (arm a).
+- `same_windings.json` and `relative_windings.json` (arm a). These two are attached to the Release `sept-submission`
+  (see `community/README.md`).
 
 `test_job.sh` does not need them.
 
@@ -21,7 +22,7 @@ Everything lives in `$DATA/vc_arc` (`<arc-project-dir>/<user>/vc_arc`). Checkpoi
   It could not be built with villa's exact CUDA 12.8 torch here, because this sandbox cannot reach `download.pytorch.org`.
 - **venv**: used otherwise, or if the image will not run. `setup.sh` installs uv and Python 3.14 under `$DATA/vc_arc`
   and runs villa's own `uv sync --frozen` into `$DATA/vc_arc/env`. That is the **exact locked environment** (torch
-  2.11.0+cu128), the same one SessB's L4 fits used. It needs internet on the login node (you confirmed it has) and a
+  2.11.0+cu128), the same one the L4 slab fits used. It needs internet on the login node (you confirmed it has) and a
   g++ ≥ 11 (`setup.sh` loads a GCC ≥ 11 module if the system compiler is older). Nothing is downloaded at run time.
 
 Since `apptainer` is not on the login PATH, the venv route is the likely one. The image is therefore an optional
@@ -71,7 +72,7 @@ Expected: `Submitted batch job NNN`. `vc_arc_test_NNN.out` should then contain, 
 If it stays pending with `ReqNodeNotAvail` because `devel` has no H100, change `--partition=devel` to `short` in
 `bundle/test_job.sh` and resubmit.
 
-**5. ARC login node: add SessA-12's whole-scroll files once they exist.** Copy `whole_scroll.tar` to `$DATA/vc_arc` first.
+**5. ARC login node: add the whole-scroll files.** Copy `whole_scroll.tar` to `$DATA/vc_arc` first.
 ```sh
 cd $DATA/vc_arc && tar -xf whole_scroll.tar && bash bundle/stage.sh
 ```
@@ -105,7 +106,7 @@ Expected: `arm_a: <size>  <sha256>  vc_arc_arm_a.tar`, the same for arm_b, then 
 - **Fit.** It runs villa's unchanged `fit_spiral.py`:
   - z [496, 11,008), 30,000 steps;
   - CT-derived inputs off;
-  - winding constraints on in arm (a) only, exactly as in SessB.
+  - winding constraints on in arm (a) only, exactly as in the slab-2 fit.
 - **Checkpoints.** villa autosaves every 1,000 steps on scratch. Every 2,000th step is copied to
   `$DATA/vc_arc/out/<arm>/ckpt/`, keeping the newest 3. 15 minutes before the time limit, the job also copies the
   latest autosave.
@@ -113,7 +114,7 @@ Expected: `arm_a: <size>  <sha256>  vc_arc_arm_a.tar`, the same for arm_b, then 
   resubmitted job skips the cold start.
 - **Finish.** It writes `final.ckpt` and `DONE`.
 
-## Expected cost (projection from SessB, not a measurement)
+## Expected cost (projection from the slab-2 fit, not a measurement)
 - Slab on an L4: 0.114 s/step, 2.8 GB GPU memory, GPU about 20 % busy.
 - Whole scroll: 13.7× the per-step samples. That projects to 3–13 L4-hours per arm and 12–25 GB of GPU memory; an H100
   should be faster.
@@ -135,7 +136,7 @@ Expected: `arm_a: <size>  <sha256>  vc_arc_arm_a.tar`, the same for arm_b, then 
 - `villa_src.tar`: villa at f4570bf; `spiral-fitting/` and `vesuvius/src/vc3d_fiber_format/` only.
 - `villa_spiral.def`, `build_sif_here.sh`, `BUILD_RECORD.json`, `FREEZE.txt`: how the optional image was built.
 - `devel/`: the slab-2 umbilicus and 100 patch ids for the test job.
-- `whole_scroll/`: SessA-12's files, once produced.
+- `whole_scroll/`: the whole-scroll input files (not shipped in the bundle).
 
 ## Redo fits a2, b2 and c (Scroll 4)
 

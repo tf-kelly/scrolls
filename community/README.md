@@ -1,9 +1,44 @@
 # Scroll 4 winding index for W. Stevens' released patches (release copy)
 
-**In this repository:** `build_s4_index.py` and its two inputs, `wrap_index.csv` and `unsatisfied.csv`.
-`python3 community/build_s4_index.py OUT` writes `OUT/winding.csv` and `OUT/contradictions.json`, as described below.
-`same_windings.json` (334 MB), `relative_windings.json` (39 MB) and `MANIFEST.sha256` belong to the full package and are
-**not in this repository**.
+**In this repository:** `build_s4_index.py` and its two inputs, `wrap_index.csv` and `unsatisfied.csv` (the saved
+output of the whole-scroll solve). `build_s4_index.py` checks the sha256 of those two files and writes them out as
+`winding.csv` (one row per patch) and `contradictions.json` (the unsatisfied constraints grouped per join). It does not
+measure or solve anything. `mkdir -p OUT && python3 community/build_s4_index.py OUT` writes both files into `OUT`;
+their sha256 equal the entries in `MANIFEST.sha256`.
+
+**Attached to the Release `sept-submission`** (files too large for the tree):
+
+| File | Bytes | sha256 |
+|---|---|---|
+| `same_windings.json` | 333,940,314 | `8ab62889d3ea8dad40b79def0b8a97a48d18dee3ae62a81452919d2cebc4fd43` |
+| `relative_windings.json` | 38,847,418 | `6e7e7d15378767c084ed1a66a39e1ec6cb6390ff7b953d09d215f21115601214` |
+| `MANIFEST.sha256` | 414 | `df000a6be17bc8b7b682f36e054fcee5d805ffbcaf743f1252e1c6bc68c933d4` |
+| `solve_edges.json` | 29,214,099 | `6e6eb5f1e52004f3a3b5c9ff16528a03f6cbbe4c33ae515a14e696a324658015` |
+| `d1_boundaries.json` | 1,961,757 | `8634023ac5648e237205f449aca4185435507108a4f2d955af1a7630fa94dd0d` |
+| `p1fix_after_unsatisfied.csv` | 1,622,769 | `1dab42ad6fc153ab7acf07e2785fb1b532675bb3f0dd11575bd4536fa4a34859` |
+| `p1fix_after_wrap_index.csv` | 1,187,333 | `e077f6da2839e2329903793d717c4565d99de898a18c38d085a3f83eaec7ddfd` |
+
+- The first three belong to this package (described below). `MANIFEST.sha256` lists the package's own README (the
+  text below "The package README follows"), the two files `build_s4_index.py` writes, and the two point-collection
+  files.
+- `solve_edges.json` is the input of the whole-scroll solve: the 174,641 joins over 56,934 patches with each join's
+  measurements, and the patch centroids. With it the solve can be rerun instead of repackaged. The scroll-axis file
+  it names must sit beside it:
+
+  ```bash
+  cp phase/tools/vc_sheet_check/validation/results/v1-12/run/axis_contract_allpatches_zyx.txt DIR/   # DIR holds solve_edges.json
+  vc-sheet-check solve --edges DIR/solve_edges.json --spacing-um 134 --compare community/wrap_index.csv --out OUT
+  ```
+
+  This reproduces `community/wrap_index.csv` and `unsatisfied.csv` byte for byte (objective 25,553; 87 s in a
+  4-CPU container). The measurement that produced `solve_edges.json` (a tiled whole-scroll run of the region check
+  over the CT) has no single command in this repository.
+- The last three are result files over 1 MB, attached instead of committed. They belong at
+  `phase/review/stevens/followup/d1_boundaries.json` and
+  `phase/tools/vc_sheet_check/validation/results/p1fix/after/{unsatisfied,wrap_index}.csv`. `d1_boundaries.json` holds
+  vertex coordinates on W. Stevens' published page surfaces.
+
+`checker_scores.csv` (a whole-scroll per-join checker score) was **not computed** and is not part of the package.
 
 **Counts.**
 - The index solved **174,641 joins** (patch pairs).
@@ -74,7 +109,8 @@ The solve is reference-free: no published segment or reference mesh enters it.
    - **same-wrap rule:** a separation rule from W. Stevens' published work, applied here to our own measurements. If
      the join's maximum separation along the sheet normal exceeds 0.59 × 134 µm = 79.06 µm, the two patches are
      taken to be on neighbouring wraps, in the direction a first solve (crossing counts and radial separation only)
-     placed them. Otherwise they are taken to be on the same wrap.
+     placed them, or with b one wrap outward of a (+1) where that first solve gave both the same winding. Otherwise
+     they are taken to be on the same wrap.
 3. **Solve.** One integer winding per patch minimises the total absolute violation over all 514,297 constraints (each
    with weight 1; total 25,553 at the solution). Where several solutions reach that same minimum, a tie-break picks
    the one closest to targets set from each patch's distance from the axis. Each target is that distance relative to
