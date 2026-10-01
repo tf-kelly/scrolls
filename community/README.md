@@ -14,6 +14,7 @@ their sha256 equal the entries in `MANIFEST.sha256`.
 | `relative_windings.json` | 38,847,418 | `6e7e7d15378767c084ed1a66a39e1ec6cb6390ff7b953d09d215f21115601214` |
 | `MANIFEST.sha256` | 414 | `df000a6be17bc8b7b682f36e054fcee5d805ffbcaf743f1252e1c6bc68c933d4` |
 | `solve_edges.json` | 29,214,099 | `6e6eb5f1e52004f3a3b5c9ff16528a03f6cbbe4c33ae515a14e696a324658015` |
+| `abs_winding.json` | 31,723,417 | `0393eec11a2f526cd92ae1b94b9c8b4612cd50491301a6a6e8eff3852f2457e2` |
 | `d1_boundaries.json` | 1,961,757 | `8634023ac5648e237205f449aca4185435507108a4f2d955af1a7630fa94dd0d` |
 | `p1fix_after_unsatisfied.csv` | 1,622,769 | `1dab42ad6fc153ab7acf07e2785fb1b532675bb3f0dd11575bd4536fa4a34859` |
 | `p1fix_after_wrap_index.csv` | 1,187,333 | `e077f6da2839e2329903793d717c4565d99de898a18c38d085a3f83eaec7ddfd` |
@@ -33,6 +34,8 @@ their sha256 equal the entries in `MANIFEST.sha256`.
   This reproduces `community/wrap_index.csv` and `unsatisfied.csv` byte for byte (objective 25,553; 87 s in a
   4-CPU container). The measurement that produced `solve_edges.json` (a tiled whole-scroll run of the region check
   over the CT) has no single command in this repository.
+- `abs_winding.json` holds fit c's absolute targets: 6 points per patch on 56,926 patches of component 0, each with
+  `wind_a` = winding + 13 (the offset from a radius regression on fit a's placed points); `phase/arc/arm_c.sh` reads it.
 - The last three are result files over 1 MB, attached instead of committed. They belong at
   `phase/review/stevens/followup/d1_boundaries.json` and
   `phase/tools/vc_sheet_check/validation/results/p1fix/after/{unsatisfied,wrap_index}.csv`. `d1_boundaries.json` holds
