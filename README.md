@@ -9,37 +9,7 @@ On Stevens' release, the index assigns numbers to 56,934 of 56,968 patches and l
 
 Whole-scroll fitting is still work in progress. The outermost windings disagree with the published segmentation, and the current results do not establish a complete, continuous surface suitable for reading. More details are given in the main write-up.
 
-For P.Herc.1667 the repo includes the saved whole-scroll assignment and unsatisfied constraints -- run as
-
-```bash
-git clone https://github.com/tf-kelly/scrolls.git
-cd scrolls
-mkdir -p OUT
-python3 community/build_s4_index.py OUT
-```
-
-which checks the input hashes and writes
-
-- `OUT/winding.csv`: 56,934 rows, with `patch_id`, `component`, `winding` and `theta_rad`.
-- `OUT/contradictions.json`: 15,154 joins containing 23,857 violated constraints, with measured and solved differences.
-
-For the fixture, fitting requires an NVIDIA GPU and a separate installation of `villa`.
-
-From the repo root:
-
-```bash
-python3.11 -m venv .venv
-. .venv/bin/activate
-python -m pip install -r phase/tools/requirements.txt \
-  -e phase/tools/vc_sheet_check -e phase/tools/vc_unwrap
-
-python phase/data_small/fixture/fetch_fixture.py
-python phase/tools/test_metrics.py
-python phase/tools/test_fixture.py
-vc-unwrap run --fixture --until export --out U
-```
-
-The downloader retrieves the fixture's patch files and CT chunks from the public data server and checks their SHA-256 hashes. It fetches 428 patches; the fixture region's solve uses 229. The recorded fixture check used about 5.3 GB of RAM. Allow several minutes for the download and CPU stages.
+For P.Herc.1667 the repo includes the saved whole-scroll assignment and unsatisfied constraints; for the fixture, fitting requires an NVIDIA GPU and a separate installation of `villa`. The recorded fixture check used about 5.3 GB of RAM. 
 
 The main outputs are:
 
