@@ -7,7 +7,7 @@ The optimisation is exact for the supplied constraints. The measurements can sti
 
 On Stevens' release, the index assigns numbers to 56,934 of 56,968 patches and leaves 15,154 joins with at least one unsatisfied constraint (the other 34 patches don't have usable joins). The outputs keep Stevens's patch IDs, so they can be compared directly with his retained and removed sets.
 
-Whole-scroll fitting is still work in progress. The outermost windings disagree with the published segmentation, and the current results do not establish a complete, continuous surface suitable for reading. More details are given in the main write-up.
+Whole-scroll fitting is still work in progress. The outermost windings disagree with the published segmentation, and the current results do not establish a complete, continuous surface suitable for reading. More details are given in the main write-up (`docs/report.pdf`)
 
 For P.Herc.1667 the repo includes the saved whole-scroll assignment and unsatisfied constraints; for the fixture, fitting requires an NVIDIA GPU and a separate installation of `villa`. The recorded fixture check used about 5.3 GB of RAM. 
 
