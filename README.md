@@ -3,7 +3,7 @@ This repository assigns winding numbers to overlapping surface patches and lists
 
 In general, an important problem with a patch-based approach to unwrapping is that patch can move onto a neighbouring sheet while still overlapping other patches. Local joins may look plausible but disagree when followed around the scroll. The index solves for integer winding numbers across each connected component in a way that minimises the total absolute disagreement with the measurements. Disagreements can then be adjudicated by eye.
 
-The optimisation is exact for the supplied constraints. The measurements can still be wrong, and a patch can cross sheets without creating a contradiction. A winding number is therefore an estimate of the patch's place in the scroll, not a certificate that the patch follows one sheet.
+The optimisation is exact for the supplied constraints, but there is still some uncertainty, and patches can sometimes cross sheets, so a winding number is an estimate of the patch's place in the scroll.
 
 On Stevens' release, the index assigns numbers to 56,934 of 56,968 patches and leaves 15,154 joins with at least one unsatisfied constraint (the other 34 patches don't have usable joins). The outputs keep Stevens's patch IDs, so they can be compared directly with his retained and removed sets.
 
