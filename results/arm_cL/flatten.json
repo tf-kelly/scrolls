@@ -1,0 +1,47 @@
+{
+ "ckpt": "/opt/g/in/final.ckpt",
+ "umbilicus": "/opt/g/ds/umbilicus.json",
+ "voxel_um": 7.91,
+ "range_source": "PLACE snapped winding range [0, 43] (+-1)",
+ "villa_default_range": [
+  10,
+  80
+ ],
+ "capacity": 144,
+ "exported_range": [
+  0,
+  44
+ ],
+ "source_surface": "/opt/g/out/scale/flatten/arm_cL/source/spiral-checkpoint.tifxyz",
+ "export_s": 109.4,
+ "source_manifest": "/opt/g/out/scale/flatten/arm_cL/source/manifest.json",
+ "flatten_s": 1031.7,
+ "lasagna_config": "/opt/g/vc_arc/scale/lasagna/configs/flatten_fast_nofilter.json",
+ "trim": {
+  "rows": [
+   1,
+   648
+  ],
+  "cols": [
+   75,
+   11412
+  ],
+  "from_shape": [
+   649,
+   11487
+  ]
+ },
+ "flat_surface": "/opt/g/out/scale/flatten/arm_cL/flat.tifxyz",
+ "source_surface_shape": [
+  542,
+  9880
+ ],
+ "source_surface_valid_cells": 5152050,
+ "flat_surface_shape": [
+  647,
+  11337
+ ],
+ "flat_surface_valid_cells": 6618365,
+ "wall_s": 1141.9,
+ "cuda_max_allocated_gb": 2.87
+}

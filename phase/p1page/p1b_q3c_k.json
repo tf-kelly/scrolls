@@ -1,0 +1,12 @@
+{
+ "s_chosen": 1,
+ "objectives": {
+  "1": 1306.0,
+  "-1": 1582.0
+ },
+ "objective": 2114.0,
+ "n": 6704,
+ "n_components": 12,
+ "cpu_s": 46.7,
+ "source": "<branch> 0f5aa76 q3c_deploy.py uniform_weight"
+}

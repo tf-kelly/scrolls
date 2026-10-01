@@ -1,0 +1,9 @@
+{
+ "region": [4224, 2560, 640, 384, 384, 384],
+ "patches": ["../../../data_small/fixture/patches.zip"],
+ "rel": "../../../data_small/fixture/rel.csv",
+ "volume": "../../../data_small/fixture/ct.zarr",
+ "patch_table": "../../../data_small/fixture/patches.csv",
+ "wrap_index": "../../../p1page/p1b_q3c_k.csv",
+ "risk_model": "../../risk_model/risk_model_v1.joblib"
+}

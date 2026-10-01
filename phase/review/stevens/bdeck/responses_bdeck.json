@@ -1,0 +1,254 @@
+{
+ "deck": "bdeck",
+ "instrument": "phase/review/stevens/bdeck/build_bdeck_page.py",
+ "exported": "2026-09-30T02:29:21.191Z",
+ "reader": "Thomas",
+ "conditions_stated_by_reader": {
+  "model_output_seen": "no",
+  "stated_at": "2026-09-30T02:23:40.592Z"
+ },
+ "page_opened_at": "2026-09-30T02:23:33.686Z",
+ "started_at": "2026-09-30T02:23:41.458Z",
+ "answers": [
+  {
+   "item": "06c582e7",
+   "image_sha256": "d716e590cf68dd8d145cce9f9a2343de3cc2cb92978f4324bfc5f1fa268fff8a",
+   "shown_at": "2026-09-30T02:23:41.458Z",
+   "answer": "cant",
+   "note": "",
+   "answered_at": "2026-09-30T02:23:56.791Z"
+  },
+  {
+   "item": "4d69f8d1",
+   "image_sha256": "5990efeee7f1dd88e6e62f1a71d1212e6c8f6a6b5f07e91400a81449158558ae",
+   "shown_at": "2026-09-30T02:23:56.791Z",
+   "answer": "switch",
+   "note": "",
+   "answered_at": "2026-09-30T02:24:01.758Z"
+  },
+  {
+   "item": "43832e6d",
+   "image_sha256": "dcd457f16e8b42b886a0e44a8b7c92f70f5028ce140f670fd57abce0826714d3",
+   "shown_at": "2026-09-30T02:24:01.758Z",
+   "answer": "switch",
+   "note": "",
+   "answered_at": "2026-09-30T02:24:06.041Z"
+  },
+  {
+   "item": "1a1758cc",
+   "image_sha256": "f62a333275e52fb3421387ca6961174915070c54331e01fd9798b7d77bd75dff",
+   "shown_at": "2026-09-30T02:24:06.041Z",
+   "answer": "cant",
+   "note": "",
+   "answered_at": "2026-09-30T02:24:26.441Z"
+  },
+  {
+   "item": "0bde6f98",
+   "image_sha256": "70970b6501392a94e11f2564897888d9e7b35058bda70bf53afa767f5fde77c9",
+   "shown_at": "2026-09-30T02:24:26.441Z",
+   "answer": "noswitch",
+   "note": "",
+   "answered_at": "2026-09-30T02:24:30.091Z"
+  },
+  {
+   "item": "19bbb66a",
+   "image_sha256": "34c039d379c141a9d50203cd513ac3dfc3a23042903a5c9109509bdf6494d409",
+   "shown_at": "2026-09-30T02:24:30.091Z",
+   "answer": "noswitch",
+   "note": "",
+   "answered_at": "2026-09-30T02:24:33.474Z"
+  },
+  {
+   "item": "b489a5ab",
+   "image_sha256": "1581a22225df7f9bfcced54d9c719b2d4643953cc984a079a111d8321632887f",
+   "shown_at": "2026-09-30T02:24:33.475Z",
+   "answer": "noswitch",
+   "note": "",
+   "answered_at": "2026-09-30T02:24:39.657Z"
+  },
+  {
+   "item": "297aab14",
+   "image_sha256": "a60ca2051bd47a8c718f3b9d9a9c90a6bc5130029705cb80b486a158025ff576",
+   "shown_at": "2026-09-30T02:24:39.657Z",
+   "answer": "noswitch",
+   "note": "I don't think there's a switch here but it's very tight. ",
+   "answered_at": "2026-09-30T02:24:59.157Z"
+  },
+  {
+   "item": "a389c45a",
+   "image_sha256": "247cfa026075e14536507a97dc193c2b118e0aac40181e0ebbb2d128ad60e194",
+   "shown_at": "2026-09-30T02:24:59.158Z",
+   "answer": "noswitch",
+   "note": "",
+   "answered_at": "2026-09-30T02:25:02.424Z"
+  },
+  {
+   "item": "6ff1987e",
+   "image_sha256": "04b7d3f175a4aeae83ab787e41aeaa2b9c303d989b9695fa07fdae60211a6187",
+   "shown_at": "2026-09-30T02:25:02.424Z",
+   "answer": "switch",
+   "note": "",
+   "answered_at": "2026-09-30T02:25:07.341Z"
+  },
+  {
+   "item": "af205e1d",
+   "image_sha256": "c1e898f22effa8ba58d994722f9a090cae5b094734a338b6b723b8fed7b9be99",
+   "shown_at": "2026-09-30T02:25:07.341Z",
+   "answer": "noswitch",
+   "note": "",
+   "answered_at": "2026-09-30T02:25:11.224Z"
+  },
+  {
+   "item": "1faec50b",
+   "image_sha256": "3010d40dc494e0020783485e4544df8ac6989f999b10013cef5e5f52246c2e83",
+   "shown_at": "2026-09-30T02:25:11.225Z",
+   "answer": "switch",
+   "note": "",
+   "answered_at": "2026-09-30T02:25:17.308Z"
+  },
+  {
+   "item": "17d19845",
+   "image_sha256": "b5b5fa73a8e5084873da8f86b6c06dd3e7b8a4d321b601743c49716b9e06aed3",
+   "shown_at": "2026-09-30T02:25:17.308Z",
+   "answer": "noswitch",
+   "note": "I think no switch, although it's convoluted and tight.",
+   "answered_at": "2026-09-30T02:25:37.190Z"
+  },
+  {
+   "item": "95fed212",
+   "image_sha256": "aa9d15b09f896fffc799bd38f99f07fb6f7bee08e870f887813c5810ec527c68",
+   "shown_at": "2026-09-30T02:25:37.191Z",
+   "answer": "noswitch",
+   "note": "",
+   "answered_at": "2026-09-30T02:25:40.208Z"
+  },
+  {
+   "item": "12906162",
+   "image_sha256": "205737304177c23f1997012f04d1b99343556d0a280a39f9a88688838e083997",
+   "shown_at": "2026-09-30T02:25:40.208Z",
+   "answer": "noswitch",
+   "note": "",
+   "answered_at": "2026-09-30T02:25:44.657Z"
+  },
+  {
+   "item": "22cfca43",
+   "image_sha256": "4bf7a6d80453fe04dbc1a108422b6ec8c3d0df1d4c5ca1a47d125c23642f7b84",
+   "shown_at": "2026-09-30T02:25:44.658Z",
+   "answer": "switch",
+   "note": "I think switch but the lines are rather thin",
+   "answered_at": "2026-09-30T02:26:26.074Z"
+  },
+  {
+   "item": "1a1b9a9e",
+   "image_sha256": "a4a86ed9f34b83822b1c029f96c2e14808319684e71f72c55a07d5861b9c9d8b",
+   "shown_at": "2026-09-30T02:26:26.075Z",
+   "answer": "switch",
+   "note": "",
+   "answered_at": "2026-09-30T02:26:32.640Z"
+  },
+  {
+   "item": "a6e1c70b",
+   "image_sha256": "400212526435b8f8858ebc5b204fea6b63387786bf4b1939aed30528f90b7bd9",
+   "shown_at": "2026-09-30T02:26:32.641Z",
+   "answer": "switch",
+   "note": "",
+   "answered_at": "2026-09-30T02:26:39.691Z"
+  },
+  {
+   "item": "19edd98f",
+   "image_sha256": "c242983349af0848769e420c12d21e5d5a7f9cc75a74ff5055af8455cf3cfe0e",
+   "shown_at": "2026-09-30T02:26:39.691Z",
+   "answer": "noswitch",
+   "note": "I think no switch but not completely clear",
+   "answered_at": "2026-09-30T02:27:00.007Z"
+  },
+  {
+   "item": "c225eeff",
+   "image_sha256": "7d959c7e429112ddd8b2e436a465b2f8c43061dfded39010fcae0bc267864ed7",
+   "shown_at": "2026-09-30T02:27:00.008Z",
+   "answer": "switch",
+   "note": "crosses onto another band then returns to the next. ",
+   "answered_at": "2026-09-30T02:27:27.974Z"
+  },
+  {
+   "item": "bbeabfa4",
+   "image_sha256": "021c76bc0d4496fbccf4a28e03e764ad4ca01858d92552a48759fb1de92c49bf",
+   "shown_at": "2026-09-30T02:27:27.974Z",
+   "answer": "noswitch",
+   "note": "I think no switch but very tight",
+   "answered_at": "2026-09-30T02:27:37.624Z"
+  },
+  {
+   "item": "e30b7e90",
+   "image_sha256": "e63b061fb33d4277177361040a5fd8569d0463604f2467b63cb77563cd76fb79",
+   "shown_at": "2026-09-30T02:27:37.625Z",
+   "answer": "noswitch",
+   "note": "",
+   "answered_at": "2026-09-30T02:27:42.324Z"
+  },
+  {
+   "item": "6bb24b80",
+   "image_sha256": "f7e8bdbc65fe265896e8ab643ece8c67da18b25416449fee878ab2f2dabd947b",
+   "shown_at": "2026-09-30T02:27:42.324Z",
+   "answer": "noswitch",
+   "note": "I think no switch but the line wanders a bit. ",
+   "answered_at": "2026-09-30T02:28:01.974Z"
+  },
+  {
+   "item": "7bd57760",
+   "image_sha256": "9580a1d244b0ad844bbd8603dab9bfacf9d77159f0e7b6974303437d66340caa",
+   "shown_at": "2026-09-30T02:28:01.974Z",
+   "answer": "noswitch",
+   "note": "",
+   "answered_at": "2026-09-30T02:28:09.775Z"
+  },
+  {
+   "item": "eea4228f",
+   "image_sha256": "5c9b5650ad316da7d267000c4450c4a56efc6e1d409b7bbfb2256b2599764518",
+   "shown_at": "2026-09-30T02:28:09.775Z",
+   "answer": "noswitch",
+   "note": "I think no switch but mostly off any surface. ",
+   "answered_at": "2026-09-30T02:28:22.574Z"
+  },
+  {
+   "item": "7cb59721",
+   "image_sha256": "254ad9b8393b57aeba839925dc8ecfdfb3e944469abc709de1f76171a8851055",
+   "shown_at": "2026-09-30T02:28:22.574Z",
+   "answer": "noswitch",
+   "note": "very tight",
+   "answered_at": "2026-09-30T02:28:32.640Z"
+  },
+  {
+   "item": "79b33eac",
+   "image_sha256": "22dc12f70c10752685acba7c4aee67c80669898f74b072142fc68aa069531707",
+   "shown_at": "2026-09-30T02:28:32.641Z",
+   "answer": "noswitch",
+   "note": "",
+   "answered_at": "2026-09-30T02:28:35.374Z"
+  },
+  {
+   "item": "62752941",
+   "image_sha256": "3e5b2180486a3ada2f0a855e860278d94572fcc30107de0c07dcfd5685ea4c06",
+   "shown_at": "2026-09-30T02:28:35.374Z",
+   "answer": "noswitch",
+   "note": "",
+   "answered_at": "2026-09-30T02:28:48.308Z"
+  },
+  {
+   "item": "b6278df8",
+   "image_sha256": "aa54f045d7efc3eb36abc1956a99242a8203cd9c113acacbdc2cd8a880ab04f2",
+   "shown_at": "2026-09-30T02:28:48.308Z",
+   "answer": "noswitch",
+   "note": "",
+   "answered_at": "2026-09-30T02:29:01.441Z"
+  },
+  {
+   "item": "1ad7296b",
+   "image_sha256": "7af91b0e4cc580f37608c282851c046d61cbb4c3f3d7b1fcc40c72b0e81fe606",
+   "shown_at": "2026-09-30T02:29:01.441Z",
+   "answer": "switch",
+   "note": "I think it's a switch, but it's very tight. ",
+   "answered_at": "2026-09-30T02:29:20.007Z"
+  }
+ ]
+}

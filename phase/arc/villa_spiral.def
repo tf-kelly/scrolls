@@ -1,0 +1,30 @@
+# Canonical Apptainer recipe for villa Spiral (f4570bf) on Oxford ARC. Build where download.pytorch.org is reachable:
+#   apptainer build villa_spiral.sif villa_spiral.def
+# This installs villa's LOCKED environment exactly (torch 2.11.0+cu128, nvidia-*-cu12 12.8, Python 3.14).
+# The .sif shipped in the bundle was NOT built from this file (see build_sif_here.sh / BUILD_RECORD.json): the Claude
+# container cannot reach download.pytorch.org, so that image uses PyPI torch 2.11.0 (CUDA 13.0 build; driver >= 580).
+Bootstrap: docker
+From: python:3.14-bookworm
+
+%files
+    villa_src.tar /opt/villa_src.tar
+
+%post
+    set -e
+    mkdir -p /opt/villa && tar -xf /opt/villa_src.tar -C /opt/villa && rm /opt/villa_src.tar
+    pip install --no-cache-dir uv cmake
+    cd /opt/villa/spiral-fitting
+    UV_PROJECT_ENVIRONMENT=/opt/venv uv sync --frozen --python /usr/local/bin/python3.14
+    uv pip install --python /opt/venv/bin/python pandas
+    /opt/venv/bin/python -c "import torch, vc_spiral.surface_index, vc_spiral.spiral_sampling; print(torch.__version__)"
+
+%environment
+    export PATH=/opt/venv/bin:$PATH
+    export PYTHONNOUSERSITE=1
+    export WANDB_MODE=disabled
+
+%runscript
+    cd /opt/villa/spiral-fitting && exec /opt/venv/bin/python "$@"
+
+%labels
+    villa_commit f4570bfa6c2b357fd24a17b46f8a43becf87ea8d

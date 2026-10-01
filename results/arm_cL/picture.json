@@ -1,0 +1,81 @@
+{
+ "surface": "/opt/g/out/scale/flatten/arm_cL/flat.tifxyz",
+ "level": 2,
+ "pixel_vox": 4.0,
+ "pixel_um": 31.64,
+ "shape": [
+  3231,
+  56681
+ ],
+ "surface_px": 165002000,
+ "sampled_px": 163153648,
+ "unavailable_px": 1848352,
+ "stretch": [
+  18142.662109375,
+  32974.6328125
+ ],
+ "orientation": {
+  "components": [
+   {
+    "component": 1,
+    "cells": 6618363,
+    "inward_sign_of_raw": -1,
+    "vote": "far",
+    "vote_frac": 0.9895
+   },
+   {
+    "component": 2,
+    "cells": 1,
+    "inward_sign_of_raw": -1,
+    "vote": "WEAK(all)",
+    "vote_frac": 1.0
+   },
+   {
+    "component": 3,
+    "cells": 1,
+    "inward_sign_of_raw": -1,
+    "vote": "WEAK(all)",
+    "vote_frac": 1.0
+   }
+  ],
+  "handedness_as_received": -1,
+  "flipped_columns": true,
+  "components_after_flip": [
+   {
+    "component": 1,
+    "cells": 6618363,
+    "inward_sign_of_raw": 1,
+    "vote": "far",
+    "vote_frac": 0.9895
+   },
+   {
+    "component": 2,
+    "cells": 1,
+    "inward_sign_of_raw": 1,
+    "vote": "WEAK(all)",
+    "vote_frac": 1.0
+   },
+   {
+    "component": 3,
+    "cells": 1,
+    "inward_sign_of_raw": 1,
+    "vote": "WEAK(all)",
+    "vote_frac": 1.0
+   }
+  ],
+  "handedness_written": 1,
+  "mixed_components": 0
+ },
+ "chunks": {
+  "fetched": 3329,
+  "missing": 0,
+  "bytes": 13962838016,
+  "cache_hits": 3265
+ },
+ "area_cm2_surface": 1651.8178617920003,
+ "jpeg_fold": {
+  "fold_width_px": 8192,
+  "downsample": 1
+ },
+ "wall_s": 203.4
+}

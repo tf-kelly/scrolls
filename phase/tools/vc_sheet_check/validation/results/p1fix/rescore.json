@@ -1,0 +1,159 @@
+{
+ "rule": "P1FIX step 3: per page, agreement of the page with the index before and after the re-solve, from each page's saved\nmatching (page<k>_key.npz from p1fix_page_key.py: page node -> patch, along-sheet unwrapped angle). Key per node =\nround(k + s * (thN - Theta') / 2 pi) with k, thN from the given wrap index; agreement = share of matched nodes on the\nmodal key; minority area at the grid's cell size (smoothing as in p1fix_page_key.py). Also: patches whose k changed\nbetween the two indexes (up to one constant per component).",
+ "before": "/tmp/claude-0/-home-user-vesuvius-layer-research/a6f2b082-f8ff-584b-95ba-1f71845094f5/scratchpad/p1/before/wrap_index.csv",
+ "after": "/tmp/claude-0/-home-user-vesuvius-layer-research/a6f2b082-f8ff-584b-95ba-1f71845094f5/scratchpad/p1/after/wrap_index.csv",
+ "pages": {
+  "0": {
+   "before": {
+    "modal_key": 17,
+    "modal_share": 0.6744,
+    "minority_area_raw_cm2": 43.75,
+    "minority_area_smoothed_cm2": 43.72
+   },
+   "after": {
+    "modal_key": 17,
+    "modal_share": 0.6744,
+    "minority_area_raw_cm2": 43.75,
+    "minority_area_smoothed_cm2": 43.72
+   },
+   "change_modal_share_points": 0.0
+  },
+  "1": {
+   "before": {
+    "modal_key": 3,
+    "modal_share": 0.8441,
+    "minority_area_raw_cm2": 9.18,
+    "minority_area_smoothed_cm2": 9.13
+   },
+   "after": {
+    "modal_key": 3,
+    "modal_share": 0.8451,
+    "minority_area_raw_cm2": 9.11,
+    "minority_area_smoothed_cm2": 9.07
+   },
+   "change_modal_share_points": 0.1
+  },
+  "2": {
+   "before": {
+    "modal_key": 19,
+    "modal_share": 0.6763,
+    "minority_area_raw_cm2": 8.3,
+    "minority_area_smoothed_cm2": 8.29
+   },
+   "after": {
+    "modal_key": 19,
+    "modal_share": 0.6763,
+    "minority_area_raw_cm2": 8.3,
+    "minority_area_smoothed_cm2": 8.29
+   },
+   "change_modal_share_points": 0.0
+  },
+  "3": {
+   "before": {
+    "modal_key": 6,
+    "modal_share": 0.9436,
+    "minority_area_raw_cm2": 1.14,
+    "minority_area_smoothed_cm2": 1.17
+   },
+   "after": {
+    "modal_key": 6,
+    "modal_share": 0.9436,
+    "minority_area_raw_cm2": 1.14,
+    "minority_area_smoothed_cm2": 1.17
+   },
+   "change_modal_share_points": 0.0
+  },
+  "4": {
+   "before": {
+    "modal_key": 10,
+    "modal_share": 0.994,
+    "minority_area_raw_cm2": 0.16,
+    "minority_area_smoothed_cm2": 0.14
+   },
+   "after": {
+    "modal_key": 10,
+    "modal_share": 0.994,
+    "minority_area_raw_cm2": 0.16,
+    "minority_area_smoothed_cm2": 0.14
+   },
+   "change_modal_share_points": 0.0
+  },
+  "5": {
+   "before": {
+    "modal_key": 19,
+    "modal_share": 0.8082,
+    "minority_area_raw_cm2": 3.04,
+    "minority_area_smoothed_cm2": 3.03
+   },
+   "after": {
+    "modal_key": 19,
+    "modal_share": 0.8082,
+    "minority_area_raw_cm2": 3.04,
+    "minority_area_smoothed_cm2": 3.03
+   },
+   "change_modal_share_points": 0.0
+  },
+  "6": {
+   "before": {
+    "modal_key": 4,
+    "modal_share": 0.9984,
+    "minority_area_raw_cm2": 0.03,
+    "minority_area_smoothed_cm2": 0.02
+   },
+   "after": {
+    "modal_key": 4,
+    "modal_share": 0.9984,
+    "minority_area_raw_cm2": 0.03,
+    "minority_area_smoothed_cm2": 0.02
+   },
+   "change_modal_share_points": 0.0
+  },
+  "7": {
+   "before": {
+    "modal_key": 10,
+    "modal_share": 0.9986,
+    "minority_area_raw_cm2": 0.02,
+    "minority_area_smoothed_cm2": 0.01
+   },
+   "after": {
+    "modal_key": 10,
+    "modal_share": 0.9986,
+    "minority_area_raw_cm2": 0.02,
+    "minority_area_smoothed_cm2": 0.01
+   },
+   "change_modal_share_points": 0.0
+  },
+  "8": {
+   "before": {
+    "modal_key": 11,
+    "modal_share": 0.9985,
+    "minority_area_raw_cm2": 0.02,
+    "minority_area_smoothed_cm2": 0.01
+   },
+   "after": {
+    "modal_key": 11,
+    "modal_share": 0.9985,
+    "minority_area_raw_cm2": 0.02,
+    "minority_area_smoothed_cm2": 0.01
+   },
+   "change_modal_share_points": 0.0
+  },
+  "9": {
+   "before": {
+    "modal_key": 3,
+    "modal_share": 0.9786,
+    "minority_area_raw_cm2": 0.31,
+    "minority_area_smoothed_cm2": 0.3
+   },
+   "after": {
+    "modal_key": 3,
+    "modal_share": 0.9786,
+    "minority_area_raw_cm2": 0.31,
+    "minority_area_smoothed_cm2": 0.3
+   },
+   "change_modal_share_points": 0.0
+  }
+ },
+ "patches_compared": 56934,
+ "patches_k_changed_up_to_component_constant": 11
+}

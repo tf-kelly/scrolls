@@ -1,0 +1,222 @@
+{
+ "note": "exploratory; boundary = smoothed on/off-modal flag change between 4-neighbour page nodes (16 vox)",
+ "joins": {
+  "by_kind": {
+   "M+split": 198,
+   "M-m": 11,
+   "split+split": 128,
+   "m+split": 160
+  },
+  "M+split": {
+   "n": 198,
+   "verdict": {
+    "same-sheet": 158,
+    "ambiguous": 22,
+    "untestable": 11,
+    "switch": 7
+   },
+   "d_i": {
+    "0": 169,
+    "1": 14,
+    "None": 11,
+    "-1": 4
+   },
+   "with_unsatisfied_terms": 18,
+   "below_threshold": 33,
+   "dk": {
+    "0": 168,
+    "1": 29,
+    "2": 1
+   }
+  },
+  "M-m": {
+   "n": 11,
+   "verdict": {
+    "same-sheet": 9,
+    "ambiguous": 2
+   },
+   "d_i": {
+    "0": 10,
+    "1": 1
+   },
+   "with_unsatisfied_terms": 2,
+   "below_threshold": 2,
+   "dk_M_to_m": {
+    "0": 9,
+    "-2": 1,
+    "1": 1
+   },
+   "joins": [
+    {
+     "M": 80399,
+     "m": 80175,
+     "k_M": 18,
+     "k_m": 18,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 1.0,
+     "unsatisfied": []
+    },
+    {
+     "M": 105468,
+     "m": 107415,
+     "k_M": 19,
+     "k_m": 19,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 1.0,
+     "unsatisfied": []
+    },
+    {
+     "M": 108930,
+     "m": 110967,
+     "k_M": 19,
+     "k_m": 19,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 1.0,
+     "unsatisfied": []
+    },
+    {
+     "M": 109738,
+     "m": 110967,
+     "k_M": 19,
+     "k_m": 19,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 1.0,
+     "unsatisfied": []
+    },
+    {
+     "M": 109836,
+     "m": 110967,
+     "k_M": 19,
+     "k_m": 19,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 1.0,
+     "unsatisfied": []
+    },
+    {
+     "M": 109964,
+     "m": 110967,
+     "k_M": 19,
+     "k_m": 19,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 1.0,
+     "unsatisfied": []
+    },
+    {
+     "M": 110988,
+     "m": 110967,
+     "k_M": 19,
+     "k_m": 19,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 1.0,
+     "unsatisfied": []
+    },
+    {
+     "M": 112106,
+     "m": 110967,
+     "k_M": 19,
+     "k_m": 19,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 1.0,
+     "unsatisfied": []
+    },
+    {
+     "M": 113191,
+     "m": 114375,
+     "k_M": 19,
+     "k_m": 19,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 1.0,
+     "unsatisfied": []
+    },
+    {
+     "M": 92449,
+     "m": 95049,
+     "k_M": 19,
+     "k_m": 17,
+     "d_i": 0,
+     "verdict": "ambiguous",
+     "agreement": 0.7884615384615384,
+     "unsatisfied": [
+      "i"
+     ]
+    },
+    {
+     "M": 112300,
+     "m": 120422,
+     "k_M": 19,
+     "k_m": 20,
+     "d_i": 1,
+     "verdict": "ambiguous",
+     "agreement": 0.6924882629107981,
+     "unsatisfied": [
+      "ii"
+     ]
+    }
+   ]
+  },
+  "m+split": {
+   "n": 160,
+   "verdict": {
+    "same-sheet": 120,
+    "switch": 9,
+    "ambiguous": 23,
+    "untestable": 8
+   },
+   "d_i": {
+    "0": 131,
+    "-1": 11,
+    "1": 10,
+    "None": 8
+   },
+   "with_unsatisfied_terms": 24,
+   "below_threshold": 31,
+   "dk": {
+    "1": 23,
+    "0": 137
+   }
+  },
+  "split+split": {
+   "n": 128,
+   "verdict": {
+    "ambiguous": 21,
+    "same-sheet": 98,
+    "untestable": 5,
+    "switch": 4
+   },
+   "d_i": {
+    "0": 107,
+    "1": 15,
+    "None": 5,
+    "-1": 1
+   },
+   "with_unsatisfied_terms": 37,
+   "below_threshold": 26,
+   "dk": {
+    "1": 40,
+    "0": 88
+   }
+  }
+ },
+ "grid": {
+  "edges": 307726,
+  "unwrap_jump_edges": 0,
+  "key_change_edges": 1618,
+  "key_change_same_patch": 0,
+  "key_change_at_unwrap_jump": 0,
+  "boundary_edges": 564,
+  "boundary_same_patch": 185,
+  "boundary_at_unwrap_jump": 0,
+  "unwrap_jump_share_of_all_edges": 0.0,
+  "boundary_at_unwrap_jump_share": 0.0,
+  "boundary_same_patch_share": 0.328
+ }
+}

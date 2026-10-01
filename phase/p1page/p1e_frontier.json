@@ -1,0 +1,126 @@
+{
+ "synthetic": {
+  "passed": true,
+  "got": [
+   [
+    [
+     1,
+     2
+    ]
+   ],
+   [
+    6
+   ]
+  ]
+ },
+ "combined": {
+  "n_joins": 8007,
+  "n_pages": 23,
+  "pruned_patches": 0,
+  "point": {
+   "page_area_cm2": 65.3247,
+   "M1": 0.8817,
+   "M2": 0.9995,
+   "M3_per_cm2": 0.0918,
+   "P1b_largest_piece": 0.9995,
+   "cross_joins": 6.0
+  },
+  "ci95": {
+   "page_area_cm2": [
+    60.4651,
+    70.3585
+   ],
+   "M1": [
+    0.8682,
+    0.8947
+   ],
+   "M2": [
+    0.9989,
+    1.0
+   ],
+   "M3_per_cm2": [
+    0.0,
+    0.2348
+   ]
+  },
+  "mechanism": {
+   "cross_joins": 6,
+   "bridging": 6,
+   "loop_closing": 0,
+   "minority_patches": 3,
+   "minority_patches_touched_by_cross_join": 3,
+   "minority_area_cm2": 0.028,
+   "minority_area_per_cross_join_cm2": 0.0047,
+   "minority_area_per_bridging_join_cm2": 0.0047
+  },
+  "pages_with_cross_joins": 2,
+  "prediction_M1_ge_0p85_at_60_70_cm2": true
+ },
+ "frontier_rows": {
+  "(i)": {
+   "page_area_cm2": 98.0732,
+   "M1": 0.1004,
+   "M2": 0.259,
+   "M3": 3.2527
+  },
+  "(ii)": {
+   "page_area_cm2": 67.8758,
+   "M1": 0.647,
+   "M2": 0.9342,
+   "M3": 0.3831
+  },
+  "(ii)+pruning": {
+   "page_area_cm2": 61.3652,
+   "M1": 0.8781,
+   "M2": 0.9992,
+   "M3": 0.1141
+  },
+  "(iii-rf)": {
+   "page_area_cm2": 84.3426,
+   "M1": 0.5497,
+   "M2": 0.9971,
+   "M3": 0.498
+  },
+  "(iii-rf)+pruning": {
+   "page_area_cm2": 84.3426,
+   "M1": 0.5497,
+   "M2": 0.9971,
+   "M3": 0.498
+  },
+  "combined": {
+   "page_area_cm2": 65.3247,
+   "M1": 0.8817,
+   "M2": 0.9995,
+   "M3": 0.0918
+  }
+ },
+ "disputed_summary": {
+  "n_patches": 17,
+  "n_rows": 43,
+  "contact_lt_50um": 17,
+  "contact_and_dii_0": 17,
+  "pipeline9_flagged": 6,
+  "joins_with_x6_row": 42,
+  "x6_truth_counts": {
+   "null": 1,
+   "unresolved": 1,
+   "same-wrap": 35,
+   "adjacent": 6
+  },
+  "d_ii_counts": {
+   "0.0": 41,
+   "-1.0": 1,
+   "None": 1
+  },
+  "d_i_counts": {
+   "0.0": 34,
+   "None": 9
+  },
+  "sep_um_quartiles": [
+   9.4,
+   10.8,
+   12.4
+  ],
+  "prediction_ge_12_contact_dii0": true
+ }
+}

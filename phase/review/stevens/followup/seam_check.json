@@ -1,0 +1,284 @@
+{
+ "seam_theta_deg": 0.0,
+ "tolerance_deg": 5.0,
+ "pages": [
+  {
+   "page": 0,
+   "vertices_matched": 12959056,
+   "S2_modal_share_raw_w": 0.203,
+   "S2_modal_share_quilt2_q": 0.6709,
+   "S2_modal_share_continuous": 0.6709,
+   "S2_max_abs_continuous_minus_q": 0,
+   "turns": 6.09,
+   "S1a_raw_w_change_edges": 59324,
+   "S1a_share_raw_w_changes_within_5deg_of_seam": 0.1858,
+   "seam_crossing_edges": 9995,
+   "seam_crossing_edges_where_q_steps": 16,
+   "raw_q_change_edges": 50215,
+   "share_raw_q_changes_within_5deg_of_seam": 0.0209,
+   "S1b_boundary_points": 9401,
+   "S1b_share_boundary_within_5deg_of_seam": 0.0777,
+   "S1b_boundary_theta_deg_pct_5_50_95": [
+    7.2,
+    228.3,
+    354.5
+   ],
+   "S1b_on_seam_ge_80pct": "n",
+   "S1b_d4_pieces": [
+    {
+     "piece": 1,
+     "points": 464,
+     "share_within_5deg": 0.2974,
+     "theta_deg_min_median_max": [
+      0.1,
+      335.9,
+      359.8
+     ],
+     "on_seam_ge_80pct": "n"
+    },
+    {
+     "piece": 2,
+     "points": 357,
+     "share_within_5deg": 0.0,
+     "theta_deg_min_median_max": [
+      134.0,
+      171.1,
+      193.8
+     ],
+     "on_seam_ge_80pct": "n"
+    }
+   ]
+  },
+  {
+   "page": 1,
+   "vertices_matched": 4390810,
+   "S2_modal_share_raw_w": 0.1844,
+   "S2_modal_share_quilt2_q": 0.3672,
+   "S2_modal_share_continuous": 0.3672,
+   "S2_max_abs_continuous_minus_q": 0,
+   "turns": 3.72,
+   "S1a_raw_w_change_edges": 26709,
+   "S1a_share_raw_w_changes_within_5deg_of_seam": 0.3747,
+   "seam_crossing_edges": 9431,
+   "seam_crossing_edges_where_q_steps": 23,
+   "raw_q_change_edges": 24635,
+   "share_raw_q_changes_within_5deg_of_seam": 0.0259,
+   "S1b_boundary_points": 2275,
+   "S1b_share_boundary_within_5deg_of_seam": 0.0905,
+   "S1b_boundary_theta_deg_pct_5_50_95": [
+    7.9,
+    130.8,
+    355.2
+   ],
+   "S1b_on_seam_ge_80pct": "n",
+   "S1b_d4_pieces": [
+    {
+     "piece": 1,
+     "points": 459,
+     "share_within_5deg": 0.0,
+     "theta_deg_min_median_max": [
+      81.5,
+      100.1,
+      140.3
+     ],
+     "on_seam_ge_80pct": "n"
+    },
+    {
+     "piece": 2,
+     "points": 320,
+     "share_within_5deg": 0.0,
+     "theta_deg_min_median_max": [
+      9.6,
+      72.4,
+      97.1
+     ],
+     "on_seam_ge_80pct": "n"
+    }
+   ]
+  },
+  {
+   "page": 2,
+   "vertices_matched": 2506332,
+   "S2_modal_share_raw_w": 0.6684,
+   "S2_modal_share_quilt2_q": 0.6702,
+   "S2_modal_share_continuous": 0.6702,
+   "S2_max_abs_continuous_minus_q": 0,
+   "turns": 1.38,
+   "S1a_raw_w_change_edges": 17028,
+   "S1a_share_raw_w_changes_within_5deg_of_seam": 0.0432,
+   "seam_crossing_edges": 601,
+   "seam_crossing_edges_where_q_steps": 3,
+   "raw_q_change_edges": 16774,
+   "share_raw_q_changes_within_5deg_of_seam": 0.0083,
+   "S1b_boundary_points": 7855,
+   "S1b_share_boundary_within_5deg_of_seam": 0.0,
+   "S1b_boundary_theta_deg_pct_5_50_95": [
+    60.8,
+    166.7,
+    291.5
+   ],
+   "S1b_on_seam_ge_80pct": "n",
+   "S1b_d4_pieces": [
+    {
+     "piece": 1,
+     "points": 614,
+     "share_within_5deg": 0.0,
+     "theta_deg_min_median_max": [
+      140.0,
+      156.0,
+      173.0
+     ],
+     "on_seam_ge_80pct": "n"
+    },
+    {
+     "piece": 2,
+     "points": 421,
+     "share_within_5deg": 0.0,
+     "theta_deg_min_median_max": [
+      134.9,
+      143.2,
+      153.6
+     ],
+     "on_seam_ge_80pct": "n"
+    }
+   ]
+  },
+  {
+   "page": 3,
+   "vertices_matched": 3110811,
+   "S2_modal_share_raw_w": 0.604,
+   "S2_modal_share_quilt2_q": 0.9974,
+   "S2_modal_share_continuous": 0.9974,
+   "S2_max_abs_continuous_minus_q": 0,
+   "turns": 3.2,
+   "S1a_raw_w_change_edges": 12955,
+   "S1a_share_raw_w_changes_within_5deg_of_seam": 0.2824,
+   "seam_crossing_edges": 3619,
+   "seam_crossing_edges_where_q_steps": 0,
+   "raw_q_change_edges": 9336,
+   "share_raw_q_changes_within_5deg_of_seam": 0.0043
+  },
+  {
+   "page": 4,
+   "vertices_matched": 2556011,
+   "S2_modal_share_raw_w": 0.4528,
+   "S2_modal_share_quilt2_q": 0.9931,
+   "S2_modal_share_continuous": 0.9931,
+   "S2_max_abs_continuous_minus_q": 0,
+   "turns": 2.85,
+   "S1a_raw_w_change_edges": 6482,
+   "S1a_share_raw_w_changes_within_5deg_of_seam": 0.3554,
+   "seam_crossing_edges": 2155,
+   "seam_crossing_edges_where_q_steps": 0,
+   "raw_q_change_edges": 4465,
+   "share_raw_q_changes_within_5deg_of_seam": 0.0334
+  },
+  {
+   "page": 5,
+   "vertices_matched": 1590571,
+   "S2_modal_share_raw_w": 0.9082,
+   "S2_modal_share_quilt2_q": 0.8069,
+   "S2_modal_share_continuous": 0.8069,
+   "S2_max_abs_continuous_minus_q": 0,
+   "turns": 1.24,
+   "S1a_raw_w_change_edges": 14395,
+   "S1a_share_raw_w_changes_within_5deg_of_seam": 0.0769,
+   "seam_crossing_edges": 1003,
+   "seam_crossing_edges_where_q_steps": 24,
+   "raw_q_change_edges": 13435,
+   "share_raw_q_changes_within_5deg_of_seam": 0.0109,
+   "S1b_boundary_points": 3876,
+   "S1b_share_boundary_within_5deg_of_seam": 0.0704,
+   "S1b_boundary_theta_deg_pct_5_50_95": [
+    12.1,
+    309.9,
+    352.3
+   ],
+   "S1b_on_seam_ge_80pct": "n",
+   "S1b_d4_pieces": [
+    {
+     "piece": 1,
+     "points": 780,
+     "share_within_5deg": 0.0,
+     "theta_deg_min_median_max": [
+      288.0,
+      301.2,
+      323.6
+     ],
+     "on_seam_ge_80pct": "n"
+    },
+    {
+     "piece": 2,
+     "points": 358,
+     "share_within_5deg": 0.0,
+     "theta_deg_min_median_max": [
+      320.8,
+      327.0,
+      334.4
+     ],
+     "on_seam_ge_80pct": "n"
+    }
+   ]
+  },
+  {
+   "page": 6,
+   "vertices_matched": 1965349,
+   "S2_modal_share_raw_w": 0.4757,
+   "S2_modal_share_quilt2_q": 0.9984,
+   "S2_modal_share_continuous": 0.9984,
+   "S2_max_abs_continuous_minus_q": 0,
+   "turns": 2.7,
+   "S1a_raw_w_change_edges": 8652,
+   "S1a_share_raw_w_changes_within_5deg_of_seam": 0.3615,
+   "seam_crossing_edges": 3127,
+   "seam_crossing_edges_where_q_steps": 0,
+   "raw_q_change_edges": 5525,
+   "share_raw_q_changes_within_5deg_of_seam": 0.0002
+  },
+  {
+   "page": 7,
+   "vertices_matched": 1508263,
+   "S2_modal_share_raw_w": 0.4591,
+   "S2_modal_share_quilt2_q": 0.9978,
+   "S2_modal_share_continuous": 0.9978,
+   "S2_max_abs_continuous_minus_q": 0,
+   "turns": 2.47,
+   "S1a_raw_w_change_edges": 5270,
+   "S1a_share_raw_w_changes_within_5deg_of_seam": 0.3565,
+   "seam_crossing_edges": 1770,
+   "seam_crossing_edges_where_q_steps": 3,
+   "raw_q_change_edges": 3506,
+   "share_raw_q_changes_within_5deg_of_seam": 0.0328
+  },
+  {
+   "page": 8,
+   "vertices_matched": 1522881,
+   "S2_modal_share_raw_w": 0.5021,
+   "S2_modal_share_quilt2_q": 0.9993,
+   "S2_modal_share_continuous": 0.9993,
+   "S2_max_abs_continuous_minus_q": 0,
+   "turns": 2.16,
+   "S1a_raw_w_change_edges": 2029,
+   "S1a_share_raw_w_changes_within_5deg_of_seam": 0.3139,
+   "seam_crossing_edges": 591,
+   "seam_crossing_edges_where_q_steps": 0,
+   "raw_q_change_edges": 1438,
+   "share_raw_q_changes_within_5deg_of_seam": 0.032
+  },
+  {
+   "page": 9,
+   "vertices_matched": 1257394,
+   "S2_modal_share_raw_w": 0.3989,
+   "S2_modal_share_quilt2_q": 0.9935,
+   "S2_modal_share_continuous": 0.9935,
+   "S2_max_abs_continuous_minus_q": 0,
+   "turns": 3.37,
+   "S1a_raw_w_change_edges": 2581,
+   "S1a_share_raw_w_changes_within_5deg_of_seam": 0.7815,
+   "seam_crossing_edges": 2001,
+   "seam_crossing_edges_where_q_steps": 0,
+   "raw_q_change_edges": 711,
+   "share_raw_q_changes_within_5deg_of_seam": 0.0225
+  }
+ ]
+}

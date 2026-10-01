@@ -1,0 +1,60 @@
+{
+ "version": "v1",
+ "model": "HistGradientBoostingClassifier(class_weight='balanced', random_state=8)",
+ "label": "Q3c reference-free uniform consensus: round(k_b - k_a) != 0; handedness chosen s=1",
+ "active_features": [
+  "sep_um",
+  "median_count",
+  "agreement",
+  "n_testable",
+  "support_fraction",
+  "stevens_dist_vox",
+  "area_a",
+  "area_b",
+  "z_um"
+ ],
+ "n_train": 7087,
+ "train_positives": 837,
+ "blind_threshold": 0.3293271860685008,
+ "threshold_rule": "threshold_at_precision(oof, own reference-free label, 0.85), 4 patch-z folds",
+ "checks": {
+  "R1_q3c_reproduction": {
+   "recall": 0.8709256844850065,
+   "q3c_recall": 0.8709256844850065,
+   "identical": true
+  },
+  "R2_nested_heldout_vs_reference": {
+   "fold_thresholds": {
+    "0": 0.33790630042325437,
+    "1": 0.37307946116602636,
+    "2": 0.0809665840797197,
+    "3": 0.284840579844533
+   },
+   "called": 812,
+   "positives": 767,
+   "precision": 0.8004926108374384,
+   "recall": 0.847457627118644
+  },
+  "R3_blind_threshold_oof": {
+   "threshold": 0.3293271860685008,
+   "called": 769,
+   "precision_vs_reference": 0.8374512353706112,
+   "recall_vs_reference": 0.8396349413298566,
+   "precision_vs_own_label": 0.8504551365409623
+  }
+ },
+ "sklearn": "1.9.1",
+ "numpy": "2.4.6",
+ "inputs": {
+  "phase/x8/pairs_dataset.csv": "db15ae943507d1411455c03e71022e0f1ae71299c254bc554c70171248403547",
+  "phase/x6/x6b_pairs.csv": "3d2c00ac40cdc092894ee1a87ee4a16461b3a083e3f8d0810afdd7115d03ed8e",
+  "phase/x6/x6b_points.npz": "ca95c3621b668edf53269e96f9aecb6eaff7fdae6616f17d9f344f3834f9a4f6",
+  "phase/x1/patches.csv": "ac3dd55217533aeb15656111ba90ea2a951861ee586a1a9cc3ee0da53b4b4cc1",
+  "phase/q3/q3c_deploy.py": "cccdc76b45023a745d1ecc4428b0092218247afb969456ecfd042ff58c0e3329",
+  "phase/q3/q3_common.py": "0997c036fe34352eec4be97c6cf5ec7f41c486d3dd61f1161d83303c5ada7518",
+  "phase/q3/Q3_consensus.npz": "e52fdc25c20ed219b29059b4466146cf1ba7e755fa510fdbdd00a4fbc76d7701",
+  "phase/data_small/x4test/complete_surface_200um.npz": "0b51f59313ebf9fd8375301c95cdf5d5169e211fd366d4ce56ad6c137aa1dded"
+ },
+ "model_sha256": "982bfa1229251f5dc0f60d8dc5181433fabc33e98a749fc28d0b6000990ea8bd",
+ "cpu_s": 184.9
+}

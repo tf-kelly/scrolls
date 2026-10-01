@@ -1,0 +1,25 @@
+{
+ "schema": "vm-b-3.build-record/1",
+ "sif": "villa.sif (optional; apptainer route only)",
+ "sif_bytes": 3594797056,
+ "sif_sha256": "387138e488acf20d6015933702cfe9d834e66a0386b254123d41e9172e819e12",
+ "villa_commit": "f4570bfa6c2b357fd24a17b46f8a43becf87ea8d",
+ "base_image": "docker://python:3.14-bookworm (Python 3.14.7, GCC 12.2)",
+ "route": "singularity build --sandbox; installs via chroot (pip); singularity build .sif from sandbox (build_sif_here.sh). %post cannot run here: CAP_SYS_RESOURCE missing.",
+ "deviation_from_lock": "torch 2.11.0 from PyPI = CUDA 13.0 build (nvidia-*-cu13) instead of villa uv.lock's 2.11.0+cu128 (download.pytorch.org blocked here). Every other package pinned to uv.lock (uv export --frozen). Requires NVIDIA driver >= 580 on ARC (checked by run_arm.sh). pandas added (evaluation only). villa's compiled vc_spiral modules copied next to its source package so imports from /opt/villa/spiral-fitting resolve.",
+ "verified_here": [
+  "all imports incl. vc_spiral.surface_index/spiral_sampling, fit_spiral, torch (2.11.0+cu130), pandas: inside the sandbox via chroot",
+  "sif partitions and key files (unsquashfs listing); build host's proxy CA absent",
+  "job logic end to end with the real image sandbox and a stub fit: staging (100 patches), checkpoint mirror + prune, kill -> resume, DONE, pack",
+  "setup.sh: bundle/zip/villa checks pass; apptainer route falls back to venv when exec fails; venv route reaches uv install (astral.sh blocked in this sandbox)",
+  "run_arm.sh venv route end to end with a stand-in python (image's venv) and stub fit: staging, checkpoint, DONE, TEST JOB PASS"
+ ],
+ "not_verified_here": [
+  "apptainer exec of the .sif (CAP_SYS_RESOURCE missing in this container)",
+  "any CUDA execution (no GPU here)",
+  "ARC partition/constraint names (from the user guide as relayed)",
+  "setup.sh venv route past uv install (astral.sh, GitHub Python builds and download.pytorch.org are blocked in this sandbox)"
+ ],
+ "canonical_recipe": "villa_spiral.def (installs the exact lock incl. torch+cu128 where download.pytorch.org is reachable)",
+ "routes": "setup.sh chooses: apptainer (villa.sif, torch CUDA 13.0, driver>=580) if apptainer is available and runs the image; else venv (villa's exact uv sync --frozen, torch 2.11.0+cu128) built on the login node"
+}

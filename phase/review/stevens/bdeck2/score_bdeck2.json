@@ -1,0 +1,221 @@
+{
+ "groups": {
+  "R02": {
+   "n": 16,
+   "counts": {
+    "switch": 16,
+    "stays": 0,
+    "leaves": 0,
+    "cant": 0
+   },
+   "rates": {
+    "switch": 1.0,
+    "stays": 0.0,
+    "leaves": 0.0,
+    "cant": 0.0
+   },
+   "wilson95": {
+    "switch": [
+     0.8064,
+     1.0
+    ],
+    "stays": [
+     0.0,
+     0.1936
+    ],
+    "leaves": [
+     0.0,
+     0.1936
+    ],
+    "cant": [
+     0.0,
+     0.1936
+    ]
+   }
+  },
+  "R5": {
+   "n": 9,
+   "counts": {
+    "switch": 8,
+    "stays": 0,
+    "leaves": 1,
+    "cant": 0
+   },
+   "rates": {
+    "switch": 0.8889,
+    "stays": 0.0,
+    "leaves": 0.1111,
+    "cant": 0.0
+   },
+   "wilson95": {
+    "switch": [
+     0.565,
+     0.9801
+    ],
+    "stays": [
+     -0.0,
+     0.2991
+    ],
+    "leaves": [
+     0.0199,
+     0.435
+    ],
+    "cant": [
+     -0.0,
+     0.2991
+    ]
+   }
+  },
+  "ART": {
+   "n": 10,
+   "counts": {
+    "switch": 0,
+    "stays": 10,
+    "leaves": 0,
+    "cant": 0
+   },
+   "rates": {
+    "switch": 0.0,
+    "stays": 1.0,
+    "leaves": 0.0,
+    "cant": 0.0
+   },
+   "wilson95": {
+    "switch": [
+     0.0,
+     0.2775
+    ],
+    "stays": [
+     0.7225,
+     1.0
+    ],
+    "leaves": [
+     0.0,
+     0.2775
+    ],
+    "cant": [
+     0.0,
+     0.2775
+    ]
+   }
+  },
+  "DA": {
+   "n": 8,
+   "counts": {
+    "switch": 0,
+    "stays": 8,
+    "leaves": 0,
+    "cant": 0
+   },
+   "rates": {
+    "switch": 0.0,
+    "stays": 1.0,
+    "leaves": 0.0,
+    "cant": 0.0
+   },
+   "wilson95": {
+    "switch": [
+     0.0,
+     0.3244
+    ],
+    "stays": [
+     0.6756,
+     1.0
+    ],
+    "leaves": [
+     0.0,
+     0.3244
+    ],
+    "cant": [
+     0.0,
+     0.3244
+    ]
+   }
+  },
+  "DB": {
+   "n": 9,
+   "counts": {
+    "switch": 0,
+    "stays": 9,
+    "leaves": 0,
+    "cant": 0
+   },
+   "rates": {
+    "switch": 0.0,
+    "stays": 1.0,
+    "leaves": 0.0,
+    "cant": 0.0
+   },
+   "wilson95": {
+    "switch": [
+     -0.0,
+     0.2991
+    ],
+    "stays": [
+     0.7009,
+     1.0
+    ],
+    "leaves": [
+     -0.0,
+     0.2991
+    ],
+    "cant": [
+     -0.0,
+     0.2991
+    ]
+   }
+  },
+  "UNK": {
+   "n": 6,
+   "counts": {
+    "switch": 0,
+    "stays": 6,
+    "leaves": 0,
+    "cant": 0
+   },
+   "rates": {
+    "switch": 0.0,
+    "stays": 1.0,
+    "leaves": 0.0,
+    "cant": 0.0
+   },
+   "wilson95": {
+    "switch": [
+     0.0,
+     0.3903
+    ],
+    "stays": [
+     0.6097,
+     1.0
+    ],
+    "leaves": [
+     0.0,
+     0.3903
+    ],
+    "cant": [
+     0.0,
+     0.3903
+    ]
+   }
+  }
+ },
+ "H1": {
+  "switch_rate_R02": 1.0,
+  "switch_rate_ART_DA_DB": 0.0,
+  "n_R02": 16,
+  "n_other": 27,
+  "d_prime_loglinear": 3.99,
+  "holds": true
+ },
+ "H2": {
+  "switch_rate_R5": 0.8889,
+  "leaves_rate_R5": 0.1111,
+  "holds": false
+ },
+ "H3": {
+  "switch_rate_ART": 0.0,
+  "holds": true
+ },
+ "false_alarm_DA": "0/8",
+ "false_alarm_DB": "0/9"
+}

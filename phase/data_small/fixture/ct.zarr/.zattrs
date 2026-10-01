@@ -1,0 +1,83 @@
+{
+  "multiscales": [
+    {
+      "version": "0.4",
+      "name": "PHerc1667 20231117161658 L0 crop",
+      "axes": [
+        {
+          "name": "z",
+          "type": "space",
+          "unit": "micrometer"
+        },
+        {
+          "name": "y",
+          "type": "space",
+          "unit": "micrometer"
+        },
+        {
+          "name": "x",
+          "type": "space",
+          "unit": "micrometer"
+        }
+      ],
+      "datasets": [
+        {
+          "path": "0",
+          "coordinateTransformations": [
+            {
+              "type": "scale",
+              "scale": [
+                7.91,
+                7.91,
+                7.91
+              ]
+            },
+            {
+              "type": "translation",
+              "translation": [
+                33411.840000000004,
+                20249.6,
+                5062.4
+              ]
+            }
+          ]
+        },
+        {
+          "path": "1",
+          "coordinateTransformations": [
+            {
+              "type": "scale",
+              "scale": [
+                15.82,
+                15.82,
+                15.82
+              ]
+            },
+            {
+              "type": "translation",
+              "translation": [
+                33411.840000000004,
+                20249.6,
+                5062.4
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fixture": {
+    "origin_voxel_zyx": [
+      4224,
+      2560,
+      640
+    ],
+    "shape_zyx": [
+      384,
+      384,
+      384
+    ],
+    "source": "https://dl.ash2txt.org/full-scrolls/Scroll4/PHerc1667.volpkg/volumes_zarr/20231117161658.zarr/0",
+    "note": "level 0 values are the scan's own uint16 L0 values; level 1 is a 2x mean"
+  }
+}

@@ -1,0 +1,334 @@
+{
+ "cells": {
+  "BB": {
+   "n": 10,
+   "no": 3,
+   "yes": 7,
+   "yes_rate": 0.7,
+   "yes_wilson95": [
+    0.397,
+    0.892
+   ]
+  },
+  "GG": {
+   "n": 10,
+   "yes": 8,
+   "no": 2,
+   "yes_rate": 0.8,
+   "yes_wilson95": [
+    0.49,
+    0.943
+   ]
+  },
+  "HO": {
+   "n": 10,
+   "yes": 6,
+   "no": 4,
+   "yes_rate": 0.6,
+   "yes_wilson95": [
+    0.313,
+    0.832
+   ]
+  },
+  "OO": {
+   "n": 10,
+   "yes": 8,
+   "no": 1,
+   "cant": 1,
+   "yes_rate": 0.8,
+   "yes_wilson95": [
+    0.49,
+    0.943
+   ]
+  }
+ },
+ "post_hoc": {
+  "HO_vs_OO_no_fisher_two_sided": 0.3034,
+  "his_removed_no": "7/20",
+  "his_kept_no": "3/20",
+  "ours_bad_no": "4/20",
+  "ours_good_no": "6/20"
+ },
+ "items": [
+  {
+   "item": "e825be43",
+   "cell": "HO",
+   "patch": 112991,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "bc96a570",
+   "cell": "GG",
+   "patch": 26838,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "daf54666",
+   "cell": "OO",
+   "patch": 140812,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "2566dbb7",
+   "cell": "BB",
+   "patch": 93203,
+   "answer": "no",
+   "note": ""
+  },
+  {
+   "item": "a88ac8c3",
+   "cell": "OO",
+   "patch": 7894,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "26caaf33",
+   "cell": "GG",
+   "patch": 111502,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "6b6d9039",
+   "cell": "GG",
+   "patch": 32217,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "96289c35",
+   "cell": "GG",
+   "patch": 89838,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "3a20153e",
+   "cell": "BB",
+   "patch": 96755,
+   "answer": "no",
+   "note": ""
+  },
+  {
+   "item": "f6672802",
+   "cell": "OO",
+   "patch": 48412,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "7a7bbdc5",
+   "cell": "OO",
+   "patch": 112320,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "3a15321c",
+   "cell": "BB",
+   "patch": 59270,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "2aa68a52",
+   "cell": "OO",
+   "patch": 74029,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "18e9349b",
+   "cell": "HO",
+   "patch": 117762,
+   "answer": "no",
+   "note": ""
+  },
+  {
+   "item": "bb16bfe0",
+   "cell": "BB",
+   "patch": 34548,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "417050b9",
+   "cell": "GG",
+   "patch": 103800,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "c3e151ea",
+   "cell": "OO",
+   "patch": 116508,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "94ad8de9",
+   "cell": "OO",
+   "patch": 42359,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "48c63d6f",
+   "cell": "HO",
+   "patch": 25987,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "94485e8d",
+   "cell": "GG",
+   "patch": 39277,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "ad3539f1",
+   "cell": "HO",
+   "patch": 143218,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "50db283e",
+   "cell": "GG",
+   "patch": 113419,
+   "answer": "no",
+   "note": ""
+  },
+  {
+   "item": "6ac9aac7",
+   "cell": "GG",
+   "patch": 24845,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "4c3180a4",
+   "cell": "HO",
+   "patch": 50381,
+   "answer": "no",
+   "note": ""
+  },
+  {
+   "item": "805f7aeb",
+   "cell": "BB",
+   "patch": 94434,
+   "answer": "no",
+   "note": ""
+  },
+  {
+   "item": "6ca1ea4e",
+   "cell": "HO",
+   "patch": 138799,
+   "answer": "no",
+   "note": ""
+  },
+  {
+   "item": "2adaa9cd",
+   "cell": "HO",
+   "patch": 23883,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "3df6edef",
+   "cell": "BB",
+   "patch": 116664,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "23cebd7b",
+   "cell": "OO",
+   "patch": 36906,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "948eae5d",
+   "cell": "BB",
+   "patch": 104043,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "07180d93",
+   "cell": "OO",
+   "patch": 136110,
+   "answer": "no",
+   "note": ""
+  },
+  {
+   "item": "e68a1c43",
+   "cell": "HO",
+   "patch": 139654,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "65489c7f",
+   "cell": "OO",
+   "patch": 78090,
+   "answer": "cant",
+   "note": ""
+  },
+  {
+   "item": "efe6ec71",
+   "cell": "HO",
+   "patch": 11210,
+   "answer": "no",
+   "note": ""
+  },
+  {
+   "item": "3d9cd559",
+   "cell": "HO",
+   "patch": 83781,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "e4adb0fa",
+   "cell": "BB",
+   "patch": 132355,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "cd64cdd1",
+   "cell": "BB",
+   "patch": 73839,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "425f3304",
+   "cell": "BB",
+   "patch": 141738,
+   "answer": "yes",
+   "note": ""
+  },
+  {
+   "item": "6866a5b9",
+   "cell": "GG",
+   "patch": 21151,
+   "answer": "no",
+   "note": ""
+  },
+  {
+   "item": "98d9e2fe",
+   "cell": "GG",
+   "patch": 71843,
+   "answer": "yes",
+   "note": ""
+  }
+ ]
+}

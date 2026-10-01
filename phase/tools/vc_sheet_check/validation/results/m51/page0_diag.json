@@ -1,0 +1,424 @@
+{
+ "note": "exploratory; boundary = smoothed on/off-modal flag change between 4-neighbour page nodes (16 vox)",
+ "joins": {
+  "by_kind": {
+   "m+split": 191,
+   "M-m": 29,
+   "split+split": 209,
+   "M+split": 402
+  },
+  "M+split": {
+   "n": 402,
+   "verdict": {
+    "same-sheet": 264,
+    "untestable": 20,
+    "switch": 40,
+    "ambiguous": 78
+   },
+   "d_i": {
+    "0": 300,
+    "None": 20,
+    "1": 42,
+    "-1": 40
+   },
+   "with_unsatisfied_terms": 85,
+   "below_threshold": 98,
+   "dk": {
+    "0": 278,
+    "1": 121,
+    "2": 3
+   }
+  },
+  "M-m": {
+   "n": 29,
+   "verdict": {
+    "same-sheet": 10,
+    "switch": 8,
+    "ambiguous": 11
+   },
+   "d_i": {
+    "0": 14,
+    "1": 10,
+    "-1": 5
+   },
+   "with_unsatisfied_terms": 10,
+   "below_threshold": 11,
+   "dk_M_to_m": {
+    "0": 10,
+    "-1": 17,
+    "1": 2
+   },
+   "joins": [
+    {
+     "M": 14147,
+     "m": 13635,
+     "k_M": 12,
+     "k_m": 12,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 1.0,
+     "unsatisfied": []
+    },
+    {
+     "M": 32398,
+     "m": 19345,
+     "k_M": 13,
+     "k_m": 12,
+     "d_i": 1,
+     "verdict": "switch",
+     "agreement": 0.8136200716845878,
+     "unsatisfied": []
+    },
+    {
+     "M": 34243,
+     "m": 20406,
+     "k_M": 13,
+     "k_m": 12,
+     "d_i": 0,
+     "verdict": "ambiguous",
+     "agreement": 0.40401785714285715,
+     "unsatisfied": [
+      "i"
+     ]
+    },
+    {
+     "M": 34243,
+     "m": 21073,
+     "k_M": 13,
+     "k_m": 12,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 0.8409090909090909,
+     "unsatisfied": [
+      "i"
+     ]
+    },
+    {
+     "M": 32398,
+     "m": 21150,
+     "k_M": 13,
+     "k_m": 12,
+     "d_i": 1,
+     "verdict": "switch",
+     "agreement": 0.832046332046332,
+     "unsatisfied": []
+    },
+    {
+     "M": 22391,
+     "m": 22656,
+     "k_M": 12,
+     "k_m": 12,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 1.0,
+     "unsatisfied": []
+    },
+    {
+     "M": 22391,
+     "m": 22679,
+     "k_M": 12,
+     "k_m": 12,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 1.0,
+     "unsatisfied": []
+    },
+    {
+     "M": 21389,
+     "m": 22631,
+     "k_M": 12,
+     "k_m": 11,
+     "d_i": 0,
+     "verdict": "ambiguous",
+     "agreement": 0.631578947368421,
+     "unsatisfied": [
+      "ii",
+      "i",
+      "iii"
+     ]
+    },
+    {
+     "M": 22871,
+     "m": 22930,
+     "k_M": 12,
+     "k_m": 12,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 1.0,
+     "unsatisfied": []
+    },
+    {
+     "M": 32398,
+     "m": 23791,
+     "k_M": 13,
+     "k_m": 12,
+     "d_i": 1,
+     "verdict": "switch",
+     "agreement": 0.9089301503094607,
+     "unsatisfied": []
+    },
+    {
+     "M": 32398,
+     "m": 26541,
+     "k_M": 13,
+     "k_m": 12,
+     "d_i": 1,
+     "verdict": "ambiguous",
+     "agreement": 0.7712765957446809,
+     "unsatisfied": [
+      "ii"
+     ]
+    },
+    {
+     "M": 63553,
+     "m": 32890,
+     "k_M": 14,
+     "k_m": 13,
+     "d_i": 1,
+     "verdict": "switch",
+     "agreement": 0.8511960236098167,
+     "unsatisfied": []
+    },
+    {
+     "M": 33616,
+     "m": 32890,
+     "k_M": 13,
+     "k_m": 13,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 0.9565217391304348,
+     "unsatisfied": []
+    },
+    {
+     "M": 34203,
+     "m": 32890,
+     "k_M": 13,
+     "k_m": 13,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 0.9642857142857143,
+     "unsatisfied": []
+    },
+    {
+     "M": 42005,
+     "m": 33449,
+     "k_M": 13,
+     "k_m": 12,
+     "d_i": 1,
+     "verdict": "switch",
+     "agreement": 0.8495049504950495,
+     "unsatisfied": [
+      "ii"
+     ]
+    },
+    {
+     "M": 34260,
+     "m": 19400,
+     "k_M": 13,
+     "k_m": 12,
+     "d_i": 0,
+     "verdict": "ambiguous",
+     "agreement": 0.2880921895006402,
+     "unsatisfied": [
+      "i"
+     ]
+    },
+    {
+     "M": 34676,
+     "m": 33267,
+     "k_M": 14,
+     "k_m": 13,
+     "d_i": -1,
+     "verdict": "ambiguous",
+     "agreement": 0.755083179297597,
+     "unsatisfied": []
+    },
+    {
+     "M": 45074,
+     "m": 36625,
+     "k_M": 13,
+     "k_m": 13,
+     "d_i": 0,
+     "verdict": "ambiguous",
+     "agreement": 0.5625,
+     "unsatisfied": []
+    },
+    {
+     "M": 42930,
+     "m": 41338,
+     "k_M": 14,
+     "k_m": 14,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 0.9444444444444444,
+     "unsatisfied": []
+    },
+    {
+     "M": 43493,
+     "m": 43399,
+     "k_M": 13,
+     "k_m": 13,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 0.9545454545454546,
+     "unsatisfied": []
+    },
+    {
+     "M": 66099,
+     "m": 56171,
+     "k_M": 13,
+     "k_m": 12,
+     "d_i": -1,
+     "verdict": "ambiguous",
+     "agreement": 0.6777777777777778,
+     "unsatisfied": [
+      "i"
+     ]
+    },
+    {
+     "M": 62835,
+     "m": 57373,
+     "k_M": 16,
+     "k_m": 15,
+     "d_i": 1,
+     "verdict": "ambiguous",
+     "agreement": 0.7574679943100996,
+     "unsatisfied": []
+    },
+    {
+     "M": 59075,
+     "m": 67315,
+     "k_M": 15,
+     "k_m": 16,
+     "d_i": 1,
+     "verdict": "switch",
+     "agreement": 0.8479880774962743,
+     "unsatisfied": []
+    },
+    {
+     "M": 65025,
+     "m": 67315,
+     "k_M": 16,
+     "k_m": 16,
+     "d_i": 0,
+     "verdict": "same-sheet",
+     "agreement": 1.0,
+     "unsatisfied": []
+    },
+    {
+     "M": 73932,
+     "m": 86614,
+     "k_M": 16,
+     "k_m": 17,
+     "d_i": 1,
+     "verdict": "ambiguous",
+     "agreement": 0.532258064516129,
+     "unsatisfied": [
+      "ii"
+     ]
+    },
+    {
+     "M": 79097,
+     "m": 53334,
+     "k_M": 16,
+     "k_m": 15,
+     "d_i": -1,
+     "verdict": "ambiguous",
+     "agreement": 0.7589285714285714,
+     "unsatisfied": [
+      "ii"
+     ]
+    },
+    {
+     "M": 90590,
+     "m": 82484,
+     "k_M": 15,
+     "k_m": 14,
+     "d_i": 1,
+     "verdict": "switch",
+     "agreement": 0.8861788617886179,
+     "unsatisfied": []
+    },
+    {
+     "M": 34243,
+     "m": 19400,
+     "k_M": 13,
+     "k_m": 12,
+     "d_i": -1,
+     "verdict": "ambiguous",
+     "agreement": 0.5032258064516129,
+     "unsatisfied": [
+      "i"
+     ]
+    },
+    {
+     "M": 22871,
+     "m": 28571,
+     "k_M": 12,
+     "k_m": 11,
+     "d_i": -1,
+     "verdict": "switch",
+     "agreement": 1.0,
+     "unsatisfied": []
+    }
+   ]
+  },
+  "m+split": {
+   "n": 191,
+   "verdict": {
+    "ambiguous": 36,
+    "same-sheet": 126,
+    "switch": 18,
+    "untestable": 11
+   },
+   "d_i": {
+    "0": 137,
+    "1": 26,
+    "-1": 17,
+    "None": 11
+   },
+   "with_unsatisfied_terms": 51,
+   "below_threshold": 47,
+   "dk": {
+    "1": 70,
+    "0": 121
+   }
+  },
+  "split+split": {
+   "n": 209,
+   "verdict": {
+    "ambiguous": 40,
+    "switch": 16,
+    "same-sheet": 149,
+    "untestable": 4
+   },
+   "d_i": {
+    "0": 161,
+    "-1": 21,
+    "1": 23,
+    "None": 4
+   },
+   "with_unsatisfied_terms": 94,
+   "below_threshold": 44,
+   "dk": {
+    "1": 99,
+    "0": 105,
+    "2": 4,
+    "3": 1
+   }
+  }
+ },
+ "grid": {
+  "edges": 1625872,
+  "unwrap_jump_edges": 0,
+  "key_change_edges": 6237,
+  "key_change_same_patch": 0,
+  "key_change_at_unwrap_jump": 0,
+  "boundary_edges": 1061,
+  "boundary_same_patch": 408,
+  "boundary_at_unwrap_jump": 0,
+  "unwrap_jump_share_of_all_edges": 0.0,
+  "boundary_at_unwrap_jump_share": 0.0,
+  "boundary_same_patch_share": 0.3845
+ }
+}

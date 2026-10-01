@@ -1,0 +1,37 @@
+{
+ "cells": {
+  "trace": 64761903,
+  "trace_any_bad": 12340156,
+  "trace_all_bad": 3541190,
+  "conflict": 1748698,
+  "conflict_pair_has_bad": 351438,
+  "conflict_any_bad": 581852,
+  "conflict_all": 3255950,
+  "conflict_all_pair_has_bad": 1234055,
+  "conflict_all_any_bad": 1875744
+ },
+ "cm2": {
+  "trace": 648.3246756950881,
+  "trace_any_bad": 123.53601833977602,
+  "trace_all_bad": 35.450484806240006,
+  "conflict": 17.506033813408003,
+  "conflict_pair_has_bad": 3.5182092684480004,
+  "conflict_any_bad": 5.824859859392001,
+  "conflict_all": 32.59497683120001,
+  "conflict_all_pair_has_bad": 12.353996263280003,
+  "conflict_all_any_bad": 18.777878106624005
+ },
+ "reproduces_arc": {
+  "trace": true,
+  "conflict": true,
+  "conflict_all": true
+ },
+ "indexed_bad_unflagged": 3649,
+ "share": {
+  "trace_any_bad": 0.19054653165457475,
+  "trace_all_bad": 0.05468014119350384,
+  "conflict_pair_has_bad": 0.20097123688595744,
+  "conflict_all_pair_has_bad": 0.3790153411446736
+ },
+ "wall_s": 822.2
+}

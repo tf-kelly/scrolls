@@ -1,0 +1,649 @@
+{
+ "definition": "Fixture v1.1 (additive; v1 files are unchanged): golden \u00a74.1 clusters for region A.",
+ "region": "A_rich",
+ "n_joins": 30,
+ "clusters": [
+  {
+   "id": 0,
+   "kind": "x6_cross_turn",
+   "n_pairs": 14,
+   "n_patches": 13,
+   "area_cm2": 0.284980941702431,
+   "centroid_zyx": [
+    4304.68,
+    2802.44,
+    882.39
+   ],
+   "bbox_zyx": [
+    [
+     4195.33,
+     2710.24,
+     724.27
+    ],
+    [
+     4477.55,
+     2933.1,
+     1083.83
+    ]
+   ],
+   "theta_deg": 128.364,
+   "wrap_index_range": [
+    19,
+    21
+   ],
+   "patches": [
+    146003,
+    146090,
+    146266,
+    146586,
+    146668,
+    146687,
+    146835,
+    146868,
+    146915,
+    147012,
+    147030,
+    147594,
+    148614
+   ],
+   "pairs": [
+    [
+     146003,
+     147030
+    ],
+    [
+     146090,
+     146266
+    ],
+    [
+     146090,
+     147012
+    ],
+    [
+     146266,
+     146668
+    ],
+    [
+     146266,
+     146687
+    ],
+    [
+     146266,
+     146835
+    ],
+    [
+     146266,
+     146868
+    ],
+    [
+     146266,
+     147012
+    ],
+    [
+     146586,
+     146687
+    ],
+    [
+     146586,
+     146835
+    ],
+    [
+     146586,
+     146868
+    ],
+    [
+     146687,
+     146868
+    ],
+    [
+     146868,
+     147594
+    ],
+    [
+     146915,
+     148614
+    ]
+   ],
+   "max_risk": 0.9995711807008613,
+   "contact_pairs": 5,
+   "pairs_flagged_by_switch_score": 11,
+   "pairs_without_switch_score": 0
+  },
+  {
+   "id": 1,
+   "kind": "x6_cross_turn",
+   "n_pairs": 4,
+   "n_patches": 4,
+   "area_cm2": 0.08170157414235035,
+   "centroid_zyx": [
+    4232.47,
+    2652.58,
+    652.08
+   ],
+   "bbox_zyx": [
+    [
+     4194.05,
+     2607.85,
+     584.63
+    ],
+    [
+     4327.45,
+     2711.0,
+     692.0
+    ]
+   ],
+   "theta_deg": 139.878,
+   "wrap_index_range": [
+    19,
+    20
+   ],
+   "patches": [
+    147549,
+    147764,
+    147958,
+    148436
+   ],
+   "pairs": [
+    [
+     147549,
+     147764
+    ],
+    [
+     147549,
+     147958
+    ],
+    [
+     147764,
+     147958
+    ],
+    [
+     147958,
+     148436
+    ]
+   ],
+   "max_risk": 0.9989952494867885,
+   "contact_pairs": 2,
+   "pairs_flagged_by_switch_score": 3,
+   "pairs_without_switch_score": 0
+  },
+  {
+   "id": 2,
+   "kind": "x6_cross_turn",
+   "n_pairs": 2,
+   "n_patches": 4,
+   "area_cm2": 0.09679210626474621,
+   "centroid_zyx": [
+    4241.56,
+    2792.96,
+    819.34
+   ],
+   "bbox_zyx": [
+    [
+     4191.05,
+     2757.31,
+     765.43
+    ],
+    [
+     4341.64,
+     2828.95,
+     899.34
+    ]
+   ],
+   "theta_deg": 130.66,
+   "wrap_index_range": [
+    19,
+    21
+   ],
+   "patches": [
+    146868,
+    146915,
+    146987,
+    147012
+   ],
+   "pairs": [
+    [
+     146868,
+     147012
+    ],
+    [
+     146915,
+     146987
+    ]
+   ],
+   "max_risk": 0.9922682220351337,
+   "contact_pairs": 0,
+   "pairs_flagged_by_switch_score": 2,
+   "pairs_without_switch_score": 0
+  },
+  {
+   "id": 3,
+   "kind": "x6_cross_turn",
+   "n_pairs": 1,
+   "n_patches": 2,
+   "area_cm2": 0.10713783914341396,
+   "centroid_zyx": [
+    4527.31,
+    2664.97,
+    915.74
+   ],
+   "bbox_zyx": [
+    [
+     4523.0,
+     2655.03,
+     901.39
+    ],
+    [
+     4530.78,
+     2673.87,
+     930.93
+    ]
+   ],
+   "theta_deg": 131.705,
+   "wrap_index_range": [
+    15,
+    16
+   ],
+   "patches": [
+    123586,
+    126170
+   ],
+   "pairs": [
+    [
+     123586,
+     126170
+    ]
+   ],
+   "max_risk": 0.016900157217945508,
+   "contact_pairs": 1,
+   "pairs_flagged_by_switch_score": 0,
+   "pairs_without_switch_score": 0
+  },
+  {
+   "id": 4,
+   "kind": "x6_cross_turn",
+   "n_pairs": 1,
+   "n_patches": 2,
+   "area_cm2": 0.02773499628502261,
+   "centroid_zyx": [
+    4379.03,
+    2787.83,
+    972.73
+   ],
+   "bbox_zyx": [
+    [
+     4373.66,
+     2767.35,
+     950.96
+    ],
+    [
+     4382.66,
+     2833.99,
+     1029.27
+    ]
+   ],
+   "theta_deg": 125.636,
+   "wrap_index_range": [
+    18,
+    19
+   ],
+   "patches": [
+    145768,
+    151425
+   ],
+   "pairs": [
+    [
+     145768,
+     151425
+    ]
+   ],
+   "max_risk": 0.8001304839484065,
+   "contact_pairs": 1,
+   "pairs_flagged_by_switch_score": 1,
+   "pairs_without_switch_score": 0
+  },
+  {
+   "id": 5,
+   "kind": "x6_cross_turn",
+   "n_pairs": 1,
+   "n_patches": 2,
+   "area_cm2": 0.03892842968786306,
+   "centroid_zyx": [
+    4535.58,
+    2949.78,
+    1103.11
+   ],
+   "bbox_zyx": [
+    [
+     4480.29,
+     2911.0,
+     1001.51
+    ],
+    [
+     4588.0,
+     2977.77,
+     1175.87
+    ]
+   ],
+   "theta_deg": 116.774,
+   "wrap_index_range": [
+    20,
+    21
+   ],
+   "patches": [
+    145997,
+    148392
+   ],
+   "pairs": [
+    [
+     145997,
+     148392
+    ]
+   ],
+   "max_risk": 0.9985961519174387,
+   "contact_pairs": 0,
+   "pairs_flagged_by_switch_score": 1,
+   "pairs_without_switch_score": 0
+  },
+  {
+   "id": 6,
+   "kind": "x6_cross_turn",
+   "n_pairs": 1,
+   "n_patches": 2,
+   "area_cm2": 0.03720186691015336,
+   "centroid_zyx": [
+    4381.15,
+    2809.99,
+    956.43
+   ],
+   "bbox_zyx": [
+    [
+     4381.14,
+     2808.98,
+     956.02
+    ],
+    [
+     4381.16,
+     2811.0,
+     956.84
+    ]
+   ],
+   "theta_deg": 125.651,
+   "wrap_index_range": [
+    21,
+    21
+   ],
+   "patches": [
+    146266,
+    147030
+   ],
+   "pairs": [
+    [
+     146266,
+     147030
+    ]
+   ],
+   "max_risk": 0.06868795890127952,
+   "contact_pairs": 1,
+   "pairs_flagged_by_switch_score": 0,
+   "pairs_without_switch_score": 0
+  },
+  {
+   "id": 7,
+   "kind": "x6_cross_turn",
+   "n_pairs": 1,
+   "n_patches": 2,
+   "area_cm2": 0.030566757538797187,
+   "centroid_zyx": [
+    4258.68,
+    2839.63,
+    999.84
+   ],
+   "bbox_zyx": [
+    [
+     4240.5,
+     2827.42,
+     978.37
+    ],
+    [
+     4292.13,
+     2856.02,
+     1015.21
+    ]
+   ],
+   "theta_deg": 123.109,
+   "wrap_index_range": [
+    19,
+    20
+   ],
+   "patches": [
+    146493,
+    148614
+   ],
+   "pairs": [
+    [
+     146493,
+     148614
+    ]
+   ],
+   "max_risk": 0.960923431435448,
+   "contact_pairs": 0,
+   "pairs_flagged_by_switch_score": 1,
+   "pairs_without_switch_score": 0
+  },
+  {
+   "id": 8,
+   "kind": "x6_cross_turn",
+   "n_pairs": 1,
+   "n_patches": 2,
+   "area_cm2": 0.0555600046029077,
+   "centroid_zyx": [
+    4583.19,
+    2829.93,
+    836.84
+   ],
+   "bbox_zyx": [
+    [
+     4560.65,
+     2809.64,
+     815.19
+    ],
+    [
+     4601.1,
+     2846.68,
+     861.79
+    ]
+   ],
+   "theta_deg": 129.547,
+   "wrap_index_range": [
+    20,
+    20
+   ],
+   "patches": [
+    147274,
+    147888
+   ],
+   "pairs": [
+    [
+     147274,
+     147888
+    ]
+   ],
+   "max_risk": 0.01829705352128969,
+   "contact_pairs": 1,
+   "pairs_flagged_by_switch_score": 0,
+   "pairs_without_switch_score": 0
+  },
+  {
+   "id": 9,
+   "kind": "x6_cross_turn",
+   "n_pairs": 1,
+   "n_patches": 2,
+   "area_cm2": 0.040127189497399185,
+   "centroid_zyx": [
+    4518.1,
+    2807.27,
+    791.67
+   ],
+   "bbox_zyx": [
+    [
+     4461.27,
+     2738.04,
+     722.88
+    ],
+    [
+     4576.32,
+     2871.26,
+     876.92
+    ]
+   ],
+   "theta_deg": 131.594,
+   "wrap_index_range": [
+    20,
+    21
+   ],
+   "patches": [
+    147274,
+    148358
+   ],
+   "pairs": [
+    [
+     147274,
+     148358
+    ]
+   ],
+   "max_risk": 0.9991202192455187,
+   "contact_pairs": 0,
+   "pairs_flagged_by_switch_score": 1,
+   "pairs_without_switch_score": 0
+  },
+  {
+   "id": 10,
+   "kind": "x6_cross_turn",
+   "n_pairs": 1,
+   "n_patches": 2,
+   "area_cm2": 0.043918057906890996,
+   "centroid_zyx": [
+    4246.81,
+    2636.0,
+    630.37
+   ],
+   "bbox_zyx": [
+    [
+     4225.46,
+     2600.67,
+     592.47
+    ],
+    [
+     4280.77,
+     2659.39,
+     658.18
+    ]
+   ],
+   "theta_deg": 141.026,
+   "wrap_index_range": [
+    19,
+    20
+   ],
+   "patches": [
+    147764,
+    148436
+   ],
+   "pairs": [
+    [
+     147764,
+     148436
+    ]
+   ],
+   "max_risk": 0.9960616575662564,
+   "contact_pairs": 0,
+   "pairs_flagged_by_switch_score": 1,
+   "pairs_without_switch_score": 0
+  },
+  {
+   "id": 11,
+   "kind": "x6_cross_turn",
+   "n_pairs": 1,
+   "n_patches": 2,
+   "area_cm2": 0.05106782919351399,
+   "centroid_zyx": [
+    4219.8,
+    2715.3,
+    710.39
+   ],
+   "bbox_zyx": [
+    [
+     4160.23,
+     2671.0,
+     656.0
+    ],
+    [
+     4271.11,
+     2760.0,
+     771.62
+    ]
+   ],
+   "theta_deg": 136.254,
+   "wrap_index_range": [
+    19,
+    20
+   ],
+   "patches": [
+    147816,
+    148436
+   ],
+   "pairs": [
+    [
+     147816,
+     148436
+    ]
+   ],
+   "max_risk": 0.9992451213437795,
+   "contact_pairs": 0,
+   "pairs_flagged_by_switch_score": 1,
+   "pairs_without_switch_score": 0
+  },
+  {
+   "id": 12,
+   "kind": "x6_cross_turn",
+   "n_pairs": 1,
+   "n_patches": 2,
+   "area_cm2": 0.04925183858129149,
+   "centroid_zyx": [
+    4527.76,
+    2806.87,
+    780.43
+   ],
+   "bbox_zyx": [
+    [
+     4474.16,
+     2738.93,
+     670.51
+    ],
+    [
+     4641.92,
+     2855.65,
+     840.84
+    ]
+   ],
+   "theta_deg": 131.962,
+   "wrap_index_range": [
+    20,
+    21
+   ],
+   "patches": [
+    147888,
+    148358
+   ],
+   "pairs": [
+    [
+     147888,
+     148358
+    ]
+   ],
+   "max_risk": 0.9994467725873091,
+   "contact_pairs": 0,
+   "pairs_flagged_by_switch_score": 1,
+   "pairs_without_switch_score": 0
+  }
+ ]
+}

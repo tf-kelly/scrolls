@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# STUB for the placement probe: copies the probe variant $PROBE_SRC (report.json + overlay) into --out.
+set -euo pipefail
+while [ $# -gt 0 ]; do case $1 in --segment|--volume|--axis-file) shift 2;; --out) OUT=$2; shift 2;; *) exit 2;; esac; done
+mkdir -p "$OUT"; cp -rP "${PROBE_SRC:?}"/. "$OUT"/   # -P keeps an overlay.zarr symlink a symlink (probe_existing.py)
+echo "stub_probe_cli copied $PROBE_SRC"

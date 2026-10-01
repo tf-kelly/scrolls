@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pipeline9-filter"
+version = "1.0.0"
+description = "Reference-free wrap numbering and pruning for pipeline9 rel.csv/badpatches (integration contract v1)"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26,<3"]
+
+[project.scripts]
+pipeline9-filter = "pipeline9_filter.cli:main"
+
+[tool.setuptools]
+packages = ["pipeline9_filter", "pipeline9_filter._vendor"]
+
+[tool.setuptools.package-data]
+"pipeline9_filter._vendor" = ["PROVENANCE.json"]

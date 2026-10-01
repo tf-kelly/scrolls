@@ -1,0 +1,352 @@
+{
+ "groups": {
+  "P5C": {
+   "n": 12,
+   "same": 12,
+   "different_rate": 0.0,
+   "different_wilson95": [
+    0.0,
+    0.243
+   ]
+  },
+  "P5B": {
+   "n": 28,
+   "cant": 3,
+   "different": 17,
+   "same": 8,
+   "different_rate": 0.607,
+   "different_wilson95": [
+    0.424,
+    0.764
+   ]
+  }
+ },
+ "H4": {
+  "P5B_different": "17/28",
+  "P5C_different": "0/12",
+  "holds": false,
+  "d_prime_loglinear": 2.03
+ },
+ "items": [
+  {
+   "item": "595da84e",
+   "group": "P5C",
+   "piece": null,
+   "arc_frac": null,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "1591cb89",
+   "group": "P5B",
+   "piece": 7,
+   "arc_frac": 0.5,
+   "answer": "cant",
+   "note": "possibly on the same sheet, but there's another patch showing on the left. "
+  },
+  {
+   "item": "0ef5e018",
+   "group": "P5C",
+   "piece": null,
+   "arc_frac": null,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "57222d3e",
+   "group": "P5B",
+   "piece": 3,
+   "arc_frac": 0.75,
+   "answer": "different",
+   "note": "not that clear"
+  },
+  {
+   "item": "2520dd48",
+   "group": "P5B",
+   "piece": 20,
+   "arc_frac": 0.973,
+   "answer": "different",
+   "note": ""
+  },
+  {
+   "item": "5c8f0dc5",
+   "group": "P5B",
+   "piece": 1,
+   "arc_frac": 0.25,
+   "answer": "different",
+   "note": ""
+  },
+  {
+   "item": "4cedc842",
+   "group": "P5C",
+   "piece": null,
+   "arc_frac": null,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "15429dd6",
+   "group": "P5C",
+   "piece": null,
+   "arc_frac": null,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "1835abb5",
+   "group": "P5B",
+   "piece": 2,
+   "arc_frac": 0.25,
+   "answer": "same",
+   "note": "right hand not really on a sheet"
+  },
+  {
+   "item": "648259b7",
+   "group": "P5C",
+   "piece": null,
+   "arc_frac": null,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "514678f7",
+   "group": "P5B",
+   "piece": 3,
+   "arc_frac": 0.25,
+   "answer": "different",
+   "note": "but difficult to tell because there's another line on the image"
+  },
+  {
+   "item": "4476d350",
+   "group": "P5B",
+   "piece": 2,
+   "arc_frac": 0.5,
+   "answer": "different",
+   "note": ""
+  },
+  {
+   "item": "56ddf21f",
+   "group": "P5B",
+   "piece": 12,
+   "arc_frac": 0.95,
+   "answer": "different",
+   "note": ""
+  },
+  {
+   "item": "e3b1184e",
+   "group": "P5B",
+   "piece": 5,
+   "arc_frac": 0.5,
+   "answer": "different",
+   "note": ""
+  },
+  {
+   "item": "d274dfa7",
+   "group": "P5B",
+   "piece": 6,
+   "arc_frac": 0.75,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "5e6479ab",
+   "group": "P5B",
+   "piece": 7,
+   "arc_frac": 0.25,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "508e4474",
+   "group": "P5B",
+   "piece": 10,
+   "arc_frac": 0.79,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "3af7d801",
+   "group": "P5B",
+   "piece": 5,
+   "arc_frac": 0.25,
+   "answer": "different",
+   "note": ""
+  },
+  {
+   "item": "6b74d8ac",
+   "group": "P5B",
+   "piece": 4,
+   "arc_frac": 0.5,
+   "answer": "cant",
+   "note": "right not really on a sheet"
+  },
+  {
+   "item": "69515967",
+   "group": "P5B",
+   "piece": 6,
+   "arc_frac": 0.25,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "b9c1423c",
+   "group": "P5B",
+   "piece": 0,
+   "arc_frac": 0.5,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "863566ae",
+   "group": "P5B",
+   "piece": 8,
+   "arc_frac": 0.028,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "a2cd95be",
+   "group": "P5C",
+   "piece": null,
+   "arc_frac": null,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "4cf64956",
+   "group": "P5B",
+   "piece": 5,
+   "arc_frac": 0.75,
+   "answer": "different",
+   "note": ""
+  },
+  {
+   "item": "e9a79680",
+   "group": "P5B",
+   "piece": 1,
+   "arc_frac": 0.763,
+   "answer": "different",
+   "note": ""
+  },
+  {
+   "item": "995505be",
+   "group": "P5B",
+   "piece": 1,
+   "arc_frac": 0.504,
+   "answer": "different",
+   "note": ""
+  },
+  {
+   "item": "e8eda727",
+   "group": "P5C",
+   "piece": null,
+   "arc_frac": null,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "2f126b64",
+   "group": "P5C",
+   "piece": null,
+   "arc_frac": null,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "7957f9a8",
+   "group": "P5B",
+   "piece": 3,
+   "arc_frac": 0.5,
+   "answer": "different",
+   "note": ""
+  },
+  {
+   "item": "4db730ba",
+   "group": "P5B",
+   "piece": 17,
+   "arc_frac": 0.081,
+   "answer": "different",
+   "note": ""
+  },
+  {
+   "item": "1f8634e4",
+   "group": "P5C",
+   "piece": null,
+   "arc_frac": null,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "d490da66",
+   "group": "P5B",
+   "piece": 11,
+   "arc_frac": 0.378,
+   "answer": "different",
+   "note": ""
+  },
+  {
+   "item": "6464c110",
+   "group": "P5B",
+   "piece": 4,
+   "arc_frac": 0.25,
+   "answer": "cant",
+   "note": "left not really one a sheet"
+  },
+  {
+   "item": "14b3329d",
+   "group": "P5B",
+   "piece": 10,
+   "arc_frac": 0.451,
+   "answer": "different",
+   "note": ""
+  },
+  {
+   "item": "e77c3b20",
+   "group": "P5B",
+   "piece": 16,
+   "arc_frac": 0.422,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "1fd16aa1",
+   "group": "P5C",
+   "piece": null,
+   "arc_frac": null,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "294934f0",
+   "group": "P5B",
+   "piece": 0,
+   "arc_frac": 0.259,
+   "answer": "different",
+   "note": ""
+  },
+  {
+   "item": "4ca1cfed",
+   "group": "P5C",
+   "piece": null,
+   "arc_frac": null,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "df789b85",
+   "group": "P5C",
+   "piece": null,
+   "arc_frac": null,
+   "answer": "same",
+   "note": ""
+  },
+  {
+   "item": "a9341ed5",
+   "group": "P5B",
+   "piece": 10,
+   "arc_frac": 0.207,
+   "answer": "different",
+   "note": ""
+  }
+ ]
+}

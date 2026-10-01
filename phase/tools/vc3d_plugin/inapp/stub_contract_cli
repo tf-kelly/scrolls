@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# STUB of vc_sheet_check for in-app wiring tests only. It does NO analysis: it copies a golden contract
+# output directory (phase/tools/example_outputs.py, fixture v1.1 region A) into --out. STUB_MODE:
+#   golden              copy as is (Amendment 4 full-frame overlay.zarr, 52 clusters)
+#   legacy_translation  replace overlay.zarr by the pre-Amendment-4 form: region-sized level 0 with an OME
+#                       translation (origin x 7.91), to check that the plugin's placement guard still fires
+#   fail                exit 3 with report.json {"status": "error"} (A4.2 internal error)
+#   invalid             exit 2 with report.json {"status": "error"} (A4.2 invalid input)
+set -euo pipefail
+while [ $# -gt 0 ]; do case $1 in --segment) SEG=$2; shift 2;; --volume) VOL=$2; shift 2;; --out) OUT=$2; shift 2;;
+  --halo-um|--threshold|--axis-file) shift 2;; *) echo "unknown arg $1" >&2; exit 2;; esac; done
+: "${STUB_GOLDEN:?}" "${STUB_MODE:=golden}" "${VP_PY:?}"
+mkdir -p "$OUT"
+case "$STUB_MODE" in
+  fail|invalid)
+    code=3; [ "$STUB_MODE" = invalid ] && code=2
+    printf '{"contract": "v1", "status": "error", "error": "stub %s: no analysis run"}\n' "$STUB_MODE" > "$OUT/report.json"
+    echo "stub_contract_cli mode=$STUB_MODE: exiting $code" >&2; exit $code;;
+esac
+cp -r "$STUB_GOLDEN"/. "$OUT"/
+if [ "$STUB_MODE" = legacy_translation ]; then
+  "$VP_PY" - "$OUT" <<'PY'
+import json, os, shutil, sys
+import zarr
+out = sys.argv[1]; ov = os.path.join(out, "overlay.zarr")
+r = json.load(open(os.path.join(out, "report.json")))["region"]
+o, s = r["origin_zyx"], r["shape_zyx"]
+a = zarr.open_array(os.path.join(ov, "0"), mode="r")[o[0]:o[0]+s[0], o[1]:o[1]+s[1], o[2]:o[2]+s[2]]
+shutil.rmtree(ov)
+g = zarr.open_group(ov, mode="w")
+g.create_dataset("0", data=a, chunks=(128, 128, 128), dtype="uint8", fill_value=0, dimension_separator="/")
+g.attrs["multiscales"] = [{"version": "0.4", "axes": [{"name": n, "type": "space", "unit": "micrometer"} for n in "zyx"],
+    "datasets": [{"path": "0", "coordinateTransformations": [{"type": "scale", "scale": [7.91] * 3},
+                  {"type": "translation", "translation": [v * 7.91 for v in o]}]}]}]
+PY
+fi
+# Like contract_io.write_overlay_fullframe: uuid5(URL, resolved overlay path), unique per output directory.
+"$VP_PY" - "$OUT/overlay.zarr" <<'PY'
+import json, os, sys, uuid
+p = sys.argv[1]; m = os.path.join(p, "meta.json")
+if os.path.exists(m):
+    d = json.load(open(m)); d["uuid"] = str(uuid.uuid5(uuid.NAMESPACE_URL, os.path.realpath(p))); json.dump(d, open(m, "w"), indent=1)
+PY
+echo "stub_contract_cli mode=$STUB_MODE segment=$SEG volume=$VOL out=$OUT"

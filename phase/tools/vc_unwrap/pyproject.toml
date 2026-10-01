@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vc-unwrap"
+version = "0.1.0"
+description = "Patches + scan + axis -> reference-free wrap solve -> villa Spiral fit -> per-wrap tifxyz and flag overlay"
+requires-python = ">=3.10"
+dependencies = ["vc-sheet-check", "numpy", "scipy", "pandas", "pillow"]
+
+[project.scripts]
+vc-unwrap = "vc_unwrap.cli:main"
+
+[tool.setuptools]
+packages = ["vc_unwrap"]

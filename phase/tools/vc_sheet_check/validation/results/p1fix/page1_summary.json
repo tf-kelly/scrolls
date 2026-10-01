@@ -1,0 +1,31 @@
+{
+ "page": 1,
+ "step": 4,
+ "s": 1,
+ "grid": [
+  844,
+  1386
+ ],
+ "valid": 368690,
+ "islands": 14,
+ "largest_island": 368483,
+ "excluded_island_area_cm2": 0.03,
+ "residual_unwrap_jumps": 787,
+ "matched": 367381,
+ "matched_share": 0.997,
+ "modal_key": 3,
+ "modal_share_matched": 0.8441,
+ "key_counts": {
+  "-8": 156,
+  "-1": 441,
+  "0": 20469,
+  "1": 4847,
+  "2": 28887,
+  "3": 310091,
+  "4": 2490
+ },
+ "minority_area_raw_cm2": 9.18,
+ "minority_area_smoothed_cm2": 9.13,
+ "patches_matched": 4145,
+ "smoothing_window_nodes": 4
+}

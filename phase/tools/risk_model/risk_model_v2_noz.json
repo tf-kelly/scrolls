@@ -1,0 +1,82 @@
+{
+ "version": "v2_noz",
+ "dropped_features": [
+  "z_um"
+ ],
+ "recall_at_precision_085_vs_reference": {
+  "precision": 0.8496732026143791,
+  "recall": 0.847457627118644,
+  "precision_ci95": [
+   0.8234482107508868,
+   0.8501327193742123,
+   0.8780811620114525
+  ],
+  "recall_ci95": [
+   0.818631363208146,
+   0.8481260638518704,
+   0.8740369418261449
+  ],
+  "threshold_per_fold": {
+   "0": 0.44791832483359784,
+   "1": 0.5884382151776745,
+   "2": 0.5983562613363427,
+   "3": 0.56987701192048
+  }
+ },
+ "model": "HistGradientBoostingClassifier(class_weight='balanced', random_state=8)",
+ "label": "Q3c reference-free uniform consensus: round(k_b - k_a) != 0; handedness chosen s=1",
+ "active_features": [
+  "sep_um",
+  "median_count",
+  "agreement",
+  "n_testable",
+  "support_fraction",
+  "stevens_dist_vox",
+  "area_a",
+  "area_b"
+ ],
+ "n_train": 7087,
+ "train_positives": 837,
+ "blind_threshold": 0.5160572012943417,
+ "threshold_rule": "threshold_at_precision(oof, own reference-free label, 0.85), 4 patch-z folds",
+ "checks": {
+  "R1_q3c_reproduction": {
+   "recall": 0.8591916558018253,
+   "q3c_recall": 0.8709256844850065,
+   "identical": false
+  },
+  "R2_nested_heldout_vs_reference": {
+   "fold_thresholds": {
+    "0": 0.47099272235735584,
+    "1": 0.5227348466463935,
+    "2": 0.4422319110678695,
+    "3": 0.5227514609391305
+   },
+   "called": 778,
+   "positives": 767,
+   "precision": 0.8367609254498715,
+   "recall": 0.848761408083442
+  },
+  "R3_blind_threshold_oof": {
+   "threshold": 0.5160572012943417,
+   "called": 772,
+   "precision_vs_reference": 0.8406735751295337,
+   "recall_vs_reference": 0.8461538461538461,
+   "precision_vs_own_label": 0.8510362694300518
+  }
+ },
+ "sklearn": "1.9.1",
+ "numpy": "2.4.6",
+ "inputs": {
+  "phase/x8/pairs_dataset.csv": "db15ae943507d1411455c03e71022e0f1ae71299c254bc554c70171248403547",
+  "phase/x6/x6b_pairs.csv": "3d2c00ac40cdc092894ee1a87ee4a16461b3a083e3f8d0810afdd7115d03ed8e",
+  "phase/x6/x6b_points.npz": "ca95c3621b668edf53269e96f9aecb6eaff7fdae6616f17d9f344f3834f9a4f6",
+  "phase/x1/patches.csv": "ac3dd55217533aeb15656111ba90ea2a951861ee586a1a9cc3ee0da53b4b4cc1",
+  "phase/q3/q3c_deploy.py": "cccdc76b45023a745d1ecc4428b0092218247afb969456ecfd042ff58c0e3329",
+  "phase/q3/q3_common.py": "0997c036fe34352eec4be97c6cf5ec7f41c486d3dd61f1161d83303c5ada7518",
+  "phase/q3/Q3_consensus.npz": "e52fdc25c20ed219b29059b4466146cf1ba7e755fa510fdbdd00a4fbc76d7701",
+  "phase/data_small/x4test/complete_surface_200um.npz": "0b51f59313ebf9fd8375301c95cdf5d5169e211fd366d4ce56ad6c137aa1dded"
+ },
+ "model_sha256": "f293718d9a71e3db713dba6fd6b789f4a047906e2634a199ffc12368e56641b6",
+ "cpu_s": 232.1
+}

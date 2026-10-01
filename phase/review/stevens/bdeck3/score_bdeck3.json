@@ -1,0 +1,183 @@
+{
+ "groups": {
+  "R02": {
+   "n": 14,
+   "counts": {
+    "same": 1,
+    "different": 13,
+    "cant": 0
+   },
+   "rates": {
+    "same": 0.0714,
+    "different": 0.9286,
+    "cant": 0.0
+   },
+   "wilson95": {
+    "same": [
+     0.0127,
+     0.3147
+    ],
+    "different": [
+     0.6853,
+     0.9873
+    ],
+    "cant": [
+     0,
+     0.2153
+    ]
+   },
+   "median_seconds": 4.72
+  },
+  "R5": {
+   "n": 8,
+   "counts": {
+    "same": 3,
+    "different": 2,
+    "cant": 3
+   },
+   "rates": {
+    "same": 0.375,
+    "different": 0.25,
+    "cant": 0.375
+   },
+   "wilson95": {
+    "same": [
+     0.1368,
+     0.6943
+    ],
+    "different": [
+     0.0715,
+     0.5907
+    ],
+    "cant": [
+     0.1368,
+     0.6943
+    ]
+   },
+   "median_seconds": 14.48
+  },
+  "P1R": {
+   "n": 5,
+   "counts": {
+    "same": 5,
+    "different": 0,
+    "cant": 0
+   },
+   "rates": {
+    "same": 1.0,
+    "different": 0.0,
+    "cant": 0.0
+   },
+   "wilson95": {
+    "same": [
+     0.5655,
+     1.0
+    ],
+    "different": [
+     0.0,
+     0.4345
+    ],
+    "cant": [
+     0.0,
+     0.4345
+    ]
+   },
+   "median_seconds": 3.23
+  },
+  "ART": {
+   "n": 7,
+   "counts": {
+    "same": 7,
+    "different": 0,
+    "cant": 0
+   },
+   "rates": {
+    "same": 1.0,
+    "different": 0.0,
+    "cant": 0.0
+   },
+   "wilson95": {
+    "same": [
+     0.6457,
+     1.0
+    ],
+    "different": [
+     0,
+     0.3543
+    ],
+    "cant": [
+     0,
+     0.3543
+    ]
+   },
+   "median_seconds": 3.37
+  },
+  "DD": {
+   "n": 5,
+   "counts": {
+    "same": 4,
+    "different": 1,
+    "cant": 0
+   },
+   "rates": {
+    "same": 0.8,
+    "different": 0.2,
+    "cant": 0.0
+   },
+   "wilson95": {
+    "same": [
+     0.3755,
+     0.9638
+    ],
+    "different": [
+     0.0362,
+     0.6245
+    ],
+    "cant": [
+     0.0,
+     0.4345
+    ]
+   },
+   "median_seconds": 4.63
+  },
+  "DP": {
+   "n": 5,
+   "counts": {
+    "same": 5,
+    "different": 0,
+    "cant": 0
+   },
+   "rates": {
+    "same": 1.0,
+    "different": 0.0,
+    "cant": 0.0
+   },
+   "wilson95": {
+    "same": [
+     0.5655,
+     1.0
+    ],
+    "different": [
+     0.0,
+     0.4345
+    ],
+    "cant": [
+     0.0,
+     0.4345
+    ]
+   },
+   "median_seconds": 3.7
+  }
+ },
+ "H4": {
+  "different_rate_R02": 0.9286,
+  "different_rate_ART_DP": 0.0,
+  "n_R02": 14,
+  "n_ctrl": 12,
+  "d_prime_loglinear": 3.05,
+  "holds": true
+ },
+ "cant_tell_R02_gt_half": false,
+ "H5_P1R_same_rate": 1.0,
+ "median_seconds_all": 4.5
+}

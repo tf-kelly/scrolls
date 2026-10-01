@@ -1,0 +1,56 @@
+{
+ "source_repo": "<private-repo>",
+ "source_branch": "<branch>",
+ "source_commit": "ac5a2b2c8829359a6ed55023fa12cbf726aec862",
+ "files": [
+  {
+   "source": "phase/core/monogenic.py",
+   "vendored": "core/monogenic.py",
+   "sha256": "247de0dd36018f9a73629bed90d9464dee40f4a2b5252888ab523169ea5fa831",
+   "modified": false
+  },
+  {
+   "source": "phase/core/_chunks.py",
+   "vendored": "core/_chunks.py",
+   "sha256": "e443c6ac59c3600530b5e10313995559b1d3a974a0cd400a067ef84376098aea",
+   "modified": false
+  },
+  {
+   "source": "phase/scripts/m2_support.py",
+   "vendored": "m2_support.py",
+   "sha256": "412e7b7def4a2a4d5fa178dfd3ed22a010dc08c7779ad96107e7bcc492a64cfc",
+   "modified": false
+  },
+  {
+   "source": "phase/scripts/orient3d_standin.py",
+   "vendored": "orient3d_standin.py",
+   "sha256": "993bdb7c84c16b3f47cbe3fd1f5ecb49485ef43eaca561c8ae5b443eeba064c7",
+   "modified": false
+  },
+  {
+   "source": "phase/x2/common.py",
+   "vendored": "x2_common.py",
+   "sha256": "5b200934c4a97215d97ad3a7f121c6dcfcf41f12fd531fd4bb54acda4fc3d254",
+   "modified": false
+  },
+  {
+   "source": "phase/x3/switchwitness/core.py",
+   "vendored": "switchwitness_core.py",
+   "sha256": "a1e916595ef31cb2b209e8ddba8f5e1f8b17065370894d7a53f7e92a3eb37f63",
+   "modified": false
+  },
+  {
+   "source": "phase/s1b/mesh_check.py",
+   "vendored": "s1b_mesh_check.py",
+   "sha256": "ced75f7dffab2bb83ceea6935a2a15bcc97322e9f518654474bb21426be8e969",
+   "modified": false
+  },
+  {
+   "source": "phase/h1/our_solver.py",
+   "vendored": "our_solver.py",
+   "sha256": "f2e92b403ae1e39a783593702bbfb072a14cfc883e2a7e7e5433f7017400357a",
+   "modified": false,
+   "note": "SessA-6: identical on <branch> and <branch> 0f5aa76 (Q3c's source)"
+  }
+ ]
+}

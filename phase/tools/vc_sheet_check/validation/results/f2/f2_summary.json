@@ -1,0 +1,36 @@
+{
+ "protocol": "F123_PROTOCOL.md F2 (+ amendment)",
+ "summary": {
+  "patches_listed": 940,
+  "patches_run": 940,
+  "scored": 940,
+  "errors": 0,
+  "off_modal_area_covered_share": 1.0,
+  "power_values": [
+   0.16666666666666666
+  ],
+  "clean_tests": 0,
+  "pass_rate": 0.2883,
+  "pass_wilson95": [
+   0.2602,
+   0.3181
+  ],
+  "clusters_per_cm2_median": 51.4,
+  "registered": {
+   "control_max_clusters_per_cm2": 242.2,
+   "share_above": 0.0064,
+   "area_weighted_share_above": 0.0027,
+   "more_than_half": false
+  },
+  "posthoc_vs_F1": {
+   "F1_pass_rate": 0.185,
+   "F1_pass_wilson95": [
+    0.1373,
+    0.2446
+   ],
+   "F1_clusters_per_cm2_median": 72.9,
+   "share_above_F1_p90": 0.0479,
+   "F1_p90": 175.0
+  }
+ }
+}

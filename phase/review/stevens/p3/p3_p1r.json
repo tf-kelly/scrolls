@@ -1,0 +1,62 @@
+{
+ "post_hoc": true,
+ "page": 1,
+ "group": "P1R (remaining boundary, q')",
+ "pieces": 112,
+ "residual_edges_excluded": 716,
+ "band_cells": 69357,
+ "control_cells": 180594,
+ "control_cells_dropped_near_boundary": 19958,
+ "rates": {
+  "a_normal_flip": {
+   "band": [
+    563,
+    69357,
+    0.00812
+   ],
+   "control": [
+    1166,
+    180594,
+    0.00646
+   ]
+  },
+  "b_self_contact": {
+   "band": [
+    558,
+    69357,
+    0.00805
+   ],
+   "control": [
+    1097,
+    180594,
+    0.00607
+   ]
+  },
+  "c_area_ratio": {
+   "band": [
+    1115,
+    69357,
+    0.01608
+   ],
+   "control": [
+    1763,
+    180594,
+    0.00976
+   ]
+  },
+  "any": {
+   "band": [
+    1795,
+    69357,
+    0.02588
+   ],
+   "control": [
+    3198,
+    180594,
+    0.01771
+   ]
+  }
+ },
+ "fisher_p_any": 2.0005190091739785e-37,
+ "elevated_by_p3_rule": false
+}

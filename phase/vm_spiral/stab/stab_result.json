@@ -1,0 +1,396 @@
+{
+ "prereg": "phase/prereg/STAB.md 2fd55d782ef2",
+ "identity": {
+  "changed": 0,
+  "exact_equal_k": true,
+  "meta": {
+   "mode": "full",
+   "n_edges_in": 174641,
+   "n_nodes_in": 56934,
+   "n_edges": 174641,
+   "n_nodes": 56934,
+   "s_chosen": 1,
+   "n_components": 4,
+   "n_unsatisfied": 23857,
+   "wall_s": 164.9
+  }
+ },
+ "a": {
+  "kept_patches": 47764,
+  "kept_area_cm2": 1683.340792571148,
+  "changed_patches": 3897,
+  "changed_area_cm2": 119.623996846556,
+  "share": 0.07106344560440513,
+  "area_outside_largest_new_component_cm2": 11.174007308741569,
+  "n_components": 304,
+  "meta": {
+   "mode": "a",
+   "n_edges_in": 174641,
+   "n_nodes_in": 56934,
+   "dropped_nodes": 9170,
+   "n_edges": 117295,
+   "n_nodes": 47764,
+   "s_chosen": 1,
+   "n_components": 304,
+   "n_unsatisfied": 7597,
+   "wall_s": 117.4
+  },
+  "hit": false
+ },
+ "null_a": {
+  "kept_patches": 47764,
+  "kept_area_cm2": 1701.193258015222,
+  "changed_patches": 3133,
+  "changed_area_cm2": 105.85912763435822,
+  "share": 0.06222639734527505,
+  "area_outside_largest_new_component_cm2": 7.561447362347502,
+  "n_components": 173,
+  "meta": {
+   "mode": "null_a",
+   "n_edges_in": 174641,
+   "n_nodes_in": 56934,
+   "dropped_nodes": 9170,
+   "n_edges": 123134,
+   "n_nodes": 47764,
+   "s_chosen": 1,
+   "n_components": 173,
+   "n_unsatisfied": 16461,
+   "wall_s": 117.5
+  }
+ },
+ "pool": {
+  "n": 46835,
+  "reproduces_46835": true,
+  "stability_quantiles": {
+   "0.05": 0.8,
+   "0.1": 0.95,
+   "0.25": 1.0,
+   "0.5": 1.0,
+   "0.75": 1.0
+  },
+  "share_below_1": 0.1393615885555674,
+  "mean": 0.974348243834739
+ },
+ "b_same7": [
+  {
+   "item": "8c5e0eb2",
+   "patches": [
+    15766,
+    23460
+   ],
+   "w_v": [
+    4,
+    3
+   ],
+   "stability": 1.0,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.5696807942777837,
+   "bottom_quartile": false
+  },
+  {
+   "item": "63c6acb0",
+   "patches": [
+    160411,
+    161458
+   ],
+   "w_v": [
+    21,
+    22
+   ],
+   "stability": 1.0,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.5696807942777837,
+   "bottom_quartile": false
+  },
+  {
+   "item": "0bb997ed",
+   "patches": [
+    129381,
+    136949
+   ],
+   "w_v": [
+    22,
+    23
+   ],
+   "stability": 1.0,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.5696807942777837,
+   "bottom_quartile": false
+  },
+  {
+   "item": "126bbb56",
+   "patches": [
+    29107,
+    37416
+   ],
+   "w_v": [
+    12,
+    13
+   ],
+   "stability": 1.0,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.5696807942777837,
+   "bottom_quartile": false
+  },
+  {
+   "item": "bcc3f832",
+   "patches": [
+    76460,
+    106932
+   ],
+   "w_v": [
+    18,
+    19
+   ],
+   "stability": 1.0,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.5696807942777837,
+   "bottom_quartile": false
+  },
+  {
+   "item": "654bbbd9",
+   "patches": [
+    35443,
+    41666
+   ],
+   "w_v": [
+    12,
+    13
+   ],
+   "stability": 1.0,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.5696807942777837,
+   "bottom_quartile": false
+  },
+  {
+   "item": "530fbb16",
+   "patches": [
+    134979,
+    138270
+   ],
+   "w_v": [
+    15,
+    14
+   ],
+   "stability": 0.7,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.02761823422653998,
+   "bottom_quartile": true
+  }
+ ],
+ "b_diff12": [
+  {
+   "item": "94b74ab5",
+   "patches": [
+    79403,
+    84933
+   ],
+   "w_v": [
+    16,
+    17
+   ],
+   "stability": 1.0,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.5696807942777837,
+   "bottom_quartile": false
+  },
+  {
+   "item": "37d263df",
+   "patches": [
+    27588,
+    40381
+   ],
+   "w_v": [
+    7,
+    6
+   ],
+   "stability": 1.0,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.5696807942777837,
+   "bottom_quartile": false
+  },
+  {
+   "item": "8d0af702",
+   "patches": [
+    143937,
+    149574
+   ],
+   "w_v": [
+    27,
+    28
+   ],
+   "stability": 0.7,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.02761823422653998,
+   "bottom_quartile": true
+  },
+  {
+   "item": "dfe23859",
+   "patches": [
+    72720,
+    75899
+   ],
+   "w_v": [
+    17,
+    16
+   ],
+   "stability": 0.4,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.004654638624959966,
+   "bottom_quartile": true
+  },
+  {
+   "item": "9aae58f6",
+   "patches": [
+    82994,
+    89610
+   ],
+   "w_v": [
+    -3,
+    -4
+   ],
+   "stability": 0.95,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.11569339169424575,
+   "bottom_quartile": true
+  },
+  {
+   "item": "98810414",
+   "patches": [
+    148773,
+    150857
+   ],
+   "w_v": [
+    26,
+    25
+   ],
+   "stability": 1.0,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.5696807942777837,
+   "bottom_quartile": false
+  },
+  {
+   "item": "2658c98b",
+   "patches": [
+    10879,
+    15202
+   ],
+   "w_v": [
+    10,
+    11
+   ],
+   "stability": 1.0,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.5696807942777837,
+   "bottom_quartile": false
+  },
+  {
+   "item": "fc76a5e8",
+   "patches": [
+    130907,
+    132523
+   ],
+   "w_v": [
+    22,
+    23
+   ],
+   "stability": 1.0,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.5696807942777837,
+   "bottom_quartile": false
+  },
+  {
+   "item": "19da6fc2",
+   "patches": [
+    6729,
+    22305
+   ],
+   "w_v": [
+    5,
+    6
+   ],
+   "stability": 1.0,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.5696807942777837,
+   "bottom_quartile": false
+  },
+  {
+   "item": "6373b225",
+   "patches": [
+    40368,
+    50485
+   ],
+   "w_v": [
+    7,
+    6
+   ],
+   "stability": 0.75,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.03611615245009074,
+   "bottom_quartile": true
+  },
+  {
+   "item": "c4ea4ec3",
+   "patches": [
+    151427,
+    156358
+   ],
+   "w_v": [
+    23,
+    24
+   ],
+   "stability": 1.0,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.5696807942777837,
+   "bottom_quartile": false
+  },
+  {
+   "item": "65c09079",
+   "patches": [
+    90913,
+    97794
+   ],
+   "w_v": [
+    18,
+    19
+   ],
+   "stability": 1.0,
+   "split_runs": 0,
+   "in_pool": true,
+   "midrank_pct": 0.5696807942777837,
+   "bottom_quartile": false
+  }
+ ],
+ "b": {
+  "count_same7_bottom": 1,
+  "count_diff12_bottom": 4,
+  "expected_random_7": 1.75,
+  "hit": false
+ },
+ "b_ii": {
+  "zone_patches": 2554,
+  "zone_median": 1.0,
+  "zone_share_below_1": 0.42991386061080655,
+  "other_median": 1.0,
+  "other_share_below_1": 0.1291651342405296,
+  "all_share_below_1": 0.1426564091755366
+ }
+}

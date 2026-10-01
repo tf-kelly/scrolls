@@ -1,0 +1,48 @@
+{
+ "n": {
+  "real": 12,
+  "artefact": 6,
+  "decoy": 12
+ },
+ "switch": {
+  "real": 8,
+  "artefact": 0,
+  "decoy": 1
+ },
+ "cant_tell": {
+  "real": 1,
+  "artefact": 0,
+  "decoy": 1
+ },
+ "hit_rate": 0.6667,
+ "false_alarm_rate": 0.0556,
+ "false_alarm_artefact": "0/6",
+ "false_alarm_decoy": "1/12",
+ "d_prime_loglinear": 1.808,
+ "excluding_cant_tell": {
+  "hit_rate": 0.7273,
+  "n_real": 11,
+  "false_alarm_rate": 0.0588,
+  "n_other": 17
+ },
+ "per_page": {
+  "0": {
+   "real": "2/2",
+   "artefact": "0/2",
+   "decoy": "0/4"
+  },
+  "1": {
+   "artefact": "0/4"
+  },
+  "2": {
+   "real": "4/4",
+   "decoy": "1/4"
+  },
+  "5": {
+   "real": "2/6",
+   "decoy": "0/4"
+  }
+ },
+ "rule": "stands iff hit_rate >= 2/3 and false_alarm_rate <= 1/4 (cant-tell = not switch)",
+ "switch_finding_stands": true
+}

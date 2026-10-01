@@ -1,0 +1,242 @@
+[
+ {
+  "item": "8c5e0eb2",
+  "answer": "same",
+  "w_v": [
+   4,
+   3
+  ],
+  "theta_deg": 178.2,
+  "deg_from_seam": 178.2,
+  "r_vox": 550.0,
+  "arc_vox_from_seam": 1712.0
+ },
+ {
+  "item": "94b74ab5",
+  "answer": "different",
+  "w_v": [
+   16,
+   17
+  ],
+  "theta_deg": 195.0,
+  "deg_from_seam": 165.0,
+  "r_vox": 1158.0,
+  "arc_vox_from_seam": 3336.0
+ },
+ {
+  "item": "37d263df",
+  "answer": "different",
+  "w_v": [
+   7,
+   6
+  ],
+  "theta_deg": 56.5,
+  "deg_from_seam": 56.5,
+  "r_vox": 648.0,
+  "arc_vox_from_seam": 639.0
+ },
+ {
+  "item": "63c6acb0",
+  "answer": "same",
+  "w_v": [
+   21,
+   22
+  ],
+  "theta_deg": 5.7,
+  "deg_from_seam": 5.7,
+  "r_vox": 1189.0,
+  "arc_vox_from_seam": 119.0
+ },
+ {
+  "item": "0bb997ed",
+  "answer": "same",
+  "w_v": [
+   22,
+   23
+  ],
+  "theta_deg": 88.9,
+  "deg_from_seam": 88.9,
+  "r_vox": 1226.0,
+  "arc_vox_from_seam": 1902.0
+ },
+ {
+  "item": "8d0af702",
+  "answer": "different",
+  "w_v": [
+   27,
+   28
+  ],
+  "theta_deg": 44.2,
+  "deg_from_seam": 44.2,
+  "r_vox": 1261.0,
+  "arc_vox_from_seam": 973.0
+ },
+ {
+  "item": "dfe23859",
+  "answer": "different",
+  "w_v": [
+   17,
+   16
+  ],
+  "theta_deg": 177.8,
+  "deg_from_seam": 177.8,
+  "r_vox": 943.0,
+  "arc_vox_from_seam": 2926.0
+ },
+ {
+  "item": "126bbb56",
+  "answer": "same",
+  "w_v": [
+   12,
+   13
+  ],
+  "theta_deg": 35.1,
+  "deg_from_seam": 35.1,
+  "r_vox": 930.0,
+  "arc_vox_from_seam": 570.0
+ },
+ {
+  "item": "9aae58f6",
+  "answer": "different",
+  "w_v": [
+   -3,
+   -4
+  ],
+  "theta_deg": 293.4,
+  "deg_from_seam": 66.6,
+  "r_vox": 71.0,
+  "arc_vox_from_seam": 83.0
+ },
+ {
+  "item": "98810414",
+  "answer": "different",
+  "w_v": [
+   26,
+   25
+  ],
+  "theta_deg": 154.7,
+  "deg_from_seam": 154.7,
+  "r_vox": 1375.0,
+  "arc_vox_from_seam": 3713.0
+ },
+ {
+  "item": "2658c98b",
+  "answer": "different",
+  "w_v": [
+   10,
+   11
+  ],
+  "theta_deg": 83.8,
+  "deg_from_seam": 83.8,
+  "r_vox": 692.0,
+  "arc_vox_from_seam": 1012.0
+ },
+ {
+  "item": "bcc3f832",
+  "answer": "same",
+  "w_v": [
+   18,
+   19
+  ],
+  "theta_deg": 59.6,
+  "deg_from_seam": 59.6,
+  "r_vox": 1035.0,
+  "arc_vox_from_seam": 1076.0
+ },
+ {
+  "item": "fc76a5e8",
+  "answer": "different",
+  "w_v": [
+   22,
+   23
+  ],
+  "theta_deg": 21.1,
+  "deg_from_seam": 21.1,
+  "r_vox": 1380.0,
+  "arc_vox_from_seam": 508.0
+ },
+ {
+  "item": "19da6fc2",
+  "answer": "different",
+  "w_v": [
+   5,
+   6
+  ],
+  "theta_deg": 163.6,
+  "deg_from_seam": 163.6,
+  "r_vox": 506.0,
+  "arc_vox_from_seam": 1445.0
+ },
+ {
+  "item": "6373b225",
+  "answer": "different",
+  "w_v": [
+   7,
+   6
+  ],
+  "theta_deg": 106.8,
+  "deg_from_seam": 106.8,
+  "r_vox": 275.0,
+  "arc_vox_from_seam": 512.0
+ },
+ {
+  "item": "c4ea4ec3",
+  "answer": "different",
+  "w_v": [
+   23,
+   24
+  ],
+  "theta_deg": 297.0,
+  "deg_from_seam": 63.0,
+  "r_vox": 1474.0,
+  "arc_vox_from_seam": 1621.0
+ },
+ {
+  "item": "ba648461",
+  "answer": "cant",
+  "w_v": [
+   8,
+   7
+  ],
+  "theta_deg": 263.6,
+  "deg_from_seam": 96.4,
+  "r_vox": 232.0,
+  "arc_vox_from_seam": 390.0
+ },
+ {
+  "item": "65c09079",
+  "answer": "different",
+  "w_v": [
+   18,
+   19
+  ],
+  "theta_deg": 286.0,
+  "deg_from_seam": 74.0,
+  "r_vox": 1188.0,
+  "arc_vox_from_seam": 1536.0
+ },
+ {
+  "item": "654bbbd9",
+  "answer": "same",
+  "w_v": [
+   12,
+   13
+  ],
+  "theta_deg": 79.6,
+  "deg_from_seam": 79.6,
+  "r_vox": 726.0,
+  "arc_vox_from_seam": 1009.0
+ },
+ {
+  "item": "530fbb16",
+  "answer": "same",
+  "w_v": [
+   15,
+   14
+  ],
+  "theta_deg": 341.8,
+  "deg_from_seam": 18.2,
+  "r_vox": 1165.0,
+  "arc_vox_from_seam": 370.0
+ }
+]

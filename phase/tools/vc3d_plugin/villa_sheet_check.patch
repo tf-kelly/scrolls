@@ -1,0 +1,1051 @@
+diff --git a/volume-cartographer/apps/VC3D/CMakeLists.txt b/volume-cartographer/apps/VC3D/CMakeLists.txt
+index e07abb75..d3cfd701 100644
+--- a/volume-cartographer/apps/VC3D/CMakeLists.txt
++++ b/volume-cartographer/apps/VC3D/CMakeLists.txt
+@@ -205,6 +205,10 @@ set(srcs
+     SurfacePanelController.cpp
+     SurfacePanelController.hpp
+     MenuActionController.cpp
++    sheet_check/SheetCheckCore.cpp
++    sheet_check/SheetCheckController.cpp
++    sheet_check/SheetCheckController.hpp
++    sheet_check/SheetCheckCore.hpp
+     MenuActionController.hpp
+     VolumeAttachmentController.cpp
+     VolumeAttachmentController.hpp
+diff --git a/volume-cartographer/apps/VC3D/MenuActionController.cpp b/volume-cartographer/apps/VC3D/MenuActionController.cpp
+index 51c3b0e3..ac0cf5f4 100644
+--- a/volume-cartographer/apps/VC3D/MenuActionController.cpp
++++ b/volume-cartographer/apps/VC3D/MenuActionController.cpp
+@@ -19,6 +19,9 @@
+ #include "Keybinds.hpp"
+ #include "FileWatcherService.hpp"
+ #include "LineAnnotationController.hpp"
++#include "overlays/VolumeOverlayController.hpp"
++#include "sheet_check/SheetCheckController.hpp"
++#include "vc/core/util/ScrollUmbilicus.hpp"
+ 
+ #include "vc/core/types/Volume.hpp"
+ #include "vc/core/types/VolumePkg.hpp"
+@@ -282,6 +285,7 @@ void MenuActionController::populateMenus(QMenuBar* menuBar)
+     menuBar->addMenu(_viewMenu);
+     menuBar->addMenu(_actionsMenu);
+     menuBar->addMenu(_selectionMenu);
++    installSheetCheck(menuBar);
+     menuBar->addMenu(_helpMenu);
+ 
+     refreshRecentMenu();
+@@ -2201,3 +2205,108 @@ void MenuActionController::convertLegacyVolpkg()
+         QObject::tr("Wrote %1 — open it now?").arg(out));
+     if (reply == QMessageBox::Yes) openVolpkgAt(out);
+ }
++
++// Tools -> Sheet check. The controller only sees these callbacks; the
++// analysis is the external vc_sheet_check CLI.
++void MenuActionController::installSheetCheck(QMenuBar* menuBar)
++{
++    sheetcheck::Host host;
++    host.dockHost = _window->segmentWorkspaceWindow();
++    host.segmentPath = [this]() -> QString {
++        auto surf = _window->_state->activeSurface().lock();
++        return surf ? QString::fromStdString(surf->path.string()) : QString();
++    };
++    host.segmentId = [this] { return QString::fromStdString(_window->_state->activeSurfaceId()); };
++    host.volumePath = [this]() -> QString {
++        auto vol = _window->_state->currentVolume();
++        return vol ? QString::fromStdString(vol->path().string()) : QString();
++    };
++    host.volumeEntries = [this]() {
++        std::vector<sheetcheck::ProjectEntry> out;
++        if (auto pkg = _window->_state->vpkg()) {
++            for (const auto& e : pkg->volumeEntries()) {
++                QStringList tags;
++                for (const auto& t : e.tags)
++                    tags << QString::fromStdString(t);
++                out.push_back({QString::fromStdString(e.location), tags});
++            }
++        }
++        return out;
++    };
++    host.removeVolumeEntries = [this](const QStringList& locations) {
++        auto pkg = _window->_state->vpkg();
++        if (!pkg)
++            return;
++        for (const auto& loc : locations)
++            pkg->removeEntry(loc.toStdString());
++        _window->refreshCurrentVolumePackageUi(
++            QString::fromStdString(_window->_state->currentVolumeId()), false);
++    };
++    host.axisFile = [this](QString* reason) -> QString {
++        auto pkg = _window->_state->vpkg();
++        if (!pkg) {
++            *reason = QObject::tr("no project is open");
++            return {};
++        }
++        // VC3D's own resolution: the project's "umbilicus" field, else an
++        // unambiguous umbilicus.json / estimated_umbilicus.json near the package.
++        const auto res = vc::core::util::resolveScrollUmbilicus(*pkg);
++        if (res.path.empty()) {
++            *reason = res.error.empty() ? QObject::tr("none found") : QString::fromStdString(res.error);
++            return {};
++        }
++        return QString::fromStdString(res.path.string());
++    };
++    host.attachVolume = [this](const QString& path, const QStringList& tagList, QString* error) -> QString {
++        if (!_window->_state->vpkg()) {
++            *error = QObject::tr("no project is open");
++            return {};
++        }
++        try {
++            auto vol = Volume::New(path.toStdString());
++            const auto keep = QString::fromStdString(_window->_state->currentVolumeId());
++            std::vector<std::string> tags;
++            for (const auto& t : tagList)
++                tags.push_back(t.toStdString());
++            const auto r = _window->attachVolumeToCurrentPackage(vol, path, std::move(tags), keep);
++            if (r == CWindow::VolumeAttachResult::VolumeIdConflict) {
++                *error = QObject::tr("volume id %1 already used by another location")
++                             .arg(QString::fromStdString(vol->id()));
++                return {};
++            }
++            return QString::fromStdString(vol->id());
++        } catch (const std::exception& e) {
++            *error = QString::fromStdString(e.what());
++            return {};
++        }
++    };
++    host.showOverlay = [this](const QString& volumeId) {
++        if (!_window->_volumeOverlay)
++            return false;
++        VolumeOverlayController::Update u;
++        u.volumeId = volumeId.toStdString();
++        // Contract v1 overlay values: 0 none, 1 suspect join, 2 wrong turn.
++        // The window's low end is also the blend cut-off, so [0.5, 2] leaves
++        // 0 transparent and spreads 1 and 2 across the colormap.
++        u.colormap = std::string("fire");
++        u.opacity = 0.6f;
++        u.window = VolumeOverlayController::Window{0.5f, 2.0f};
++        return _window->_volumeOverlay->apply(u) == VolumeOverlayController::ApplyResult::Applied;
++    };
++    host.jumpTo = [this](const std::array<float, 3>& xyz,
++                         const std::optional<std::array<float, 3>>& n,
++                         const QString& segmentId) {
++        if (!_window->_viewerManager)
++            return;
++        const cv::Vec3f normal = n ? cv::Vec3f((*n)[0], (*n)[1], (*n)[2]) : cv::Vec3f(0, 0, 0);
++        _window->_viewerManager->centerFocusAt(cv::Vec3f(xyz[0], xyz[1], xyz[2]), normal,
++                                               segmentId.toStdString());
++    };
++    host.status = [this](const QString& msg, int ms) { _window->showStatusBarMessage(msg, ms); };
++
++    auto* sheetCheck = new sheetcheck::SheetCheckController(std::move(host), this);
++    _toolsMenu = new QMenu(QObject::tr("&Tools"), _window);
++    _toolsMenu->addAction(sheetCheck->action());
++    _toolsMenu->addAction(sheetCheck->joinAction());
++    menuBar->addMenu(_toolsMenu);
++}
+diff --git a/volume-cartographer/apps/VC3D/MenuActionController.hpp b/volume-cartographer/apps/VC3D/MenuActionController.hpp
+index 53fc452e..337e51ea 100644
+--- a/volume-cartographer/apps/VC3D/MenuActionController.hpp
++++ b/volume-cartographer/apps/VC3D/MenuActionController.hpp
+@@ -121,6 +121,7 @@ private slots:
+     void beginRotateSurfaceTransform();
+     void materializeCurrentOpenDataSegmentFolder();
+     void exitApplication();
++    void installSheetCheck(QMenuBar* menuBar);
+ 
+ signals:
+     // Emitted when the user picks Actions -> Merge tifxyz... CWindow
+@@ -187,6 +188,8 @@ private:
+     QMenu* _transformsMenu{nullptr};
+     QMenu* _selectionMenu{nullptr};
+     QMenu* _helpMenu{nullptr};
++    QMenu* _toolsMenu{nullptr};  // Tools -> Sheet check
++
+     QMenu* _recentMenu{nullptr};
+ 
+     QAction* _newProjectAct{nullptr};
+diff --git a/volume-cartographer/apps/VC3D/sheet_check/SheetCheckController.cpp b/volume-cartographer/apps/VC3D/sheet_check/SheetCheckController.cpp
+new file mode 100644
+index 00000000..0f9054c1
+--- /dev/null
++++ b/volume-cartographer/apps/VC3D/sheet_check/SheetCheckController.cpp
+@@ -0,0 +1,260 @@
++#include "SheetCheckController.hpp"
++
++#include <QAction>
++#include <QDateTime>
++#include <QDir>
++#include <QDockWidget>
++#include <QFileDialog>
++#include <QFile>
++#include <QFileInfo>
++#include <QJsonDocument>
++#include <QJsonObject>
++#include <QLabel>
++#include <QListWidget>
++#include <QVBoxLayout>
++#include <QMainWindow>
++#include <QMessageBox>
++#include <QProcess>
++#include <QStandardPaths>
++
++#include <iostream>
++
++namespace sheetcheck {
++
++namespace {
++constexpr int kClusterIndexRole = Qt::UserRole + 1;
++
++void log(const QString& msg)
++{
++    // Plain stdout line so headless runs can be checked from the log.
++    std::cout << "vc.sheet_check: " << msg.toStdString() << std::endl;
++}
++}  // namespace
++
++SheetCheckController::SheetCheckController(Host host, QObject* parent)
++    : QObject(parent), _host(std::move(host))
++{
++    _action = new QAction(tr("Sheet check"), this);
++    _action->setObjectName(QStringLiteral("actionSheetCheck"));
++    _action->setStatusTip(tr("Run vc_sheet_check on the active segment and current volume"));
++    connect(_action, &QAction::triggered, this, &SheetCheckController::run);
++    _joinAction = new QAction(tr("Sheet check (joins)"), this);
++    _joinAction->setObjectName(QStringLiteral("actionSheetCheckJoins"));
++    _joinAction->setStatusTip(tr("Run vc_sheet_check's join mode on a region, from a join spec"));
++    connect(_joinAction, &QAction::triggered, this, &SheetCheckController::runJoin);
++    log(QStringLiteral("action registered"));
++}
++
++QString SheetCheckController::resolveProgram()
++{
++    const QString env = qEnvironmentVariable("VC_SHEET_CHECK");
++    if (!env.isEmpty())
++        return env;
++    return QStandardPaths::findExecutable(QStringLiteral("vc_sheet_check"));
++}
++
++void SheetCheckController::run()
++{
++    if (_proc) {
++        _host.status(tr("Sheet check is already running."), 4000);
++        return;
++    }
++    const QString segment = _host.segmentPath();
++    const QString volume = _host.volumePath();
++    if (segment.isEmpty() || volume.isEmpty())
++        return fail(tr("Select a segment and load a volume first."));
++    QString axisReason;
++    const QString axis = _host.axisFile(&axisReason);
++    if (axis.isEmpty())
++        return fail(tr("Segment mode disabled: no umbilicus for --axis-file (contract A5.3): %1").arg(axisReason));
++    const QString program = resolveProgram();
++    if (program.isEmpty())
++        return fail(tr("vc_sheet_check not found. Put it on PATH or set VC_SHEET_CHECK."));
++    const QString outDir = makeOutDir(QFileInfo(segment).fileName());
++    if (outDir.isEmpty())
++        return;
++    _segmentIdAtStart = _host.segmentId();
++    start(buildInvocation(program, segment, volume, outDir, axis), _segmentIdAtStart);
++}
++
++void SheetCheckController::runJoin()
++{
++    if (_proc) {
++        _host.status(tr("Sheet check is already running."), 4000);
++        return;
++    }
++    QString specPath = qEnvironmentVariable("VC_SHEET_CHECK_JOIN");
++    if (specPath.isEmpty() && qEnvironmentVariableIsEmpty("VC_SHEET_CHECK_NO_DIALOGS"))
++        specPath = QFileDialog::getOpenFileName(_host.dockHost, tr("Join spec"), QString(),
++                                                tr("Join spec (*.json)"));
++    if (specPath.isEmpty())
++        return fail(tr("Join mode needs a join spec (a region, its patches and rel.csv)."));
++    const JoinSpecResult parsed = parseJoinSpecFile(specPath);
++    if (!parsed.spec)
++        return fail(parsed.error);
++    const JoinSpec& spec = *parsed.spec;
++    const QString volume = spec.volume.isEmpty() ? _host.volumePath() : spec.volume;
++    if (volume.isEmpty())
++        return fail(tr("The join spec names no volume and none is loaded."));
++    const QString program = resolveProgram();
++    if (program.isEmpty())
++        return fail(tr("vc_sheet_check not found. Put it on PATH or set VC_SHEET_CHECK."));
++    const QString key = joinEntryKey(spec);
++    const QString outDir = makeOutDir(QString(key).replace(QLatin1Char(':'), QLatin1Char('_')));
++    if (outDir.isEmpty())
++        return;
++    _segmentIdAtStart = _host.segmentId();  // for jump-to only; may be empty in join mode
++    start(buildJoinInvocation(program, spec, volume, outDir), key);
++}
++
++QString SheetCheckController::makeOutDir(const QString& name)
++{
++    // Outputs go to the cache, never into the segment or volume directory.
++    const QString outDir = QDir(QStandardPaths::writableLocation(QStandardPaths::CacheLocation))
++        .filePath(QStringLiteral("sheet_check/%1-%2")
++                      .arg(name, QDateTime::currentDateTimeUtc().toString(QStringLiteral("yyyyMMddTHHmmsszzz"))));
++    if (!QDir().mkpath(outDir)) {
++        fail(tr("Cannot create %1").arg(outDir));
++        return {};
++    }
++    return outDir;
++}
++
++void SheetCheckController::start(const Invocation& inv, const QString& entryKey)
++{
++    _inv = inv;
++    _entryKey = entryKey;
++    _failed = false;
++    _proc = new QProcess(this);
++    _proc->setProcessChannelMode(QProcess::MergedChannels);
++    connect(_proc, &QProcess::readyRead, this, [this] {
++        if (_proc)
++            std::cout << _proc->readAll().toStdString() << std::flush;
++    });
++    connect(_proc, &QProcess::finished, this,
++            [this](int code, QProcess::ExitStatus st) { onFinished(code, static_cast<int>(st)); });
++    connect(_proc, &QProcess::errorOccurred, this, [this](QProcess::ProcessError e) {
++        if (e == QProcess::FailedToStart) {
++            _proc->deleteLater();
++            fail(tr("Could not start %1").arg(_inv.program));
++            emit finished(false);
++        }
++    });
++    log(QStringLiteral("start %1 %2").arg(_inv.program, _inv.arguments.join(' ')));
++    _host.status(tr("Sheet check running..."), 0);
++    _proc->start(_inv.program, _inv.arguments);
++}
++
++void SheetCheckController::onFinished(int exitCode, int exitStatus)
++{
++    _proc->deleteLater();
++    if (exitStatus != QProcess::NormalExit || exitCode != 0) {
++        // A4.2: non-zero exit is failure whatever files exist; show the tool's own message if it wrote one.
++        QString detail;
++        QFile f(_inv.reportPath);
++        if (f.open(QIODevice::ReadOnly))
++            detail = QJsonDocument::fromJson(f.readAll()).object().value("error").toString();
++        fail(detail.isEmpty() ? tr("vc_sheet_check exited with code %1").arg(exitCode)
++                              : tr("vc_sheet_check exited with code %1: %2").arg(exitCode).arg(detail));
++        emit finished(false);
++        return;
++    }
++
++    const ParseResult parsed = parseReportFile(_inv.reportPath);
++    if (!parsed.report) {
++        fail(parsed.error);
++        emit finished(false);
++        return;
++    }
++    _report = *parsed.report;
++    const QString overlay = chooseOverlay(_inv.outDir);
++    log(QStringLiteral("report %1 contract=%2 clusters=%3 pairs_flagged=%4 overlay=%5")
++            .arg(_inv.reportPath, _report.contract).arg(_report.clusters.size())
++            .arg(_report.pairsFlagged).arg(overlay));
++
++    QString err;
++    const QString placement = overlay.isEmpty() ? QString() : overlayPlacementProblem(overlay);
++    QString volId;
++    if (!overlay.isEmpty() && placement.isEmpty()) {
++        const QStringList stale = staleOverlayEntries(_host.volumeEntries(), _entryKey, overlay);
++        if (!stale.isEmpty()) {
++            _host.removeVolumeEntries(stale);
++            log(QStringLiteral("removed project entries: %1").arg(stale.join(QStringLiteral(", "))));
++        }
++        volId = _host.attachVolume(overlay, overlayEntryTags(_entryKey), &err);
++    }
++    if (overlay.isEmpty()) {
++        fail(tr("No overlay.zarr in %1").arg(_inv.outDir));
++    } else if (!placement.isEmpty()) {
++        fail(tr("Overlay not loaded: %1").arg(placement));
++    } else if (volId.isEmpty()) {
++        fail(tr("Overlay not loaded: %1").arg(err));
++    } else if (!_host.showOverlay(volId)) {
++        fail(tr("Overlay volume %1 attached but could not be shown").arg(volId));
++    } else {
++        log(QStringLiteral("overlay layer %1").arg(volId));
++    }
++    showReport(_report);  // the list is useful even if the overlay failed
++    _host.status(tr("Sheet check: %n flagged cluster(s)", nullptr,
++                    static_cast<int>(_report.clusters.size())), 8000);
++    emit finished(!_failed);
++}
++
++void SheetCheckController::ensureDock()
++{
++    if (_dock)
++        return;
++    _dock = new QDockWidget(tr("Sheet check"), _host.dockHost);
++    _dock->setObjectName(QStringLiteral("sheetCheckDock"));
++    auto* body = new QWidget(_dock);
++    auto* layout = new QVBoxLayout(body);
++    layout->setContentsMargins(0, 0, 0, 0);
++    _list = new QListWidget(body);
++    _list->setToolTip(tr("Double-click to jump to a cluster"));
++    layout->addWidget(_list, 1);
++    // Contract Amendment 3 A3.1: required wording for any viewer text.
++    auto* note = new QLabel(tr("Flags mark where the index changes, not where it is doubtful. "
++                               "\"switch\" is the switch score, not an error estimate."), body);
++    note->setWordWrap(true);
++    layout->addWidget(note);
++    _dock->setWidget(body);
++    _host.dockHost->addDockWidget(Qt::RightDockWidgetArea, _dock);
++    connect(_list, &QListWidget::itemActivated, this, &SheetCheckController::jumpToItem);
++}
++
++void SheetCheckController::showReport(const Report& report)
++{
++    ensureDock();
++    _list->clear();
++    for (std::size_t i = 0; i < report.clusters.size(); ++i) {
++        auto* item = new QListWidgetItem(describe(report, report.clusters[i]), _list);
++        item->setData(kClusterIndexRole, static_cast<int>(i));
++    }
++    if (report.clusters.empty())
++        new QListWidgetItem(tr("No flagged clusters"), _list);
++    _dock->show();
++    _dock->raise();
++    log(QStringLiteral("dock rows=%1").arg(_list->count()));
++}
++
++void SheetCheckController::jumpToItem(QListWidgetItem* item)
++{
++    const QVariant v = item ? item->data(kClusterIndexRole) : QVariant();
++    if (!v.isValid())
++        return;
++    const Cluster& c = _report.clusters.at(static_cast<std::size_t>(v.toInt()));
++    const auto xyz = toVc3dXyz(c.centroidZyx);
++    _host.jumpTo(xyz, std::nullopt, _segmentIdAtStart);  // contract clusters carry no normal
++    log(QStringLiteral("jump %1 xyz=%2,%3,%4").arg(c.id).arg(xyz[0]).arg(xyz[1]).arg(xyz[2]));
++}
++
++void SheetCheckController::fail(const QString& message)
++{
++    _failed = true;
++    log(QStringLiteral("error: ") + message);
++    _host.status(message, 8000);
++    if (qEnvironmentVariableIsEmpty("VC_SHEET_CHECK_NO_DIALOGS"))
++        QMessageBox::warning(_host.dockHost, tr("Sheet check"), message);
++}
++
++}  // namespace sheetcheck
+diff --git a/volume-cartographer/apps/VC3D/sheet_check/SheetCheckController.hpp b/volume-cartographer/apps/VC3D/sheet_check/SheetCheckController.hpp
+new file mode 100644
+index 00000000..1603c26e
+--- /dev/null
++++ b/volume-cartographer/apps/VC3D/sheet_check/SheetCheckController.hpp
+@@ -0,0 +1,93 @@
++#pragma once
++
++// Tools -> Sheet check. Runs vc_sheet_check on the active segment and the
++// current volume, attaches the overlay zarr it writes as an overlay volume,
++// and lists flagged clusters in a dock with jump-to. No analysis here.
++// Tools -> Sheet check (joins) runs the checker's join mode (contract A4.2
++// region form) from a join spec instead; overlay and dock are shared.
++
++#include "SheetCheckCore.hpp"
++
++#include <QObject>
++#include <QPointer>
++#include <QString>
++
++#include <array>
++#include <functional>
++#include <optional>
++
++class QAction;
++class QDockWidget;
++class QListWidget;
++class QListWidgetItem;
++class QMainWindow;
++class QProcess;
++
++namespace sheetcheck {
++
++// Everything the controller needs from VC3D, supplied by the menu owner so
++// the controller never reaches into CWindow.
++struct Host {
++    QMainWindow* dockHost{nullptr};
++    std::function<QString()> segmentPath;   // empty when no segment is active
++    std::function<QString()> segmentId;
++    std::function<QString()> volumePath;    // empty when no volume is loaded
++    // The scan's umbilicus for "--axis-file" (contract A5.3). Empty, with
++    // *reason set, when none can be resolved: segment mode is then disabled.
++    std::function<QString(QString* reason)> axisFile;
++    // Attach a local zarr to the open project with these tags; return its
++    // volume id, or an empty string with *error set.
++    std::function<QString(const QString& path, const QStringList& tags, QString* error)> attachVolume;
++    std::function<std::vector<ProjectEntry>()> volumeEntries;  // the project's volume entries
++    std::function<void(const QStringList& locations)> removeVolumeEntries;
++    std::function<bool(const QString& volumeId)> showOverlay;
++    std::function<void(const std::array<float, 3>& xyz,
++                       const std::optional<std::array<float, 3>>& normalXyz,
++                       const QString& segmentId)> jumpTo;
++    std::function<void(const QString& message, int timeoutMs)> status;
++};
++
++class SheetCheckController : public QObject
++{
++    Q_OBJECT
++
++public:
++    SheetCheckController(Host host, QObject* parent);
++    QAction* action() const { return _action; }
++    QAction* joinAction() const { return _joinAction; }
++
++    // CLI program: $VC_SHEET_CHECK, else vc_sheet_check on PATH.
++    static QString resolveProgram();
++
++public slots:
++    void run();
++    // Join spec: $VC_SHEET_CHECK_JOIN, else a file dialog (not with VC_SHEET_CHECK_NO_DIALOGS).
++    void runJoin();
++
++signals:
++    // Emitted once per run when it ends: ok is false if any step failed.
++    void finished(bool ok);
++
++private:
++    QString makeOutDir(const QString& name);
++    void start(const Invocation& inv, const QString& entryKey);
++    void onFinished(int exitCode, int exitStatus);
++    void showReport(const Report& report);
++    void ensureDock();
++    void jumpToItem(QListWidgetItem* item);
++    void fail(const QString& message);
++
++    Host _host;
++    QAction* _action{nullptr};
++    QAction* _joinAction{nullptr};
++    QPointer<QProcess> _proc;
++    Invocation _inv;
++    QString _segmentIdAtStart;
++    QString _entryKey;  // project-entry key: the segment id, or joinEntryKey() in join mode
++    bool _failed{false};
++    Report _report;
++    QPointer<QDockWidget> _dock;
++    QPointer<QListWidget> _list;
++};
++
++}  // namespace sheetcheck
+diff --git a/volume-cartographer/apps/VC3D/sheet_check/SheetCheckCore.cpp b/volume-cartographer/apps/VC3D/sheet_check/SheetCheckCore.cpp
+new file mode 100644
+index 00000000..c861c8da
+--- /dev/null
++++ b/volume-cartographer/apps/VC3D/sheet_check/SheetCheckCore.cpp
+@@ -0,0 +1,353 @@
++#include "SheetCheckCore.hpp"
++
++#include <QDir>
++#include <QFile>
++#include <QFileInfo>
++#include <QJsonArray>
++#include <QJsonDocument>
++#include <QJsonObject>
++
++#include <cmath>
++
++namespace sheetcheck {
++
++namespace {
++
++constexpr auto kContractVersion = "v1";
++
++std::optional<Zyx> vec3(const QJsonValue& v)
++{
++    const QJsonArray a = v.toArray();
++    if (a.size() != 3)
++        return std::nullopt;
++    Zyx out{};
++    for (int i = 0; i < 3; ++i) {
++        if (!a[i].isDouble() || !std::isfinite(a[i].toDouble()))
++            return std::nullopt;
++        out[i] = a[i].toDouble();
++    }
++    return out;
++}
++
++ParseResult fail(const QString& msg) { return {std::nullopt, msg}; }
++
++}  // namespace
++
++Invocation buildInvocation(const QString& cliProgram,
++                           const QString& segmentPath,
++                           const QString& volumePath,
++                           const QString& outDir,
++                           const QString& axisFile)
++{
++    Invocation inv;
++    inv.program = cliProgram;
++    inv.arguments = {QStringLiteral("--segment"), segmentPath,
++                     QStringLiteral("--volume"), volumePath,
++                     QStringLiteral("--out"), outDir};
++    if (!axisFile.isEmpty())
++        inv.arguments << QStringLiteral("--axis-file") << axisFile;
++    inv.outDir = outDir;
++    inv.reportPath = QDir(outDir).filePath(QStringLiteral("report.json"));
++    return inv;
++}
++
++namespace {
++
++JoinSpecResult joinFail(const QString& msg) { return {std::nullopt, msg}; }
++
++bool isWholeNumber(const QJsonValue& v)
++{
++    return v.isDouble() && std::isfinite(v.toDouble()) && v.toDouble() == std::floor(v.toDouble());
++}
++
++}  // namespace
++
++JoinSpecResult parseJoinSpec(const QByteArray& json, const QString& baseDir)
++{
++    QJsonParseError err{};
++    const QJsonDocument doc = QJsonDocument::fromJson(json, &err);
++    if (err.error != QJsonParseError::NoError)
++        return joinFail(QStringLiteral("join spec is not valid JSON: %1").arg(err.errorString()));
++    if (!doc.isObject())
++        return joinFail(QStringLiteral("join spec top level is not an object"));
++    const QJsonObject root = doc.object();
++    const QDir base(baseDir);
++    const auto path = [&base](const QJsonValue& v) {
++        return v.toString().isEmpty() ? QString() : QDir::cleanPath(base.absoluteFilePath(v.toString()));
++    };
++
++    JoinSpec s;
++    const QJsonArray region = root.value("region").toArray();
++    if (region.size() != 6)
++        return joinFail(QStringLiteral("join spec needs \"region\": [z, y, x, nz, ny, nx]"));
++    for (int i = 0; i < 6; ++i) {
++        if (!isWholeNumber(region[i]) || (i < 3 ? region[i].toDouble() < 0 : region[i].toDouble() <= 0))
++            return joinFail(QStringLiteral("join spec \"region\" needs whole numbers, origin >= 0 and size > 0"));
++        s.region[i] = static_cast<qint64>(region[i].toDouble());
++    }
++    const QJsonValue patches = root.value("patches");
++    for (const QJsonValue& p : patches.isArray() ? patches.toArray() : QJsonArray{patches})
++        if (!p.toString().isEmpty())
++            s.patches << path(p);
++    if (s.patches.isEmpty())
++        return joinFail(QStringLiteral("join spec needs \"patches\" (zip or directory of patch_N/ folders)"));
++    s.rel = path(root.value("rel"));
++    if (s.rel.isEmpty())
++        return joinFail(QStringLiteral("join spec needs \"rel\" (pipeline9 rel.csv)"));
++    // A local volume resolves against the spec; a URL is passed through.
++    const QString volume = root.value("volume").toString();
++    s.volume = volume.contains(QStringLiteral("://")) ? volume : path(root.value("volume"));
++    s.wrapIndex = path(root.value("wrap_index"));
++    s.patchTable = path(root.value("patch_table"));
++    s.axisFile = path(root.value("axis_file"));
++    s.riskModel = path(root.value("risk_model"));
++    if (root.contains("scan_shape")) {
++        const QJsonArray a = root.value("scan_shape").toArray();
++        if (a.size() != 3)
++            return joinFail(QStringLiteral("join spec \"scan_shape\" needs [z, y, x]"));
++        std::array<qint64, 3> shape{};
++        for (int i = 0; i < 3; ++i) {
++            if (!isWholeNumber(a[i]) || a[i].toDouble() <= 0)
++                return joinFail(QStringLiteral("join spec \"scan_shape\" needs positive whole numbers"));
++            shape[i] = static_cast<qint64>(a[i].toDouble());
++        }
++        s.scanShape = shape;
++    }
++    return {s, {}};
++}
++
++JoinSpecResult parseJoinSpecFile(const QString& path)
++{
++    QFile f(path);
++    if (!f.open(QIODevice::ReadOnly))
++        return joinFail(QStringLiteral("cannot read join spec %1").arg(path));
++    return parseJoinSpec(f.readAll(), QFileInfo(path).absolutePath());
++}
++
++Invocation buildJoinInvocation(const QString& cliProgram,
++                               const JoinSpec& spec,
++                               const QString& volumePath,
++                               const QString& outDir)
++{
++    Invocation inv;
++    inv.program = cliProgram;
++    inv.arguments << QStringLiteral("--region");
++    for (qint64 v : spec.region)
++        inv.arguments << QString::number(v);
++    inv.arguments << QStringLiteral("--patches") << spec.patches
++                  << QStringLiteral("--rel") << spec.rel
++                  << QStringLiteral("--volume") << (spec.volume.isEmpty() ? volumePath : spec.volume)
++                  << QStringLiteral("--out") << outDir;
++    if (!spec.wrapIndex.isEmpty())
++        inv.arguments << QStringLiteral("--wrap-index") << spec.wrapIndex;
++    if (!spec.patchTable.isEmpty())
++        inv.arguments << QStringLiteral("--patch-table") << spec.patchTable;
++    if (!spec.axisFile.isEmpty())
++        inv.arguments << QStringLiteral("--axis-file") << spec.axisFile;
++    if (!spec.riskModel.isEmpty())
++        inv.arguments << QStringLiteral("--risk-model") << spec.riskModel;
++    if (spec.scanShape) {
++        inv.arguments << QStringLiteral("--scan-shape");
++        for (qint64 v : *spec.scanShape)
++            inv.arguments << QString::number(v);
++    }
++    inv.outDir = outDir;
++    inv.reportPath = QDir(outDir).filePath(QStringLiteral("report.json"));
++    return inv;
++}
++
++QString joinEntryKey(const JoinSpec& spec)
++{
++    QStringList parts;
++    for (qint64 v : spec.region)
++        parts << QString::number(v);
++    return QStringLiteral("region:") + parts.join(QLatin1Char('_'));
++}
++
++ParseResult parseReport(const QByteArray& json)
++{
++    QJsonParseError err{};
++    const QJsonDocument doc = QJsonDocument::fromJson(json, &err);
++    if (err.error != QJsonParseError::NoError)
++        return fail(QStringLiteral("report.json is not valid JSON: %1").arg(err.errorString()));
++    if (!doc.isObject())
++        return fail(QStringLiteral("report.json top level is not an object"));
++    const QJsonObject root = doc.object();
++
++    Report r;
++    r.contract = root.value("contract").toString();
++    if (r.contract != QLatin1String(kContractVersion))
++        return fail(QStringLiteral("report.json contract is \"%1\", expected \"%2\"")
++                        .arg(r.contract, kContractVersion));
++    r.git = root.value("git").toString();
++    r.status = root.value("status").toString();
++    if (!r.status.isEmpty() && r.status != QLatin1String("ok"))
++        return fail(QStringLiteral("vc_sheet_check reported status \"%1\": %2")
++                        .arg(r.status, root.value("error").toString()));
++
++    const QJsonObject region = root.value("region").toObject();
++    const auto origin = vec3(region.value("origin_zyx"));
++    const auto shape = vec3(region.value("shape_zyx"));
++    if (!origin || !shape)
++        return fail(QStringLiteral("report.json region needs origin_zyx and shape_zyx"));
++    r.regionOriginZyx = *origin;
++    r.regionShapeZyx = *shape;
++    r.overlayOriginZyx = *origin;
++    r.overlayShapeZyx = *shape;
++    if (root.contains("overlay_region")) {
++        const QJsonObject ovr = root.value("overlay_region").toObject();
++        const auto ovo = vec3(ovr.value("origin_zyx"));
++        const auto ovs = vec3(ovr.value("shape_zyx"));
++        if (!ovo || !ovs)
++            return fail(QStringLiteral("report.json overlay_region needs origin_zyx and shape_zyx"));
++        r.overlayOriginZyx = *ovo;
++        r.overlayShapeZyx = *ovs;
++    }
++    r.pairsFlagged = root.value("counts").toObject().value("pairs_flagged").toInteger(0);
++
++    const QJsonValue cv = root.value("clusters");
++    if (!cv.isArray())
++        return fail(QStringLiteral("report.json has no \"clusters\" array"));
++    const QJsonArray arr = cv.toArray();
++    for (qsizetype i = 0; i < arr.size(); ++i) {
++        const QJsonObject o = arr[i].toObject();
++        Cluster c;
++        if (!o.value("id").isDouble())
++            return fail(QStringLiteral("cluster %1 has no integer id").arg(i));
++        c.id = o.value("id").toInteger();
++        c.kind = o.value("kind").toString();
++        if (c.kind != QLatin1String("suspect_join") && c.kind != QLatin1String("wrong_turn"))
++            return fail(QStringLiteral("cluster %1 has unknown kind \"%2\"").arg(c.id).arg(c.kind));
++        const auto centroid = vec3(o.value("centroid_zyx"));
++        if (!centroid)
++            return fail(QStringLiteral("cluster %1 has no valid centroid_zyx").arg(c.id));
++        c.centroidZyx = *centroid;
++        const QJsonArray bb = o.value("bbox_zyx").toArray();
++        const auto lo = bb.size() == 2 ? vec3(bb[0]) : std::nullopt;
++        const auto hi = bb.size() == 2 ? vec3(bb[1]) : std::nullopt;
++        if (!lo || !hi)
++            return fail(QStringLiteral("cluster %1 has no valid bbox_zyx").arg(c.id));
++        c.bboxLoZyx = *lo;
++        c.bboxHiZyx = *hi;
++        c.nPairs = o.value("n_pairs").toInteger(0);
++        c.nPatches = o.value("n_patches").toInteger(0);
++        c.areaCm2 = o.value("area_cm2").toDouble(0.0);
++        if (o.value("max_risk").isDouble())
++            c.maxRisk = o.value("max_risk").toDouble();
++        r.clusters.push_back(std::move(c));
++    }
++    return {std::move(r), {}};
++}
++
++ParseResult parseReportFile(const QString& reportPath)
++{
++    QFile f(reportPath);
++    if (!f.open(QIODevice::ReadOnly))
++        return fail(QStringLiteral("cannot read %1: %2").arg(reportPath, f.errorString()));
++    return parseReport(f.readAll());
++}
++
++QString chooseOverlay(const QString& outDir)
++{
++    const QDir d(outDir);
++    for (const auto* name : {"overlay_vc3d.zarr", "overlay.zarr"}) {
++        const QString p = d.filePath(QString::fromLatin1(name));
++        if (QFileInfo(p).isDir())
++            return QDir::cleanPath(QFileInfo(p).absoluteFilePath());
++    }
++    return {};
++}
++
++QString overlayPlacementProblem(const QString& overlayDir)
++{
++    // OME attributes: .zattrs (Zarr v2) or zarr.json "attributes" (Zarr v3).
++    QJsonObject attrs;
++    QFile v2(QDir(overlayDir).filePath(QStringLiteral(".zattrs")));
++    QFile v3(QDir(overlayDir).filePath(QStringLiteral("zarr.json")));
++    if (v2.open(QIODevice::ReadOnly))
++        attrs = QJsonDocument::fromJson(v2.readAll()).object();
++    else if (v3.open(QIODevice::ReadOnly))
++        attrs = QJsonDocument::fromJson(v3.readAll()).object().value("attributes").toObject();
++    else
++        return {};  // plain zarr without OME metadata: no translation
++    const QJsonArray datasets =
++        attrs.value("multiscales").toArray().first().toObject().value("datasets").toArray();
++    for (const QJsonValue& ds : datasets) {
++        for (const QJsonValue& t : ds.toObject().value("coordinateTransformations").toArray()) {
++            const QJsonObject o = t.toObject();
++            if (o.value("type").toString() != QLatin1String("translation"))
++                continue;
++            for (const QJsonValue& v : o.value("translation").toArray()) {
++                if (v.toDouble() != 0.0)
++                    return QStringLiteral(
++                        "%1 has a non-zero OME translation, which VC3D cannot place. "
++                        "The CLI should also write overlay_vc3d.zarr (zero translation, scan frame).")
++                        .arg(overlayDir);
++            }
++        }
++    }
++    return {};
++}
++
++QString segmentTag(const QString& segmentId)
++{
++    return QStringLiteral("sheet_check_segment:") + segmentId;
++}
++
++QStringList overlayEntryTags(const QString& segmentId)
++{
++    return {QString::fromLatin1(kEntryTag), segmentTag(segmentId)};
++}
++
++QStringList staleOverlayEntries(const std::vector<ProjectEntry>& entries,
++                                const QString& segmentId,
++                                const QString& newLocation)
++{
++    QStringList out;
++    for (const ProjectEntry& e : entries) {
++        if (!e.tags.contains(QString::fromLatin1(kEntryTag)) || e.location == newLocation)
++            continue;
++        if (e.tags.contains(segmentTag(segmentId)) || !QFileInfo(e.location).isDir())
++            out << e.location;
++    }
++    return out;
++}
++
++std::array<float, 3> toVc3dXyz(const Zyx& zyx)
++{
++    return {static_cast<float>(zyx[2]), static_cast<float>(zyx[1]),
++            static_cast<float>(zyx[0])};
++}
++
++bool insideRegion(const Report& r, const Cluster& c)
++{
++    for (int i = 0; i < 3; ++i) {
++        const double v = c.centroidZyx[i];
++        if (v < r.overlayOriginZyx[i] || v >= r.overlayOriginZyx[i] + r.overlayShapeZyx[i])
++            return false;
++    }
++    return true;
++}
++
++QString describe(const Report& r, const Cluster& c)
++{
++    return insideRegion(r, c) ? describe(c) : describe(c) + QStringLiteral("  [outside overlay region]");
++}
++
++QString describe(const Cluster& c)
++{
++    QString s = QStringLiteral("#%1 %2  z=%3 y=%4 x=%5  pairs=%6 patches=%7  %8 cm2")
++                    .arg(c.id)
++                    .arg(c.kind)
++                    .arg(c.centroidZyx[0], 0, 'f', 0)
++                    .arg(c.centroidZyx[1], 0, 'f', 0)
++                    .arg(c.centroidZyx[2], 0, 'f', 0)
++                    .arg(c.nPairs)
++                    .arg(c.nPatches)
++                    .arg(c.areaCm2, 0, 'f', 3);
++    if (c.maxRisk)
++        s += QStringLiteral("  switch=%1").arg(*c.maxRisk, 0, 'f', 2);
++    return s;
++}
++
++}  // namespace sheetcheck
+diff --git a/volume-cartographer/apps/VC3D/sheet_check/SheetCheckCore.hpp b/volume-cartographer/apps/VC3D/sheet_check/SheetCheckCore.hpp
+new file mode 100644
+index 00000000..b433f5ad
+--- /dev/null
++++ b/volume-cartographer/apps/VC3D/sheet_check/SheetCheckCore.hpp
+@@ -0,0 +1,154 @@
++#pragma once
++
++// Sheet check: non-GUI half of the VC3D wiring for the vc_sheet_check CLI.
++// All analysis lives in the CLI. This file only builds its command line,
++// reads its report.json (integration contract v1, section 4.1), picks the
++// overlay to load, and converts coordinates into VC3D's convention.
++// Depends on Qt Core only, so it is unit-tested without the rest of VC3D.
++
++#include <QString>
++#include <QStringList>
++
++#include <array>
++#include <optional>
++#include <vector>
++
++namespace sheetcheck {
++
++using Zyx = std::array<double, 3>;
++
++// One entry of report.json "clusters". Coordinates are scan voxels in
++// (z, y, x) as the contract writes them; use toVc3dXyz() before handing
++// them to VC3D, whose volume points are (x, y, z).
++struct Cluster {
++    qint64 id{0};
++    QString kind;  // "suspect_join" | "wrong_turn"
++    Zyx centroidZyx{};
++    Zyx bboxLoZyx{};
++    Zyx bboxHiZyx{};
++    qint64 nPairs{0};
++    qint64 nPatches{0};
++    double areaCm2{0.0};
++    // report.json "max_risk". Amendment 3: this is the SWITCH SCORE (where the
++    // wrap index changes), not an error or confidence estimate.
++    std::optional<double> maxRisk;  // null for wrong_turn clusters
++};
++
++struct Report {
++    QString contract;  // "v1"
++    QString status;    // Amendment 4 A4.2: "ok" (absent in pre-A4 reports)
++    QString git;
++    Zyx regionOriginZyx{};
++    Zyx regionShapeZyx{};
++    // A10.2: where the overlay has chunks (report.json "overlay_region"); equals region when absent (pre-A10).
++    Zyx overlayOriginZyx{};
++    Zyx overlayShapeZyx{};
++    qint64 pairsFlagged{0};
++    std::vector<Cluster> clusters;
++};
++
++struct ParseResult {
++    std::optional<Report> report;
++    QString error;  // set iff !report
++};
++
++struct Invocation {
++    QString program;
++    QStringList arguments;
++    QString outDir;
++    QString reportPath;
++};
++
++// argv for one run: contract A4.2's form, plus "--axis-file <axisFile>"
++// when one is given (segment mode requires it, contract A5.3).
++Invocation buildInvocation(const QString& cliProgram,
++                           const QString& segmentPath,
++                           const QString& volumePath,
++                           const QString& outDir,
++                           const QString& axisFile = {});
++
++// Join mode: contract A4.2's region form. The checker scores the joins
++// between overlapping patches in one chunk-aligned region, so it needs the
++// region, its patch set and pipeline9's rel.csv, which VC3D does not hold.
++// They come from a join spec, a small JSON file:
++//   {"region": [z, y, x, nz, ny, nx], "patches": ["patches.zip"], "rel": "rel.csv",
++//    "volume": "ct.zarr", "wrap_index": "...", "patch_table": "...",
++//    "axis_file": "...", "risk_model": "...", "scan_shape": [z, y, x]}
++// "region", "patches" and "rel" are required; "volume" defaults to the
++// current volume. Relative paths resolve against the spec's directory.
++struct JoinSpec {
++    std::array<qint64, 6> region{};  // z, y, x, nz, ny, nx (level-0 voxels)
++    QStringList patches;
++    QString rel;
++    QString volume;
++    QString wrapIndex;
++    QString patchTable;
++    QString axisFile;
++    QString riskModel;
++    std::optional<std::array<qint64, 3>> scanShape;
++};
++
++struct JoinSpecResult {
++    std::optional<JoinSpec> spec;
++    QString error;  // set iff !spec
++};
++
++JoinSpecResult parseJoinSpec(const QByteArray& json, const QString& baseDir);
++JoinSpecResult parseJoinSpecFile(const QString& path);
++
++// argv for one join run: "--region Z Y X NZ NY NX --patches ... --rel R
++// --volume V --out O" plus the spec's optional arguments. volumePath is used
++// when the spec names no volume.
++Invocation buildJoinInvocation(const QString& cliProgram,
++                               const JoinSpec& spec,
++                               const QString& volumePath,
++                               const QString& outDir);
++
++// Project-entry key for a join run, used where segment mode uses the
++// segment id: "region:Z_Y_X_NZ_NY_NX".
++QString joinEntryKey(const JoinSpec& spec);
++
++ParseResult parseReport(const QByteArray& json);
++ParseResult parseReportFile(const QString& reportPath);
++
++// The overlay directory to attach: <outDir>/overlay_vc3d.zarr when the CLI
++// wrote one (zero-translation view VC3D can open), else <outDir>/overlay.zarr.
++// Empty if neither exists.
++QString chooseOverlay(const QString& outDir);
++
++// Non-empty if VC3D cannot place this overlay correctly: an OME level
++// transform (Zarr v2 .zattrs or v3 zarr.json attributes) has a non-zero
++// translation. VC3D's local reader ignores translations (villa f4570bf,
++// openLocalZarrPyramid) and draws the array from scan index 0, silently;
++// the plugin refuses such an overlay instead.
++QString overlayPlacementProblem(const QString& overlayDir);
++
++// Project-file bookkeeping. The plugin tags its overlay entries with
++// kEntryTag and segmentTag(segmentId), keeping one entry per segment.
++struct ProjectEntry {
++    QString location;
++    QStringList tags;
++};
++inline constexpr const char* kEntryTag = "sheet_check";
++QString segmentTag(const QString& segmentId);  // "sheet_check_segment:<id>"
++QStringList overlayEntryTags(const QString& segmentId);
++
++// Locations to remove from the project before attaching newLocation for
++// segmentId: sheet_check entries of the same segment (replace, not append)
++// and sheet_check entries of any segment whose directory no longer exists.
++// Entries without the sheet_check tag are never touched.
++QStringList staleOverlayEntries(const std::vector<ProjectEntry>& entries,
++                                const QString& segmentId,
++                                const QString& newLocation);
++
++// (z, y, x) -> (x, y, z). Kept as a named function so the swap is tested.
++std::array<float, 3> toVc3dXyz(const Zyx& zyx);
++
++// True if the centroid lies inside the overlay region: A10.2's "overlay_region", or
++// "region" for a pre-A10 report. Chunks are written only there, so outside it nothing is drawn.
++bool insideRegion(const Report& r, const Cluster& c);
++
++QString describe(const Cluster& c);  // one line for the dock list
++QString describe(const Report& r, const Cluster& c);  // + "[outside overlay region]"
++
++}  // namespace sheetcheck

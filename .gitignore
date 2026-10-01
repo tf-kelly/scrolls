@@ -1,0 +1,16 @@
+# fetched by phase/data_small/fixture/fetch_fixture.py (third-party data, never committed)
+phase/data_small/fixture/patches.zip
+phase/data_small/fixture/patches.zip.part
+phase/data_small/fixture/ct.zarr/0/*
+!phase/data_small/fixture/ct.zarr/0/.zarray
+!phase/data_small/fixture/ct.zarr/0/.zattrs
+phase/data_small/fixture/ct.zarr/1/*
+!phase/data_small/fixture/ct.zarr/1/.zarray
+!phase/data_small/fixture/ct.zarr/1/.zattrs
+__pycache__/
+*.pyc
+# created by the quickstart (candidate-4)
+.venv/
+U/
+OUT/
+*.egg-info/

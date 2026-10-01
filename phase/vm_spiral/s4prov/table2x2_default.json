@@ -1,0 +1,95 @@
+{
+ "flag_rows": 23857,
+ "flag_row_types": {
+  "ii": 7504,
+  "i": 7701,
+  "iii": 8652
+ },
+ "flagged_patches": 17109,
+ "index_patches": 56934,
+ "bad": {
+  "n": 9170,
+  "flagged": 5521,
+  "unflagged": 3649,
+  "rate": 0.6020719738276991
+ },
+ "good": {
+  "n": 47764,
+  "flagged": 11588,
+  "unflagged": 36176,
+  "rate": 0.24260949669206935
+ },
+ "not_in_index": {
+  "good": 33,
+  "bad": 1
+ },
+ "flags_outside_index": 0,
+ "prediction_holds": false,
+ "join_quartile_edges": [
+  4,
+  6,
+  8
+ ],
+ "by_join_quartile": {
+  "0": {
+   "bad": {
+    "n": 573,
+    "flagged": 262,
+    "unflagged": 311,
+    "rate": 0.4572425828970332
+   },
+   "good": {
+    "n": 6215,
+    "flagged": 1039,
+    "unflagged": 5176,
+    "rate": 0.1671761866452132
+   }
+  },
+  "1": {
+   "bad": {
+    "n": 2076,
+    "flagged": 1183,
+    "unflagged": 893,
+    "rate": 0.5698458574181118
+   },
+   "good": {
+    "n": 15819,
+    "flagged": 3464,
+    "unflagged": 12355,
+    "rate": 0.21897717934129843
+   }
+  },
+  "2": {
+   "bad": {
+    "n": 2823,
+    "flagged": 1674,
+    "unflagged": 1149,
+    "rate": 0.5929861849096706
+   },
+   "good": {
+    "n": 14791,
+    "flagged": 3659,
+    "unflagged": 11132,
+    "rate": 0.2473801636130079
+   }
+  },
+  "3": {
+   "bad": {
+    "n": 3698,
+    "flagged": 2402,
+    "unflagged": 1296,
+    "rate": 0.6495402920497566
+   },
+   "good": {
+    "n": 10939,
+    "flagged": 3426,
+    "unflagged": 7513,
+    "rate": 0.3131913337599415
+   }
+  }
+ },
+ "median_joins": {
+  "bad": 7,
+  "good": 6
+ }
+}

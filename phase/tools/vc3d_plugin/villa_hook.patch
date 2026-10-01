@@ -1,0 +1,167 @@
+diff --git a/volume-cartographer/apps/VC3D/CMakeLists.txt b/volume-cartographer/apps/VC3D/CMakeLists.txt
+index e07abb75..d3cfd701 100644
+--- a/volume-cartographer/apps/VC3D/CMakeLists.txt
++++ b/volume-cartographer/apps/VC3D/CMakeLists.txt
+@@ -205,6 +205,10 @@ set(srcs
+     SurfacePanelController.cpp
+     SurfacePanelController.hpp
+     MenuActionController.cpp
++    sheet_check/SheetCheckCore.cpp
++    sheet_check/SheetCheckController.cpp
++    sheet_check/SheetCheckController.hpp
++    sheet_check/SheetCheckCore.hpp
+     MenuActionController.hpp
+     VolumeAttachmentController.cpp
+     VolumeAttachmentController.hpp
+diff --git a/volume-cartographer/apps/VC3D/MenuActionController.cpp b/volume-cartographer/apps/VC3D/MenuActionController.cpp
+index 51c3b0e3..ac0cf5f4 100644
+--- a/volume-cartographer/apps/VC3D/MenuActionController.cpp
++++ b/volume-cartographer/apps/VC3D/MenuActionController.cpp
+@@ -19,6 +19,9 @@
+ #include "Keybinds.hpp"
+ #include "FileWatcherService.hpp"
+ #include "LineAnnotationController.hpp"
++#include "overlays/VolumeOverlayController.hpp"
++#include "sheet_check/SheetCheckController.hpp"
++#include "vc/core/util/ScrollUmbilicus.hpp"
+ 
+ #include "vc/core/types/Volume.hpp"
+ #include "vc/core/types/VolumePkg.hpp"
+@@ -282,6 +285,7 @@ void MenuActionController::populateMenus(QMenuBar* menuBar)
+     menuBar->addMenu(_viewMenu);
+     menuBar->addMenu(_actionsMenu);
+     menuBar->addMenu(_selectionMenu);
++    installSheetCheck(menuBar);
+     menuBar->addMenu(_helpMenu);
+ 
+     refreshRecentMenu();
+@@ -2201,3 +2205,108 @@ void MenuActionController::convertLegacyVolpkg()
+         QObject::tr("Wrote %1 — open it now?").arg(out));
+     if (reply == QMessageBox::Yes) openVolpkgAt(out);
+ }
++
++// Tools -> Sheet check. The controller only sees these callbacks; the
++// analysis is the external vc_sheet_check CLI.
++void MenuActionController::installSheetCheck(QMenuBar* menuBar)
++{
++    sheetcheck::Host host;
++    host.dockHost = _window->segmentWorkspaceWindow();
++    host.segmentPath = [this]() -> QString {
++        auto surf = _window->_state->activeSurface().lock();
++        return surf ? QString::fromStdString(surf->path.string()) : QString();
++    };
++    host.segmentId = [this] { return QString::fromStdString(_window->_state->activeSurfaceId()); };
++    host.volumePath = [this]() -> QString {
++        auto vol = _window->_state->currentVolume();
++        return vol ? QString::fromStdString(vol->path().string()) : QString();
++    };
++    host.volumeEntries = [this]() {
++        std::vector<sheetcheck::ProjectEntry> out;
++        if (auto pkg = _window->_state->vpkg()) {
++            for (const auto& e : pkg->volumeEntries()) {
++                QStringList tags;
++                for (const auto& t : e.tags)
++                    tags << QString::fromStdString(t);
++                out.push_back({QString::fromStdString(e.location), tags});
++            }
++        }
++        return out;
++    };
++    host.removeVolumeEntries = [this](const QStringList& locations) {
++        auto pkg = _window->_state->vpkg();
++        if (!pkg)
++            return;
++        for (const auto& loc : locations)
++            pkg->removeEntry(loc.toStdString());
++        _window->refreshCurrentVolumePackageUi(
++            QString::fromStdString(_window->_state->currentVolumeId()), false);
++    };
++    host.axisFile = [this](QString* reason) -> QString {
++        auto pkg = _window->_state->vpkg();
++        if (!pkg) {
++            *reason = QObject::tr("no project is open");
++            return {};
++        }
++        // VC3D's own resolution: the project's "umbilicus" field, else an
++        // unambiguous umbilicus.json / estimated_umbilicus.json near the package.
++        const auto res = vc::core::util::resolveScrollUmbilicus(*pkg);
++        if (res.path.empty()) {
++            *reason = res.error.empty() ? QObject::tr("none found") : QString::fromStdString(res.error);
++            return {};
++        }
++        return QString::fromStdString(res.path.string());
++    };
++    host.attachVolume = [this](const QString& path, const QStringList& tagList, QString* error) -> QString {
++        if (!_window->_state->vpkg()) {
++            *error = QObject::tr("no project is open");
++            return {};
++        }
++        try {
++            auto vol = Volume::New(path.toStdString());
++            const auto keep = QString::fromStdString(_window->_state->currentVolumeId());
++            std::vector<std::string> tags;
++            for (const auto& t : tagList)
++                tags.push_back(t.toStdString());
++            const auto r = _window->attachVolumeToCurrentPackage(vol, path, std::move(tags), keep);
++            if (r == CWindow::VolumeAttachResult::VolumeIdConflict) {
++                *error = QObject::tr("volume id %1 already used by another location")
++                             .arg(QString::fromStdString(vol->id()));
++                return {};
++            }
++            return QString::fromStdString(vol->id());
++        } catch (const std::exception& e) {
++            *error = QString::fromStdString(e.what());
++            return {};
++        }
++    };
++    host.showOverlay = [this](const QString& volumeId) {
++        if (!_window->_volumeOverlay)
++            return false;
++        VolumeOverlayController::Update u;
++        u.volumeId = volumeId.toStdString();
++        // Contract v1 overlay values: 0 none, 1 suspect join, 2 wrong turn.
++        // The window's low end is also the blend cut-off, so [0.5, 2] leaves
++        // 0 transparent and spreads 1 and 2 across the colormap.
++        u.colormap = std::string("fire");
++        u.opacity = 0.6f;
++        u.window = VolumeOverlayController::Window{0.5f, 2.0f};
++        return _window->_volumeOverlay->apply(u) == VolumeOverlayController::ApplyResult::Applied;
++    };
++    host.jumpTo = [this](const std::array<float, 3>& xyz,
++                         const std::optional<std::array<float, 3>>& n,
++                         const QString& segmentId) {
++        if (!_window->_viewerManager)
++            return;
++        const cv::Vec3f normal = n ? cv::Vec3f((*n)[0], (*n)[1], (*n)[2]) : cv::Vec3f(0, 0, 0);
++        _window->_viewerManager->centerFocusAt(cv::Vec3f(xyz[0], xyz[1], xyz[2]), normal,
++                                               segmentId.toStdString());
++    };
++    host.status = [this](const QString& msg, int ms) { _window->showStatusBarMessage(msg, ms); };
++
++    auto* sheetCheck = new sheetcheck::SheetCheckController(std::move(host), this);
++    _toolsMenu = new QMenu(QObject::tr("&Tools"), _window);
++    _toolsMenu->addAction(sheetCheck->action());
++    _toolsMenu->addAction(sheetCheck->joinAction());
++    menuBar->addMenu(_toolsMenu);
++}
+diff --git a/volume-cartographer/apps/VC3D/MenuActionController.hpp b/volume-cartographer/apps/VC3D/MenuActionController.hpp
+index 53fc452e..337e51ea 100644
+--- a/volume-cartographer/apps/VC3D/MenuActionController.hpp
++++ b/volume-cartographer/apps/VC3D/MenuActionController.hpp
+@@ -121,6 +121,7 @@ private slots:
+     void beginRotateSurfaceTransform();
+     void materializeCurrentOpenDataSegmentFolder();
+     void exitApplication();
++    void installSheetCheck(QMenuBar* menuBar);
+ 
+ signals:
+     // Emitted when the user picks Actions -> Merge tifxyz... CWindow
+@@ -187,6 +188,8 @@ private:
+     QMenu* _transformsMenu{nullptr};
+     QMenu* _selectionMenu{nullptr};
+     QMenu* _helpMenu{nullptr};
++    QMenu* _toolsMenu{nullptr};  // Tools -> Sheet check
++
+     QMenu* _recentMenu{nullptr};
+ 
+     QAction* _newProjectAct{nullptr};

@@ -1,0 +1,35 @@
+{
+ "method": "VP-M48 / SCALE-M36 item 20 (descriptive, post hoc, not registered): did the index's contradiction flags fire at the",
+ "points": {
+  "p0_boundary": 7461,
+  "p0_control": 7461,
+  "p2_boundary": 6704,
+  "p2_control": 6704
+ },
+ "sets": {
+  "p0_boundary": {
+   "patches_touching": 393,
+   "patches_with_any_unsatisfied_join": 200,
+   "share_flagged": 0.509,
+   "unsatisfied_joins_within_set": 157
+  },
+  "p0_control": {
+   "patches_touching": 6968,
+   "patches_with_any_unsatisfied_join": 1629,
+   "share_flagged": 0.234,
+   "unsatisfied_joins_within_set": 761
+  },
+  "p2_boundary": {
+   "patches_touching": 312,
+   "patches_with_any_unsatisfied_join": 101,
+   "share_flagged": 0.324,
+   "unsatisfied_joins_within_set": 57
+  },
+  "p2_control": {
+   "patches_touching": 2102,
+   "patches_with_any_unsatisfied_join": 636,
+   "share_flagged": 0.303,
+   "unsatisfied_joins_within_set": 375
+  }
+ }
+}

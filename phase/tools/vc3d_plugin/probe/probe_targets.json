@@ -1,0 +1,6 @@
+{
+ "scan_shape_zyx": [11174, 3340, 3440],
+ "P2_zyx": [4480, 2688, 768],
+ "P1_zyx": [4451, 2803, 907],
+ "note": "P2 is a single voxel of value 2 at the first voxel of chunk (35,21,6). P1 is the centre of a 3-voxel cross of value 1 (centre and +-1 on each axis). Region origin for the region-framed variant: fixture region A (4224, 2560, 640), shape 384^3."
+}

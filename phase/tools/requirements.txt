@@ -1,0 +1,13 @@
+# Exact versions phase/tools (contract, metrics, fixture, risk model v1) were run and tested with, Python 3.11.
+# zarr must match phase/requirements.txt (Amendment 4 §A4.5). scikit-learn is exact because risk_model_v1.joblib is a
+# pickle of a HistGradientBoostingClassifier built under 1.9.1.
+numpy==2.4.6
+scipy==1.17.1
+scikit-learn==1.9.1
+joblib==1.6.0
+zarr==2.18.7
+numcodecs==0.15.1
+tifffile==2026.3.3
+imagecodecs==2026.3.6
+matplotlib==3.11.2
+ortools==9.15.6755

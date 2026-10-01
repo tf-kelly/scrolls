@@ -1,0 +1,24 @@
+{
+ "source_repo": "<private-repo>",
+ "source_commit": "2c5179f88380506c1d885b342a9ab1847f94e6bf",
+ "files": [
+  {
+   "source": "phase/p1page/p1d_prune.py",
+   "vendored": "p1d_prune.py",
+   "sha256": "03e751c95c656c92b68934e2e67ea64dd1535510632012b9596b1915273fb4ba",
+   "modified": false
+  },
+  {
+   "source": "phase/p1page/p1b_fair_table.py",
+   "vendored": "p1b_fair_table.py",
+   "sha256": "d0149d0da7d8b02455275e2e8c5ad383cee1ac6b658c2ceabdc96eba5a5d7b07",
+   "modified": false
+  },
+  {
+   "source": "phase/p1page/p1c_purity.py",
+   "vendored": "p1c_purity.py",
+   "sha256": "1f12c8c71d87a357d52aba272553ec0725862b3a111d520055737218736c40ed",
+   "modified": false
+  }
+ ]
+}
