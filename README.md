@@ -9,9 +9,7 @@ On Stevens' release, the index assigns numbers to 56,934 of 56,968 patches and l
 
 Whole-scroll fitting is still work in progress. The outermost windings disagree with the published segmentation, and the current results do not establish a complete, continuous surface suitable for reading. More details are given in the main write-up.
 
-## For P.Herc.1667
-
-The repository includes the saved whole-scroll assignment and unsatisfied constraints -- run as
+For P.Herc.1667 the repo includes the saved whole-scroll assignment and unsatisfied constraints -- run as
 
 ```bash
 git clone https://github.com/tf-kelly/scrolls.git
@@ -25,11 +23,9 @@ which checks the input hashes and writes
 - `OUT/winding.csv`: 56,934 rows, with `patch_id`, `component`, `winding` and `theta_rad`.
 - `OUT/contradictions.json`: 15,154 joins containing 23,857 violated constraints, with measured and solved differences.
 
-## Try the fixture
+For the fixture, fitting requires an NVIDIA GPU and a separate installation of `villa`.
 
-The tools are Python packages. Python 3.11 is the tested environment. Checking and exporting the fixture run on a CPU; fitting requires an NVIDIA GPU and a separate installation of `villa`.
-
-From the repository root:
+From the repo root:
 
 ```bash
 python3.11 -m venv .venv
@@ -79,7 +75,6 @@ There is a draft [VC3D integration](phase/tools/vc3d_plugin/JOIN.md). Join mode 
 
 When fitting, check the initial spacing and winding capacity explicitly. With dense-spacing inputs disabled (published versions for scroll 4 couldn't be found, and computing them was beyond the scope of this), the original Scroll 4 runs at 16 voxels per winding produced 95 fitted windings. Runs starting at 32 voxels, with the winding cap also changed, produced 43–45. The fitter's satisfied-patch score alone did not identify the excessive turn count.
 
-## Evidence and credit
 
 [docs/CLAIMS.md](docs/CLAIMS.md) records the results, their sources and limitations. [REGISTRATIONS.md](REGISTRATIONS.md) records the planned tests and outcomes. Some supporting inputs remain outside this release, as described above.
 
